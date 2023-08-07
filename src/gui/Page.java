@@ -1,14 +1,14 @@
 package gui;
 
-public interface Page {
+interface Page {
 
     //Display the current frame on the screen
-    public void showPage();
+    void showPage();
 
     //hide the current frame from the screen
-    public void hidePage();
+    void hidePage();
 
     //add components such as panels and buttons on the frame
-    public void addComponents();
+    void addComponents();
 
 }
