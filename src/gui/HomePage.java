@@ -1,23 +1,31 @@
 package gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class HomePage {
 
-    JFrame home = new JFrame();
-    JButton close = new JButton();
+    static JFrame home = new JFrame();
+    static JButton set = new JButton();
 
-    public void display(boolean show) {
-        addComponents();
-        home.setLocation(200, 40);
-        home.setSize(700, 500);
+    public static void display(boolean show) {
+        set.setSize(20, 20);
+        set.setLocation(302, 83);
+        home.add(set);
+        Dimension size = set.getSize();
+        System.out.println(size);
+        home.setLocation(300, 80);
         home.setVisible(show);
+        
     }
 
-    public void addComponents() {
-        home.add(close);
+    private static void addComponents() {
+
     }
 
+    private static void setButton() {
+        set.setBounds(20, 20, 20, 20);
+    }
 
 }
