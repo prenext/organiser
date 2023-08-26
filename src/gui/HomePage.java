@@ -20,12 +20,4 @@ public class HomePage {
         
     }
 
-    private static void addComponents() {
-
-    }
-
-    private static void setButton() {
-        set.setBounds(20, 20, 20, 20);
-    }
-
 }
