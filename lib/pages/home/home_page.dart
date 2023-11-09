@@ -31,8 +31,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        backgroundColor:Colors.transparent,
+        shadowColor: Colors.transparent,
         title: const Text('Organise Your Tasks'),
+        foregroundColor: Colors.purple,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -60,8 +62,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.black,
-        unselectedItemColor: Colors.white,
-        backgroundColor: Colors.amber,
+        elevation: 100,
+        unselectedItemColor: Colors.purple,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Tasks'),
