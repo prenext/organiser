@@ -31,15 +31,13 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.1.0
-
+  charts_flutter: ^0.12.0  # For bar graph
+  fl_chart: ^0.64.0
+  table_calendar: ^3.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_svg: ^2.0.9
-  flare_flutter: ^3.0.2
-  flare_dart: ^3.0.0
   
-flutter_gif: any
 
 dev_dependencies:
   flutter_test:
