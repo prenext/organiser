@@ -12,8 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   int currentIndex = 0;
+
   final PageController _pageController = PageController();
+  
   final List<Widget> _screens = [
     const Dashboard(),
     const Tasks(),
@@ -46,7 +49,6 @@ class _HomePageState extends State<HomePage> {
 
   String appBarTitle = 'Organize Your Tasks'; // Default app bar title
 
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -55,126 +57,83 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentScreen = _screens[currentIndex];
-    bool isDashboardScreen = currentScreen is Dashboard;
-
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromARGB(255, 163, 70, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-          ], // Customize the gradient colors
-        ),
-      ),
-      child: Scaffold(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          elevation: 10,
-          leading: null,
-          title: Text(appBarTitle),
-          foregroundColor: Colors.purple,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.notifications),
-              onPressed: () {
-                // Handle the search icon tap
-              },
-            ),
-          ],
-        ),
-        body: Container(
-
-          child: PageView(
-            controller: _pageController,
-            children: _screens,
-            onPageChanged: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-              updateAppBarTitle(currentIndex);
+        shadowColor: Colors.transparent,
+        elevation: 10,
+        title: Text(appBarTitle),
+        foregroundColor: Colors.purple,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              // Handle the search icon tap
             },
           ),
+        ],
+      ),
+      body: PageView(
+          controller: _pageController,
+          children: _screens,
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+            updateAppBarTitle(currentIndex);
+          },
         ),
-        drawer: _HomePageStateDrawer(),
-
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          mini: true,
-          onPressed: () => {},
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          elevation: 0,
-          color: Colors.transparent,
-          clipBehavior: Clip.antiAlias,
-          shape: CircularNotchedRectangle(),
-          child: Container(
-            height: 50,
-            width: double.infinity,
-            child: IconTheme(
-              data: IconThemeData(
-                size: 35,
-                color: Colors.purple,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _pageController.jumpToPage(0);
-                    },
-                    child: Icon(Icons.dashboard_rounded),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _pageController.jumpToPage(1);
-                    },
-                    child: Icon(Icons.book),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _pageController.jumpToPage(2);
-                    },
-                    child: Icon(Icons.dining_sharp),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _pageController.jumpToPage(3);
-                    },
-                    child: Icon(Icons.schedule),
-                  ),
-                ],
-              ),
+      drawer: _HomePageStateDrawer(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        mini: true,
+        onPressed: () => {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        color: Color.fromARGB(41, 207, 207, 207),
+        clipBehavior: Clip.antiAlias,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          child: IconTheme(
+            data: IconThemeData(
+              size: 35,
+              color: Colors.purple,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    _pageController.jumpToPage(0);
+                  },
+                  child: Icon(Icons.dashboard_rounded),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _pageController.jumpToPage(1);
+                  },
+                  child: Icon(Icons.book),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _pageController.jumpToPage(2);
+                  },
+                  child: Icon(Icons.dining_sharp),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _pageController.jumpToPage(3);
+                  },
+                  child: Icon(Icons.schedule),
+                ),
+              ],
             ),
           ),
         ),
@@ -189,18 +148,16 @@ class _HomePageStateDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor:Color.fromARGB(220, 255, 255, 255) ,
+      backgroundColor: Color.fromARGB(220, 255, 255, 255),
       elevation: 10,
       child: ListView(
         padding: EdgeInsets.zero,
-
         children: <Widget>[
           DrawerHeader(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
                 Text(
                   'Organiser',
                   style: TextStyle(
@@ -223,7 +180,9 @@ class _HomePageStateDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20,),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -241,7 +200,6 @@ class _HomePageStateDrawer extends StatelessWidget {
                         ),
                       ],
                     ),
-
                   ],
                 )
               ],
@@ -329,7 +287,9 @@ class _HomePageStateDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 200,),
+          SizedBox(
+            height: 200,
+          ),
           Text(
             '     © 2023 Alidante', // Replace with your company name
             style: TextStyle(
