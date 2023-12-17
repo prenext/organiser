@@ -12,11 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   int currentIndex = 0;
 
   final PageController _pageController = PageController();
-  
+
   final List<Widget> _screens = [
     const Dashboard(),
     const Tasks(),
@@ -59,11 +58,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        elevation: 10,
         title: Text(appBarTitle),
-        foregroundColor: Colors.purple,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -74,15 +69,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: PageView(
-          controller: _pageController,
-          children: _screens,
-          onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-            updateAppBarTitle(currentIndex);
-          },
-        ),
+        controller: _pageController,
+        children: _screens,
+        onPageChanged: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+          updateAppBarTitle(currentIndex);
+        },
+      ),
       drawer: _HomePageStateDrawer(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -91,8 +86,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        elevation: 0,
-        color: Color.fromARGB(41, 207, 207, 207),
+        elevation: 10,
         clipBehavior: Clip.antiAlias,
         shape: CircularNotchedRectangle(),
         child: Container(
@@ -101,7 +95,6 @@ class _HomePageState extends State<HomePage> {
           child: IconTheme(
             data: IconThemeData(
               size: 35,
-              color: Colors.purple,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -148,7 +141,6 @@ class _HomePageStateDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(220, 255, 255, 255),
       elevation: 10,
       child: ListView(
         padding: EdgeInsets.zero,
@@ -163,7 +155,6 @@ class _HomePageStateDrawer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.purple,
                   ),
                 ),
                 SizedBox(height: 20.0), // Add spacing between elements
@@ -203,16 +194,6 @@ class _HomePageStateDrawer extends StatelessWidget {
                   ],
                 )
               ],
-            ),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(107, 184, 33, 243),
-                  Colors.transparent,
-                ],
-              ),
             ),
           ),
           ListTile(
