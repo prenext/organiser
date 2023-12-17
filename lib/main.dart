@@ -17,15 +17,15 @@ class OrganiserApp extends StatefulWidget {
 class _OrganiserAppState extends State<OrganiserApp> {
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //     //statusBarColor: Colors.transparent,
-    //     ));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        ));
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-        // textTheme: GoogleFonts.poppinsTextTheme(
-        //   Theme.of(context).textTheme,
-        // ),
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
