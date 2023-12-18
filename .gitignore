@@ -6,7 +6,7 @@ web
 linux
 Miscellaneous
 macos
-
+.vscode
 # Miscellaneous
 *.class
 *.log

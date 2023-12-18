@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/progress_card.dart';
-import '../../../widgets/progress_span_chips.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key});
@@ -17,8 +15,7 @@ class _DashboardState extends State<Dashboard> {
       child: IntrinsicHeight(
         child: Column(
           children: [
-            progress_span_chips(),
-            progress_card()
+            Center(child: Text("Dashboard"))
           ],
         ),
       ),
