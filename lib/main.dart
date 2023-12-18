@@ -22,7 +22,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
         ));
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.purple,
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),

@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text('Get everthing in order in sec!🙌'),
+              Text('Get everything in order!🙌'),
 
               Padding(
                 padding: const EdgeInsets.only(top: 18, bottom: 18),

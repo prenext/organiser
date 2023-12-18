@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Tasks extends StatefulWidget {
-  const Tasks({Key? key});
+
+class Goals extends StatefulWidget {
+  const Goals({Key? key});
 
   @override
-  State<Tasks> createState() => _TasksState();
+  State<Goals> createState() => _GoalsState();
 }
 
-class _TasksState extends State<Tasks> {
+class _GoalsState extends State<Goals> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
