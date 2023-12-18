@@ -1,3 +1,7 @@
+import 'package:Organiser/pages/home/screens/goals.dart';
+import 'package:Organiser/pages/home/screens/meals.dart';
+import 'package:Organiser/pages/home/screens/schedules.dart';
+import 'package:Organiser/pages/home/screens/tasks.dart';
 import 'package:Organiser/widgets/action_button.dart';
 import 'package:Organiser/widgets/app_bar.dart';
 import 'package:Organiser/widgets/bottom_app_bar.dart';
@@ -13,15 +17,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
+    Dashboard(), 
+    Schedules(), 
+    Tasks(),
+    Goals(),
+    Meals(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-      body: Dashboard(),
+      body: _screens[_currentIndex],
       floatingActionButton: CustomFAB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      bottomNavigationBar: CustomBottomAppBar(),
+      bottomNavigationBar: CustomBottomAppBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }

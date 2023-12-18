@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 1,
       title: Text("Organiser"),
-      backgroundColor: Color.fromARGB(255, 252, 244, 253),
+      centerTitle: true,
+      backgroundColor: Theme.of(context).hintColor,
       foregroundColor: Theme.of(context).primaryColor,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.notifications_outlined),
+          onPressed: () {
+            // Handle notification icon tap
+          },
+        ),
+      ],
     );
   }
 

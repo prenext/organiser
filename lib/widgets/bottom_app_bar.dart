@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const CustomBottomAppBar({required this.currentIndex, required this.onTap});
+
   BottomNavigationBarItem _buildBottomNavItem(
     IconData iconData,
     String label,
@@ -9,7 +14,7 @@ class CustomBottomAppBar extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Icon(
         iconData,
-        size: 35
+        size: 25
         ),
       label: label,
     );
@@ -18,17 +23,20 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      elevation: 50,
+      currentIndex: currentIndex,
+      onTap: onTap,
+      elevation: 20,
       items: [
-        _buildBottomNavItem(Icons.dashboard_sharp, 'Home', context),
-        _buildBottomNavItem(Icons.calendar_month, 'Schedules', context),
-        _buildBottomNavItem(Icons.check_circle, 'Tasks', context),
-        _buildBottomNavItem(Icons.chat_sharp, 'Goals', context),
+        _buildBottomNavItem(Icons.dashboard_outlined, 'Home', context),
+        _buildBottomNavItem(Icons.check_circle_outlined, 'Tasks', context),
+        _buildBottomNavItem(Icons.badge_outlined, 'Goals', context),
+        _buildBottomNavItem(Icons.schedule, 'Schedules', context),
         _buildBottomNavItem(Icons.restaurant, 'Meals', context),
       ],
-      backgroundColor: Color.fromARGB(255, 177, 80, 201),
+      backgroundColor: Theme.of(context).hintColor,
       selectedItemColor: Theme.of(context).primaryColor,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: Color.fromARGB(255, 139, 139, 139),
+      type:  BottomNavigationBarType.fixed,
     );
   }
 }

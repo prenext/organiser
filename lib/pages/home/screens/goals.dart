@@ -14,7 +14,7 @@ class _GoalsState extends State<Goals> {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          children: [],
+          children: [Center(child: Text("goals"))],
         ),
       ),
     );

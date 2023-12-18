@@ -34,7 +34,7 @@ class _CustomFABState extends State<CustomFAB>
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isMenuOpen)
-              buildMenuItem(Icons.star,  () {
+              buildMenuItem(Icons.badge,  () {
                 showSetGoalDialog(context);
                 setState(() {
                   isMenuOpen = !isMenuOpen;
@@ -88,7 +88,7 @@ class _CustomFABState extends State<CustomFAB>
   
   Widget buildMenuItem(IconData icon, VoidCallback onPressed) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 5.0),
       child: FloatingActionButton(
         mini: !isMenuOpen,
         onPressed: onPressed,
@@ -99,9 +99,8 @@ class _CustomFABState extends State<CustomFAB>
             children: [
               Icon(
                 icon,
-                size: 30.0, 
+                size: 25.0, 
               ),
-              SizedBox(height: 4),
             ],
           ),
         ),

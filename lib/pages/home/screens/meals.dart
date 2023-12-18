@@ -13,7 +13,7 @@ class _MealsState extends State<Meals> {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          children: [],
+          children: [Center(child: Text("meals"))],
         ),
       ),
     );

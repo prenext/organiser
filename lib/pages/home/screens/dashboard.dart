@@ -14,7 +14,9 @@ class _DashboardState extends State<Dashboard> {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          children: [],
+          children: [
+            Center(child: Text("Dashboard"))
+          ],
         ),
       ),
     );
