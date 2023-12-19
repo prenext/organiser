@@ -7,7 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 1,
       title: Text("Organiser"),
       centerTitle: true,
-      backgroundColor: Theme.of(context).hintColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       foregroundColor: Theme.of(context).primaryColor,
       actions: [
         IconButton(

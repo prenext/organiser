@@ -1,9 +1,17 @@
+import 'package:Organiser/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'widgets/splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const OrganiserApp());
 }
 
@@ -26,7 +34,6 @@ class _OrganiserAppState extends State<OrganiserApp> {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-        hintColor: customColor,
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
