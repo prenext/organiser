@@ -1,4 +1,6 @@
+import 'package:Organiser/pages/user/screens/account.dart';
 import 'package:flutter/material.dart';
+
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();
@@ -9,14 +11,12 @@ class CustomDrawer extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return ListTile(
-      title: Text(title,
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.normal
-      ),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
       ),
       leading: Icon(
-        icon, 
+        icon,
         size: 35,
         color: Colors.deepPurple,
       ),
@@ -35,13 +35,10 @@ class CustomDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-
             Container(
               width: double.infinity,
-              padding:
-                  const EdgeInsets.only(top: 20.0, bottom: 20.0),
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
               child: Column(
-                
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -68,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                             Text(
+                          Text(
                             'Alidante',
                             style: TextStyle(
                               fontSize: 20.0,
@@ -102,7 +99,6 @@ class CustomDrawer extends StatelessWidget {
                           ),
                         ],
                       )
-                   
                     ],
                   ),
                 ],
@@ -116,13 +112,15 @@ class CustomDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   _buildListTileWithDecoration(
-                    title: 'Account',
-                    icon: Icons.account_box,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for Account
-                    },
-                  ),
+                      title: 'Account', icon: Icons.account_box, 
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AccountPage(username: "Alidante")),
+                        );
+                        
+                      }),
                   _buildListTileWithDecoration(
                     title: 'Settings',
                     icon: Icons.settings,
@@ -169,9 +167,10 @@ class CustomDrawer extends StatelessWidget {
             Divider(
               height: 1,
             ),
-            Container( 
-              child:Padding(
-              padding: const EdgeInsets.only(top: 12,left: 16.0, bottom: 12.0, right: 10.0),
+            Container(
+                child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 12, left: 16.0, bottom: 12.0, right: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -184,22 +183,21 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
-                    child: Row(
-                    children: <Widget>[
-                    Text("Log out"),
-                    SizedBox(width: 3,),
-                    Icon(
+                    onTap: () {},
+                    child: Row(children: <Widget>[
+                      Text("Log out"),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Icon(
                         Icons.arrow_circle_right_outlined,
                         color: Colors.brown,
                       ),
-                    ]
-                    ),
+                    ]),
                   )
                 ],
               ),
-            )
-            ),
+            )),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom,
             ),

@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
   firebase_core: ^2.24.2
+  font_awesome_flutter: ^10.6.0
+  image_picker: ^1.0.5
   
 
 dev_dependencies:
