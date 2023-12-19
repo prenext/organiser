@@ -1,7 +1,5 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
-import 'package:flutter/material.dart';
 import 'package:Organiser/pages/home/home_page.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 3500), () {});
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomePage()
+        )
+    );
   }
 
   @override
