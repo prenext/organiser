@@ -36,6 +36,7 @@ dependencies:
   table_calendar: ^3.0.1
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
+  firebase_core: ^2.24.2
   
 
 dev_dependencies:

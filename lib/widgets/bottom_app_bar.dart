@@ -33,7 +33,7 @@ class CustomBottomAppBar extends StatelessWidget {
         _buildBottomNavItem(Icons.schedule, 'Schedules', context),
         _buildBottomNavItem(Icons.restaurant, 'Meals', context),
       ],
-      backgroundColor: Theme.of(context).hintColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Color.fromARGB(255, 139, 139, 139),
       type:  BottomNavigationBarType.fixed,

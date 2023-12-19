@@ -1,5 +1,7 @@
 #platform code
 windows
+# Firebase configuration
+lib/firebase_options.dart
 android
 ios
 web
