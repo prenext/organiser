@@ -57,6 +57,24 @@ class _EditAcountDetailsState extends State<EditAcountDetails> {
     // _lnameController.text = widget.lname;
   }
 
+  Widget buildAppBarTitle() {
+    return Row(
+      children: [
+         IconButton(
+              icon: Icon(Icons.cancel_outlined, size: 25,),
+              onPressed: () {
+                // Handle notification icon tap
+              },
+            ),
+            SizedBox(
+              width: 40,
+            ), 
+        SizedBox(width: 8), 
+        Text('Update Details'),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,17 +82,8 @@ class _EditAcountDetailsState extends State<EditAcountDetails> {
           elevation: 0,
           backgroundColor: Theme.of(context).secondaryHeaderColor,
           foregroundColor: Theme.of(context).primaryColor,
-          title: Text('Update Personal Details'),
+          title: buildAppBarTitle(),
           actions: [
-            IconButton(
-              icon: Icon(Icons.cancel_outlined, size: 25),
-              onPressed: () {
-                // Handle notification icon tap
-              },
-            ),
-            SizedBox(
-              width: 40,
-            ),
             IconButton(
               icon: Icon(
                 Icons.check_circle_outlined,

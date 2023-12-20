@@ -1,3 +1,4 @@
+import 'package:Organiser/pages/messages/screens/messages.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,7 +14,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(Icons.notifications_outlined),
           onPressed: () {
-            // Handle notification icon tap
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NotificationScreen()),
+            );
           },
         ),
       ],

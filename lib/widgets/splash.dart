@@ -2,7 +2,7 @@ import 'package:Organiser/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({super.key, required Null Function() onSelectThemeColor});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -30,16 +30,18 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(36, 243, 33, 243),
-              Color.fromARGB(0, 175, 112, 76),
-            ], // Customize the gradient colors
+              Theme.of(context)
+                  .secondaryHeaderColor,
+              Theme.of(context).scaffoldBackgroundColor,
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
+
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 'Organizer',
                 style: TextStyle(
                   fontSize: 50,
-                  color: Colors.purple,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
