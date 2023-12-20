@@ -1,11 +1,18 @@
+import 'package:Organiser/pages/info/screens/about.dart';
+import 'package:Organiser/pages/info/screens/tips.dart';
+import 'package:Organiser/pages/settings/screens/settings.dart';
+import 'package:Organiser/pages/theme/screens/theme_color.dart';
+import 'package:Organiser/pages/theme/screens/theme_mode.dart';
 import 'package:Organiser/pages/user/screens/account.dart';
+import 'package:Organiser/pages/user/screens/login.dart';
+import 'package:Organiser/widgets/DialogBoxes/rate_app.dart';
 import 'package:flutter/material.dart';
-
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();
 
   Widget _buildListTileWithDecoration({
+    required BuildContext context,
     required String title,
     required IconData icon,
     required VoidCallback onTap,
@@ -18,7 +25,7 @@ class CustomDrawer extends StatelessWidget {
       leading: Icon(
         icon,
         size: 35,
-        color: Colors.deepPurple,
+        color: Theme.of(context).primaryColor,
       ),
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
@@ -112,55 +119,94 @@ class CustomDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   _buildListTileWithDecoration(
-                      title: 'Account', icon: Icons.account_box, 
+                      title: 'Account',
+                      icon: Icons.account_box,
                       onTap: () {
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AccountPage(username: "Alidante")),
+                              builder: (context) =>
+                                  AccountPage(username: "Alidante")),
                         );
-                        
-                      }),
+                      },
+                      context: context),
                   _buildListTileWithDecoration(
-                    title: 'Settings',
-                    icon: Icons.settings,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for Settings
-                    },
-                  ),
+                      title: 'Settings',
+                      icon: Icons.settings,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingsScreen(),
+                            ));
+                      },
+                      context: context),
                   _buildListTileWithDecoration(
-                    title: 'Theme',
-                    icon: Icons.color_lens_outlined,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for Theme
-                    },
-                  ),
+                      title: 'Theme Color',
+                      icon: Icons.color_lens_outlined,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ThemeSelectionScreen(
+                                onColorSelected: (Color) {},
+                              ),
+                            ));
+                      },
+                      context: context),
                   _buildListTileWithDecoration(
-                    title: 'About us',
-                    icon: Icons.people,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for About us
-                    },
-                  ),
+                      title: 'Light Theme',
+                      icon: Icons.sunny,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            DialogRoute(
+                              context: context,
+                              builder: (context) => ThemeDialog(
+                                onThemeSelected: (String) {},
+                              ),
+                            ));
+                      },
+                      context: context),
                   _buildListTileWithDecoration(
-                    title: 'Rate us',
-                    icon: Icons.star,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for Rate us
-                    },
-                  ),
+                      title: 'Rate App',
+                      icon: Icons.star,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            DialogRoute(
+                                builder: (context) => AppRatingDialog(),
+                                context: context));
+                      },
+                      context: context),
                   _buildListTileWithDecoration(
-                    title: 'Tips',
-                    icon: Icons.tips_and_updates,
-                    onTap: () {
-                      Navigator.pop(context);
-                      // Add your navigation logic for Tips
-                    },
-                  ),
+                      title: 'About',
+                      icon: Icons.people,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AboutPage(),
+                            ));
+                      },
+                      context: context),
+                  _buildListTileWithDecoration(
+                      title: 'Tips',
+                      icon: Icons.tips_and_updates,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TipsPage(),
+                            ));
+                      },
+                      context: context),
                 ],
               ),
             ),
@@ -183,7 +229,10 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                       Navigator.of(context).pop();
+                      _showConfirmationDialog(context);
+                    },
                     child: Row(children: <Widget>[
                       Text("Log out"),
                       SizedBox(
@@ -191,7 +240,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       Icon(
                         Icons.arrow_circle_right_outlined,
-                        color: Colors.brown,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ]),
                   )
@@ -204,6 +253,42 @@ class CustomDrawer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showConfirmationDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure to Logout?'),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
+              },
+              child: Text('Logout'),
+            ),
+           ] )
+          ],
+        );
+      },
     );
   }
 }

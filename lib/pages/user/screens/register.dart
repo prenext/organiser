@@ -16,20 +16,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(top: 80.0),
-          decoration: const BoxDecoration(
+      body: Container(
+         alignment: Alignment.center,
+         decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(36, 243, 33, 243),
-                Color.fromARGB(0, 175, 112, 76),
+                Theme.of(context).secondaryHeaderColor,
+                Theme.of(context).scaffoldBackgroundColor,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
-          child: Padding(
+          child: SingleChildScrollView(
             padding: EdgeInsets.all(30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -222,7 +221,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 

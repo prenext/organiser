@@ -1,9 +1,8 @@
 import 'package:Organiser/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'widgets/splash.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
+import 'widgets/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,22 +22,39 @@ class OrganiserApp extends StatefulWidget {
 }
 
 class _OrganiserAppState extends State<OrganiserApp> {
-  // Define your custom color very close to white
-  final Color customColor = Color.fromARGB(255, 254, 243, 255);
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
+
+    var colorPrimary = Colors.deepPurple;
+
+    var myColor = ThemeData(
+      primarySwatch: colorPrimary,
+    ).secondaryHeaderColor;
+    var textColor = ThemeData(
+      primarySwatch: colorPrimary,
+    ).primaryColor;
+
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        ),
+          primarySwatch: colorPrimary,
+          appBarTheme: AppBarTheme(
+            backgroundColor: myColor,
+            foregroundColor: textColor,
+            elevation: 1,
+          ),
+          expansionTileTheme: ExpansionTileThemeData(
+            shape: Border.all(color: Colors.transparent, width: 0),
+            collapsedShape: Border.all(color: Colors.transparent, width: 0),
+            childrenPadding: EdgeInsets.all(20)
+            )
+          ),
+          
+      home: SplashScreen(
+        onSelectThemeColor: () {},
       ),
-      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

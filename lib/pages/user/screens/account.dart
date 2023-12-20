@@ -12,12 +12,6 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  List<String> todos = [
-    'Task 1',
-    'Task 2',
-    'Task 3',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,15 +66,26 @@ class _AccountPageState extends State<AccountPage> {
                   Column(
                     children: [
                       Text(
-                        'Valentine Doe',
+                        'Valentine123',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 35,
+                          color: Theme.of(context).primaryColor
                         ),
                       ),
+                      SizedBox(height: 16),
+                      Text(
+                        'alidante@gmail.com',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context).hintColor
+                        ),
+                      ),
+                      SizedBox(height: 16),
                       Text(
                         '58 Goals Achieved',
                         style: TextStyle(
                           fontSize: 18,
+                          color: Theme.of(context).hintColor
                         ),
                       ),
                     ],
@@ -89,53 +94,109 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             SizedBox(height: 40),
-            Text(
-              "Personal Information:",
-              
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w100,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0, 1),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Text(
+                    "My Statistics",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ],
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.calendar_month,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {
+                    // Add your logic to handle the time range selection
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildStatisticCard(Icons.check_circle, 'Tasks', '10/20'),
+                buildStatisticCard(Icons.flag, 'Goals', '5/23'),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildStatisticCard(Icons.event, 'Events', '3/4'),
+                buildStatisticCard(Icons.schedule, 'Schedules', '2/4'),
+              ],
+            ),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Text(
+                    "Personal Information",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.edit, color: Theme.of(context).primaryColor,),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditAcountDetails()),
+                    );
+                  },
+                ),
+              ],
+            ),
+            Card(
               child: StyledContainer(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [Text("Username:"), Text("Alidante")],
+                    children: [
+                      Text("First Name:", style: TextStyle(color:Colors.grey ,fontSize: 20)),
+                      Text("Alidante", style: TextStyle(color:Colors.grey ,fontSize: 20))
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [Text("Email:"), Text("alidante@gmail.com")],
+                    children: [
+                      Text(
+                        "Last Name:",
+                        style: TextStyle(color: Colors.grey, fontSize: 20),
+                      ),
+                      Text("Peter", style: TextStyle(color:Colors.grey ,fontSize: 20))
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [Text("Age:"), Text("23")],
+                    children: [
+                      Text("Age:", style: TextStyle(color:Colors.grey ,fontSize: 20)),
+                      Text("23", style: TextStyle(color:Colors.grey ,fontSize: 20))
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [Text("Gender:"), Text("Male")],
+                    children: [
+                      Text("Gender:", style: TextStyle(color:Colors.grey ,fontSize: 20)),
+                      Text("Male", style: TextStyle(color:Colors.grey ,fontSize: 20))
+                    ],
                   ),
                 ],
-
               ),
             ),
             SizedBox(height: 20),
@@ -179,6 +240,35 @@ class _AccountPageState extends State<AccountPage> {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildStatisticCard(IconData icon, String title, String value) {
+    return Card(
+      child: SizedBox(
+        height: 150,
+        width: 180, // Set a fixed height for all cards
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 40,
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(height: 8),
+              Text(
+                title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 4),
+              Text(value),
+            ],
+          ),
         ),
       ),
     );
