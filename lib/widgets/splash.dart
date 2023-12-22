@@ -1,4 +1,4 @@
-import 'package:Organiser/pages/home/home_page.dart';
+import 'package:Organiser/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,18 +12,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    preloadAssets();
     _navigateToHome();
   }
 
+  Future<void> preloadAssets() async {
+    await Future.wait([
+      precacheImage(AssetImage('assets/icon/logo.png'), context),
+      precacheImage(AssetImage('assets/gif/loading.gif'), context)
+    ]);
+  }
+
   _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 3500), () {});
-    // ignore: use_build_context_synchronously
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage()
-        )
-    );
+        context, MaterialPageRoute(builder: (context) => LandingPage()));
   }
 
   @override
@@ -33,22 +36,19 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context)
-                  .secondaryHeaderColor,
+              Theme.of(context).secondaryHeaderColor,
               Theme.of(context).scaffoldBackgroundColor,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
-
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Small image above 'Organiser' text
               Image.asset(
-                'assets/icon/logo.png', // Replace with your image asset
+                'assets/icon/logo.png',
                 width: 100,
                 height: 100,
               ),
@@ -61,7 +61,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               Text('Get everything in order!🙌'),
-
               Padding(
                 padding: const EdgeInsets.only(top: 18, bottom: 18),
                 child: Image.asset('assets/gif/loading.gif'),

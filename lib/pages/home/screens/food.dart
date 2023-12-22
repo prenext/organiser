@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-
-class Goals extends StatefulWidget {
-  const Goals({Key? key});
+class Food extends StatefulWidget {
+  const Food({Key? key});
 
   @override
-  State<Goals> createState() => _GoalsState();
+  State<Food> createState() => _FoodState();
 }
 
-class _GoalsState extends State<Goals> {
+class _FoodState extends State<Food> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          children: [Center(child: Text("goals"))],
+          children: [Center(child: Text("Food"))],
         ),
       ),
     );

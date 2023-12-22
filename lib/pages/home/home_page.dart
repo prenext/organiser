@@ -1,5 +1,5 @@
-import 'package:Organiser/pages/home/screens/goals.dart';
-import 'package:Organiser/pages/home/screens/meals.dart';
+import 'package:Organiser/pages/home/screens/socials.dart';
+import 'package:Organiser/pages/home/screens/food.dart';
 import 'package:Organiser/pages/home/screens/schedules.dart';
 import 'package:Organiser/pages/home/screens/tasks.dart';
 import 'package:Organiser/widgets/action_button.dart';
@@ -22,8 +22,8 @@ class _HomePageState extends State<HomePage> {
     Dashboard(), 
     Schedules(), 
     Tasks(),
-    Goals(),
-    Meals(),
+    Socials(),
+    Food(),
   ];
 
   @override

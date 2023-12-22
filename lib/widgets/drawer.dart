@@ -4,7 +4,7 @@ import 'package:Organiser/pages/settings/screens/settings.dart';
 import 'package:Organiser/pages/theme/screens/theme_color.dart';
 import 'package:Organiser/pages/theme/screens/theme_mode.dart';
 import 'package:Organiser/pages/user/screens/account.dart';
-import 'package:Organiser/pages/user/screens/login.dart';
+import 'package:Organiser/widgets/DialogBoxes/logout.dart';
 import 'package:Organiser/widgets/DialogBoxes/rate_app.dart';
 import 'package:flutter/material.dart';
 
@@ -127,7 +127,7 @@ class CustomDrawer extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  AccountPage(username: "Alidante")),
+                                  AccountPage(userid: '',)),
                         );
                       },
                       context: context),
@@ -230,7 +230,7 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                       _showConfirmationDialog(context);
                     },
                     child: Row(children: <Widget>[
@@ -257,38 +257,7 @@ class CustomDrawer extends StatelessWidget {
   }
 
   Future<void> _showConfirmationDialog(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Are you sure to Logout?'),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                );
-              },
-              child: Text('Logout'),
-            ),
-           ] )
-          ],
-        );
-      },
-    );
+    await LogoutDialog.show(context);
   }
+  
 }
