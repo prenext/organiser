@@ -127,7 +127,7 @@ class CustomDrawer extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  AccountPage(userid: '',)),
+                                  AccountPage()),
                         );
                       },
                       context: context),
@@ -185,7 +185,7 @@ class CustomDrawer extends StatelessWidget {
                       context: context),
                   _buildListTileWithDecoration(
                       title: 'About',
-                      icon: Icons.people,
+                      icon: Icons.info_outline_rounded,
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.push(

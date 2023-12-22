@@ -12,19 +12,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    preloadAssets();
     _navigateToHome();
   }
 
-  Future<void> preloadAssets() async {
-    await Future.wait([
-      precacheImage(AssetImage('assets/icon/logo.png'), context),
-      precacheImage(AssetImage('assets/gif/loading.gif'), context)
-    ]);
-  }
-
   _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 1500), () {});
+    await Future.delayed(const Duration(milliseconds: 1000), () {});
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => LandingPage()));
   }
@@ -61,10 +53,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               Text('Get everything in order!🙌'),
-              Padding(
-                padding: const EdgeInsets.only(top: 18, bottom: 18),
-                child: Image.asset('assets/gif/loading.gif'),
-              ),
             ],
           ),
         ),
