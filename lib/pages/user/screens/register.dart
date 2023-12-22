@@ -1,5 +1,4 @@
 import 'package:Organiser/pages/user/screens/add_account_details.dart';
-import 'package:Organiser/pages/user/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,51 +9,43 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool onSignupComplete = false;
   //register text controlers
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
-  Future Signup() async {
+  // Future<void> hasUserSavedDetails() async {
+  //   await ;
+  // }
 
-    String errorMessage = "";
+  Future<void> signUp() async {
     showDialog(
-        context: context,
-        builder: (context) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
       if (passwordConfirmed()) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        
-        errorMessage = "Account created successifully";
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-            duration: Duration(seconds: 2),
-          ),
-        );
-
         Navigator.pop(context);
-
-        Navigator.push(
-          context,
-      
-          DialogRoute(
-              context: context,
-              builder: (context) => AdditionalSignUpDetailsPage()
-          ),
+        showDialog(
+          useSafeArea: false,
+          context: context,
+          builder: (BuildContext context) {
+            return AdditionalSignUpDetailsPage();
+          },
         );
-
       }
     } on FirebaseAuthException catch (e) {
+      String errorMessage = "";
+
       if (e.code == 'weak-password') {
         errorMessage = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
@@ -69,6 +60,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           duration: Duration(seconds: 3),
         ),
       );
+
+      // Notify the caller that signup failed
+     // onSignupComplete(false);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -77,6 +71,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           duration: Duration(seconds: 3),
         ),
       );
+
+      // Notify the caller that signup failed
+      //onSignupComplete(false);
     }
   }
 
@@ -182,35 +179,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       onPressed: () {
-                        Signup();
+                        signUp();
+                        if (onSignupComplete) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Success"),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Failed"),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
                       },
                       child: Text('Register'),
                     ),
                     Text('OR'),
                     OutlinedButton(
                       onPressed: () {
-                        Navigator.pop(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    LoginScreen(),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              const begin = Offset(1.0, 0.0);
-                              const end = Offset.zero;
-                              const curve = Curves.easeInOut;
-
-                              var tween = Tween(begin: begin, end: end)
-                                  .chain(CurveTween(curve: curve));
-
-                              var offsetAnimation = animation.drive(tween);
-
-                              return SlideTransition(
-                                  position: offsetAnimation, child: child);
-                            },
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                       child: Text('Login'),
                       style: ButtonStyle(
