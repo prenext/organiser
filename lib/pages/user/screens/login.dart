@@ -125,27 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Button to direct user to the signup page
                         OutlinedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        RegisterScreen(),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  const begin = Offset(1.0, 0.0);
-                                  const end = Offset.zero;
-                                  const curve = Curves.easeInOut;
-
-                                  var tween = Tween(begin: begin, end: end)
-                                      .chain(CurveTween(curve: curve));
-
-                                  var offsetAnimation = animation.drive(tween);
-
-                                  return SlideTransition(
-                                      position: offsetAnimation, child: child);
-                                },
-                              ),
+                             showDialog(
+                               useSafeArea: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return RegisterScreen();
+                              },
                             );
                           },
                           child: Text('Sign Up'),

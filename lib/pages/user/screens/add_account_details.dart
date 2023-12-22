@@ -13,6 +13,13 @@ class AdditionalSignUpDetailsPage extends StatefulWidget {
 
 class _AdditionalSignUpDetailsPageState
     extends State<AdditionalSignUpDetailsPage> {
+
+  bool onSignupComplete = false;
+
+  void detailsSaveSuccess(){
+
+  }
+
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _fnameController = TextEditingController();
   TextEditingController _lnameController = TextEditingController();
@@ -77,8 +84,9 @@ class _AdditionalSignUpDetailsPageState
             .doc(user.uid)
             .set(userModel.toMap());
 
-      Navigator.pop(context);
-      
+       Navigator.pop(context);
+       onSignupComplete = true;
+
       } catch (error) {
         // Handle different types of errors and show a Snackbar
         String errorMessage = "An error occurred. Please try again.";
@@ -97,7 +105,6 @@ class _AdditionalSignUpDetailsPageState
     }
   }
 
-  
   @override
   void dispose() {
     _fnameController.dispose();
@@ -113,15 +120,20 @@ class _AdditionalSignUpDetailsPageState
     User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Finish Setting Up Your Account'),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: Text('Finish Setting Up Your Account:',
+              style: TextStyle(
+                fontSize: 25, color: Theme.of(context).primaryColor
+              ),),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -8,7 +8,7 @@ class LogoutDialog {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Are you sure to Logout?'),
+          title: Text('Do you really want to Sign Out?'),
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
