@@ -29,9 +29,9 @@ class CustomBottomAppBar extends StatelessWidget {
       items: [
         _buildBottomNavItem(Icons.dashboard_outlined, 'Home', context),
         _buildBottomNavItem(Icons.check_circle_outlined, 'Tasks', context),
-        _buildBottomNavItem(Icons.badge_outlined, 'Goals', context),
+        _buildBottomNavItem(Icons.people_rounded, 'social', context),
         _buildBottomNavItem(Icons.schedule, 'Schedules', context),
-        _buildBottomNavItem(Icons.restaurant, 'Meals', context),
+        _buildBottomNavItem(Icons.restaurant, 'Food', context),
       ],
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       selectedItemColor: Theme.of(context).primaryColor,
