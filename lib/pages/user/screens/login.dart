@@ -1,6 +1,8 @@
+import 'package:Organiser/pages/user/screens/forgot_pwd.dart';
 import 'package:Organiser/pages/user/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -8,8 +10,32 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // login text contollers fields
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  Future Signin() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim());
+
+    Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     "Welocome Back!",
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 35,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor),
                   ),
@@ -48,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Text("Signin to yout account:",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         fontWeight: FontWeight.w100,
                       )),
                 ],
@@ -75,31 +101,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        // button to handle user sign in
                         ElevatedButton(
                           style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(15),
                             padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
                                   horizontal: 50.0, vertical: 15.0),
                             ),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    50.0), // Adjust the radius as needed
+                                borderRadius: BorderRadius.circular(50.0),
                               ),
                             ),
                           ),
                           onPressed: () {
-                            // Add your login logic here
-                            String email = _emailController.text;
-                            String password = _passwordController.text;
-                            // Perform login validation or authentication
-                            // For simplicity, let's just print the values for now
-                            print('Email: $email');
-                            print('Password: $password');
+                            Signin();
                           },
                           child: Text('Login'),
                         ),
                         Text('OR'),
+
+                        // Button to direct user to the signup page
                         OutlinedButton(
                           onPressed: () {
                             Navigator.push(
@@ -134,16 +157,28 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                 side: BorderSide(
-                                    color: Theme.of(context)
-                                        .primaryColor), // Customize the border color
-                                borderRadius: BorderRadius.circular(
-                                    50.0), // Adjust the radius as needed
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(50.0),
                               ),
                             ),
                           ),
                         ),
                       ])),
-              SizedBox(height: 150.0),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RestPasswordScreen()),
+                      );
+                    },
+                    child: Text("Forgot Password?")),
+              ),
+              SizedBox(height: 100.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -243,6 +278,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-
-  
 }
