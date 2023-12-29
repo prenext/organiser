@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:Organiser/widgets/DialogBoxes/add_task.dart';
-import 'package:Organiser/widgets/DialogBoxes/add_meal.dart';
-import 'package:Organiser/widgets/DialogBoxes/create_schedule.dart';
-import 'package:Organiser/widgets/DialogBoxes/set_goal.dart';
-import 'package:Organiser/widgets/DialogBoxes/create_event.dart';
+import 'package:Organiser/widgets/dialogues/add_task.dart';
+import 'package:Organiser/widgets/dialogues/add_meal.dart';
+import 'package:Organiser/widgets/dialogues/add_schedule.dart';
+import 'package:Organiser/widgets/dialogues/add_goal.dart';
+import 'package:Organiser/widgets/dialogues/add_event.dart';
 
 
 class CustomFAB extends StatefulWidget {
@@ -33,16 +33,23 @@ class _CustomFABState extends State<CustomFAB>
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (isMenuOpen)
-              buildMenuItem(Icons.badge,  () {
-                showSetGoalDialog(context);
+             if (isMenuOpen)
+              buildMenuItem(Icons.check_circle, () {
+                showAddTaskDialog(context);
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+               if (isMenuOpen)
+              buildMenuItem(Icons.schedule, () {
+                showCreateScheduleDialog(context);
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
             if (isMenuOpen)
-              buildMenuItem(Icons.check_circle, () {
-                showAddTaskDialog(context);
+              buildMenuItem(Icons.stars_rounded,  () {
+                showSetGoalDialog(context);
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
@@ -61,15 +68,11 @@ class _CustomFABState extends State<CustomFAB>
                   isMenuOpen = !isMenuOpen;
                 });
               }),
-            if (isMenuOpen)
-              buildMenuItem(Icons.schedule, () {
-                showCreateScheduleDialog(context);
-                setState(() {
-                  isMenuOpen = !isMenuOpen;
-                });
-              }),
+           
             FloatingActionButton(
               child: Icon(isMenuOpen ? Icons.close : Icons.add),
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              foregroundColor: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 setState(() {
                   isMenuOpen = !isMenuOpen;
@@ -100,6 +103,7 @@ class _CustomFABState extends State<CustomFAB>
               Icon(
                 icon,
                 size: 25.0, 
+                color: Theme.of(context).secondaryHeaderColor,
               ),
             ],
           ),

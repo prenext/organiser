@@ -1,5 +1,5 @@
 import 'package:Organiser/models/collections/user.dart';
-import 'package:Organiser/widgets/DialogBoxes/logout.dart';
+import 'package:Organiser/widgets/dialogues/logout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +21,7 @@ class _AccountPageState extends State<AccountPage> {
 
   DateTime? selectedDate;
 
-  Future<void> _showConfirmationDialog(BuildContext context) async {
+  Future<void> showConfirmationDialog(BuildContext context) async {
     await LogoutDialog.show(context);
   }
 
@@ -443,7 +443,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  int _calculateAge(DateTime? dob) {
+  int calculateAge(DateTime? dob) {
     if (dob == null) {
       return 0; // Handle the case where the date of birth is not available
     }

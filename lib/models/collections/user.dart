@@ -47,3 +47,5 @@ class UserModel {
     );
   }
 }
+
+//TODO: define users  sub collections such as goals tasks events meals and schedules
