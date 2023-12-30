@@ -1,8 +1,10 @@
 import 'package:Organiser/firebase_options.dart';
+import 'package:Organiser/providers/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'widgets/splash.dart';
 
 Future<void> main() async {
@@ -17,7 +19,12 @@ Future<void> main() async {
     persistenceEnabled: true,
   );
 
-  runApp(OrganiserApp());
+ runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: OrganiserApp(),
+    ),
+  );
 }
 
 
@@ -36,7 +43,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarColor: Colors.transparent,
     ));
 
-    var colorPrimary = Colors.lightGreen;
+    var colorPrimary = Colors.teal;
 
     var myColor = ThemeData(
       primarySwatch: colorPrimary,

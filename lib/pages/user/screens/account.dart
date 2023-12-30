@@ -19,6 +19,7 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController _lnameController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
 
+  
   DateTime? selectedDate;
 
   Future<void> showConfirmationDialog(BuildContext context) async {
@@ -39,9 +40,17 @@ class _AccountPageState extends State<AccountPage> {
     if (userSnapshot.exists) {
       setState(() {
         _user = UserModel.fromMap(userSnapshot.data() as Map<String, dynamic>);
+
+        // Set the text controllers with user data
+        _usernameController.text = _user.username;
+        _fnameController.text = _user.fname;
+        _lnameController.text = _user.lname;
+        _dobController.text =
+            _user.dob?.toLocal().toString().split(' ')[0] ?? '';
       });
     }
   }
+
 
   Future<void> _saveUserDetails(User? user) async {
     showDialog(
