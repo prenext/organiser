@@ -1,5 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Define an enum for subcollections
+enum SubCollection {
+  goals,
+  tasks,
+  events,
+  meals,
+  schedules,
+}
+
 class UserModel {
   final String id;
   final String email;
@@ -9,6 +18,7 @@ class UserModel {
   final String? gender;
   final DateTime? dob;
   final String? profilePhotoUrl;
+  final Map<SubCollection, List<dynamic>> subcollections;
 
   UserModel({
     required this.id,
@@ -19,7 +29,8 @@ class UserModel {
     this.gender,
     this.dob,
     this.profilePhotoUrl,
-  });
+    Map<SubCollection, List<dynamic>>? subcollections,
+  }) : subcollections = subcollections ?? {};
 
   Map<String, dynamic> toMap() {
     return {
@@ -31,6 +42,8 @@ class UserModel {
       'gender': gender,
       'dob': dob,
       'profilePhotoUrl': profilePhotoUrl,
+      'subcollections':
+          subcollections.map((key, value) => MapEntry(key.toString(), value)),
     };
   }
 
@@ -44,8 +57,14 @@ class UserModel {
       gender: map['gender'],
       dob: map['dob'] != null ? (map['dob'] as Timestamp).toDate() : null,
       profilePhotoUrl: map['profilePhotoUrl'],
+      subcollections: Map<SubCollection, List<dynamic>>.fromEntries(
+        SubCollection.values.map((subcollection) {
+          final key = subcollection;
+          final value =
+              List<dynamic>.from(map['subcollections'][key.toString()] ?? []);
+          return MapEntry(key, value);
+        }),
+      ),
     );
   }
 }
-
-//TODO: define users  sub collections such as goals tasks events meals and schedules
