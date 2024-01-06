@@ -8,35 +8,42 @@ enum ReferenceType {
   meal,
 }
 
-class Event {
-  String id; // Unique identifier for the event
+class Event with ChangeNotifier {
+  String id;
   String title;
   String description;
-  DateTime date;
-  TimeOfDay startTime;
-  TimeOfDay endTime;
+  DateTime startDate;
+  DateTime endDate;
+  List<Map<String, TimeOfDay>> timeMap;
   String category;
   List<String> tags;
   bool isRepeating;
-  String
-      repeatFrequency; // String for repeat frequency, e.g., 'daily', 'weekly'
+  String repeatFrequency;
   bool isMultiDayEvent;
-  int numberOfDays;
+  bool sameEachDay;
+  String location;
+  double ticketCost;
+  int numberOfTickets;
+  String photoURL;
 
   // Constructor
   Event({
     required this.id,
     required this.title,
     required this.description,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
+    required this.startDate,
+    required this.endDate,
+    required this.timeMap,
     required this.category,
     required this.tags,
     required this.isRepeating,
     required this.repeatFrequency,
     required this.isMultiDayEvent,
-    required this.numberOfDays,
+    required this.sameEachDay,
+    required this.location,
+    required this.ticketCost,
+    required this.numberOfTickets,
+    required this.photoURL,
   });
 
   // Factory constructor to create an Event instance from a Firebase snapshot
@@ -45,16 +52,19 @@ class Event {
       id: documentId,
       title: data['title'],
       description: data['description'],
-      date: (data['date'] as Timestamp).toDate(),
-      startTime:
-          TimeOfDay.fromDateTime((data['startTime'] as Timestamp).toDate()),
-      endTime: TimeOfDay.fromDateTime((data['endTime'] as Timestamp).toDate()),
+      startDate: (data['startDate'] as Timestamp).toDate(),
+      endDate: (data['endDate'] as Timestamp).toDate(),
+      timeMap: List<Map<String, TimeOfDay>>.from(data['timeMap']),
       category: data['category'],
       tags: List<String>.from(data['tags']),
       isRepeating: data['isRepeating'],
       repeatFrequency: data['repeatFrequency'],
       isMultiDayEvent: data['isMultiDayEvent'],
-      numberOfDays: data['numberOfDays'],
+      sameEachDay: data['sameEachDay'],
+      location: data['location'],
+      ticketCost: data['ticketCost'],
+      numberOfTickets: data['numberOfTickets'],
+      photoURL: data['photoURL']
     );
   }
 
@@ -63,18 +73,43 @@ class Event {
     return {
       'title': title,
       'description': description,
-      'date':
-          date, // You may need to convert this to a Firestore Timestamp if needed
-      'startTime':
-          startTime, // You may need to convert this to a Firestore Timestamp if needed
-      'endTime':
-          endTime, // You may need to convert this to a Firestore Timestamp if needed
+      'startDate': startDate,
+      'endDate': endDate,
+      'timeMap': timeMap,
       'category': category,
       'tags': tags,
       'isRepeating': isRepeating,
       'repeatFrequency': repeatFrequency,
       'isMultiDayEvent': isMultiDayEvent,
-      'numberOfDays': numberOfDays,
+      'sameEachDay': sameEachDay,
+      'location': location,
+      'ticketCost': ticketCost,
+      'numberOfTickets': numberOfTickets,
+      'photoURL': photoURL
     };
   }
+
+ 
+
+
 }
+
+enum EventCategory {
+  concert,
+  conference,
+  party,
+  seminar,
+  workshop,
+  wedding,
+  hackathon,
+  technology,
+  gathering,
+  church,
+  other,
+}
+
+
+List<String> eventCategoryList = EventCategory.values
+    .map((category) => category.toString().split('.').last)
+    .toList();
+

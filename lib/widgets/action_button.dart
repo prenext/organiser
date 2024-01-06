@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:Organiser/widgets/dialogues/add_task.dart';
-import 'package:Organiser/widgets/dialogues/add_meal.dart';
-import 'package:Organiser/widgets/dialogues/add_schedule.dart';
-import 'package:Organiser/widgets/dialogues/add_goal.dart';
+import 'package:Organiser/models/sub_collections/event_model.dart';
 import 'package:Organiser/widgets/dialogues/add_event.dart';
-
+import 'package:flutter/material.dart';
 
 class CustomFAB extends StatefulWidget {
   @override
@@ -33,42 +29,42 @@ class _CustomFABState extends State<CustomFAB>
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-             if (isMenuOpen)
+            if (isMenuOpen)
               buildMenuItem(Icons.check_circle, () {
-                showAddTaskDialog(context);
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
-               if (isMenuOpen)
+            if (isMenuOpen)
               buildMenuItem(Icons.schedule, () {
-                showCreateScheduleDialog(context);
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
             if (isMenuOpen)
-              buildMenuItem(Icons.stars_rounded,  () {
-                showSetGoalDialog(context);
+              buildMenuItem(Icons.stars_rounded, () {
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
             if (isMenuOpen)
-              buildMenuItem(Icons.event,  () {
-                showCreateEventDialog(context);
+              buildMenuItem(Icons.event, () {
+               EventModel eventModel = new EventModel(); // Initialize your EventModel instance
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreateEventPage(eventModel)),
+                );
+
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
             if (isMenuOpen)
-              buildMenuItem(Icons.restaurant,  () {
-                showAddMealDialog(context);
+              buildMenuItem(Icons.restaurant, () {
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
               }),
-           
             FloatingActionButton(
               child: Icon(isMenuOpen ? Icons.close : Icons.add),
               backgroundColor: Theme.of(context).secondaryHeaderColor,
@@ -88,7 +84,6 @@ class _CustomFABState extends State<CustomFAB>
     );
   }
 
-  
   Widget buildMenuItem(IconData icon, VoidCallback onPressed) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.0),
@@ -102,7 +97,7 @@ class _CustomFABState extends State<CustomFAB>
             children: [
               Icon(
                 icon,
-                size: 25.0, 
+                size: 25.0,
                 color: Theme.of(context).secondaryHeaderColor,
               ),
             ],

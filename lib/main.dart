@@ -43,7 +43,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarColor: Colors.transparent,
     ));
 
-    var colorPrimary = Colors.teal;
+    var colorPrimary = Colors.deepOrange;
 
     var myColor = ThemeData(
       primarySwatch: colorPrimary,
