@@ -1,119 +1,112 @@
+import 'package:Organiser/models/sub_collections/event_model.dart';
+import 'package:Organiser/widgets/form_items/buttons.dart';
+import 'package:Organiser/widgets/form_items/dropdown.dart';
+import 'package:Organiser/widgets/form_items/tag_chips.dart';
+import 'package:Organiser/widgets/form_items/textfields.dart';
 import 'package:flutter/material.dart';
+import 'package:Organiser/models/sub_collections/event.dart';
 
- void showCreateEventDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 10.0,
-          child: _AddEventDialogContent(),
-        );
-      },
-    );
-  }
+List<String> eventCategoryList = EventCategory.values
+    .map((category) => category.toString().split('.').last)
+    .toList();
 
-class _AddEventDialogContent extends StatefulWidget {
+class CreateEventPage extends StatefulWidget {
+  final EventModel eventModel;
+
+  CreateEventPage(this.eventModel);
+
   @override
-  _AddEventDialogContentState createState() => _AddEventDialogContentState();
+  _CreateEventPageState createState() => _CreateEventPageState();
 }
 
-class _AddEventDialogContentState extends State<_AddEventDialogContent> {
-  // Define your variables for event details
-  String title = '';
-  String description = '';
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now().add(Duration(days: 7));
-  List<String> tasks = [];
+class _CreateEventPageState extends State<CreateEventPage> {
+  String dropdownValue = eventCategoryList.first;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  ValueNotifier<String> selectedCategory = ValueNotifier<String>('');
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Create New Event',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Create a new Event'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                StyledTextField(
+                  controller: _titleController,
+                  label: 'Event title',
+                ),
+                SizedBox(height: 16.0),
+                StyledTextField(
+                  controller: _descriptionController,
+                  label: 'Event Description',
+                  isMarkdownEnabled: true,
+                ),
+                SizedBox(height: 16.0),
+                StyledDropdown(
+                  selectedValue: dropdownValue,
+                  items: eventCategoryList,
+                  onChanged: (String value) {
+                    setState(() {
+                      dropdownValue = value;
+                    });
+                  },
+                ),
+                SizedBox(height: 16.0),
+                TagChips(),
+                SizedBox(height: 16.0),
+              
+                StyledButtons.primaryElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      _createEvent();
+                    }
+                  },
+                  text: 'Create Event',
+                  icon: Icons.check, 
+                ),
+              ],
             ),
           ),
-          TextField(
-            onChanged: (value) {
-              title = value;
-            },
-            decoration: InputDecoration(labelText: 'Event Title'),
-          ),
-          TextField(
-            onChanged: (value) {
-              description = value;
-            },
-            decoration: InputDecoration(labelText: 'Event Description'),
-          ),
-          Row(
-            children: [
-              Text('Start Date: ${startDate.toLocal()}'),
-              IconButton(
-                icon: Icon(Icons.calendar_today),
-                onPressed: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: startDate,
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2101),
-                  );
-                  if (pickedDate != null && pickedDate != startDate)
-                    setState(() {
-                      startDate = pickedDate;
-                    });
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text('End Date: ${endDate.toLocal()}'),
-              IconButton(
-                icon: Icon(Icons.calendar_today),
-                onPressed: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: endDate,
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2101),
-                  );
-                  if (pickedDate != null && pickedDate != endDate)
-                    setState(() {
-                      endDate = pickedDate;
-                    });
-                },
-              ),
-            ],
-          ),
-          TextField(
-            onChanged: (value) {
-              // Split tasks by comma and store in the list
-              tasks = value.split(',').map((e) => e.trim()).toList();
-            },
-            decoration: InputDecoration(
-                labelText: 'Tasks (comma-separated, optional)'),
-          ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              // Add logic to save the event to the database
-              // using the provided details (title, description, startDate, endDate, tasks)
-              Navigator.pop(context); // Close the dialog after creating the event
-            },
-            child: Text('Create Event'),
-          ),
-        ],
+        ),
       ),
     );
+  }
+
+  void _createEvent() {
+    Event newEvent = Event(
+      id: 'your_generated_id',
+      title: _titleController.text,
+      description: _descriptionController.text,
+      startDate: DateTime.now(),
+      endDate: DateTime.now(),
+      category: 'Your Category',
+      tags: ['Tag1', 'Tag2'],
+      isRepeating: false,
+      repeatFrequency: 'Daily',
+      isMultiDayEvent: true,
+      sameEachDay: false,
+      location: 'Event Location',
+      ticketCost: 10.0,
+      numberOfTickets: 100,
+      timeMap: [
+        {'day1': TimeOfDay.now()},
+      ],
+      photoURL: '',
+    );
+
+    widget.eventModel.addEvent(newEvent);
+
+    Navigator.pop(context);
   }
 }
