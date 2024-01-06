@@ -15,6 +15,9 @@ class StyledDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: selectedValue,
+      menuMaxHeight: 250,
+      borderRadius: BorderRadius.all(Radius.circular(5)),
+      
       items: items.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
