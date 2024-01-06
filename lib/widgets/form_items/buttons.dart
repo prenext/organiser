@@ -28,7 +28,7 @@ class StyledButtons {
       icon: Icon(icon),
       label: Text(text),
       style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.blue), 
+        side: BorderSide(color: Colors.deepOrange), 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(35.0), 
         ),
