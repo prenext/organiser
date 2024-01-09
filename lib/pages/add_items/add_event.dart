@@ -6,7 +6,6 @@ import 'package:Organiser/widgets/form_items/buttons.dart';
 import 'package:Organiser/widgets/form_items/dropdown.dart';
 import 'package:Organiser/widgets/form_items/location_card.dart';
 import 'package:Organiser/widgets/form_items/pickers.dart';
-import 'package:Organiser/widgets/form_items/tag_chips.dart';
 import 'package:Organiser/widgets/form_items/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/models/sub_collections/event.dart';
@@ -48,6 +47,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
   DateTime endTime = DateTime.now();
   TextEditingController ticketsController = TextEditingController();
   TextEditingController costPerTicketController = TextEditingController();
+  List<Tag> selectedTags = [];
 
   Future<void> _selectDate(
       BuildContext context, DateTime selectedDate, bool isFromDate) async {
@@ -172,10 +172,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     ),
                     StyledButtons.primaryElevatedButton(
                       onPressed: () async {
-                        String? result = await AddTagDialog.show(context);
-                        if (result != null) {
-                         
-                        }
+                        List<Tag>? result = await AddTagDialog.show(context);
+                        setState(() {
+                          selectedTags = result!;
+                        });
                       },
                       text: 'Add Tags',
                       icon: Icons.add,
@@ -183,6 +183,17 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   ],
                 ),
                 SizedBox(height: 16.0),
+                if (selectedTags.isNotEmpty)
+                  Text(
+                    'Tags',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                Wrap(
+                  children: selectedTags.map((tag) => _buildChip(tag)).toList(),
+                  spacing: 3,
+                ),
                 SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -299,19 +310,21 @@ class _CreateEventPageState extends State<CreateEventPage> {
                 Row(
                   children: [
                     Expanded(
-                      child: StyledTextField(
-                        controller: ticketsController,
-                        label: 'Number of Available Tickets',
-                        isMultiline: false,
+                      child: BottomBorderTextField(
+                        controller: TextEditingController(),
+                        hintText: 'Number of Tickets',
+                        trailingIcon: Icons.add,
+                        leadingIcon: Icons.remove,
+                        inputType: TextInputType.number,
                       ),
                     ),
                     SizedBox(width: 16),
                     Expanded(
-                      child: StyledTextField(
-                        controller: costPerTicketController,
-                        label: 'Cost per Ticket',
-                        isMultiline: false,
-                        leadingIcon: Icons.currency_exchange,
+                      child: BottomBorderTextField(
+                        controller: TextEditingController(),
+                        hintText: 'Cost per Ticket',
+                        leadingIcon: Icons.attach_money,
+                        inputType: TextInputType.number,
                       ),
                     ),
                   ],
@@ -378,6 +391,24 @@ class _CreateEventPageState extends State<CreateEventPage> {
         ),
       ),
     );
+  }
+
+  Widget _buildChip(Tag tag) {
+    return Chip(
+      label: Text(tag.tag),
+      onDeleted: () {
+        _removeTag(tag);
+      },
+      deleteIcon: Icon(Icons.cancel),
+    );
+  }
+
+  void _removeTag(Tag tag) {
+    setState(() {
+      selectedTags.remove(tag);
+    });
+    print("Tag removed " + tag.tag);
+    print("remaining tags : "+ selectedTags.toString());
   }
 
   void _createEvent() {
