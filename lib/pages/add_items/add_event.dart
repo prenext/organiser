@@ -95,6 +95,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
     }
   }
 
+  // ignore: unused_element
   Future<void> _pickImage() async {
     XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -107,285 +108,285 @@ class _CreateEventPageState extends State<CreateEventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Create a new Event'),
-        centerTitle: true,
-        actions: [
-          selectedImage == null
-              ? IconButton(
-                  icon: Icon(Icons.camera_alt),
-                  onPressed: () {
-                    _pickImage();
-                  },
-                )
-              : Stack(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        _pickImage();
-                      },
-                    ),
-                    Positioned(
-                      top: 2,
-                      right: 2,
-                      child: Icon(Icons.cancel, color: Colors.red),
-                    ),
-                  ],
-                ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                StyledTextField(
-                  controller: _titleController,
-                  label: 'Event title',
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    StyledButtons.primaryElevatedButton(
-                      onPressed: () async {
-                        String? result = await AddCategoryDialog.show(context);
-                        if (result != null) {}
-                      },
-                      text: 'Event cartegory',
-                      icon: Icons.add,
-                    ),
-                    StyledButtons.primaryElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DescriptionEditorPage(),
-                            ));
-                      },
-                      text: 'Add description',
-                      icon: Icons.add,
-                    ),
-                    StyledButtons.primaryElevatedButton(
-                      onPressed: () async {
-                        List<Tag>? result = await AddTagDialog.show(context);
-                        setState(() {
-                          selectedTags = result!;
-                        });
-                      },
-                      text: 'Add Tags',
-                      icon: Icons.add,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                if (selectedTags.isNotEmpty)
-                  Text(
-                    'Tags',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  StyledTextField(
+                    controller: _titleController,
+                    label: 'Title',
+                    trailingIcon: Icons.sports_kabaddi_rounded,
                   ),
-                Wrap(
-                  children: selectedTags.map((tag) => _buildChip(tag)).toList(),
-                  spacing: 3,
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      StyledButtons.primaryElevatedButton(
+                        onPressed: () async {
+                          String? result =
+                              await AddCategoryDialog.show(context);
+                          if (result != null) {}
+                        },
+                        text: 'Cartegory',
+                        icon: Icons.add,
+                      ),
+                      StyledButtons.primaryElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DescriptionEditorPage(),
+                              ));
+                        },
+                        text: 'Notes',
+                        icon: Icons.add,
+                      ),
+                      StyledButtons.primaryElevatedButton(
+                        onPressed: () async {
+                          List<Tag>? result = await AddTagDialog.show(context);
+                          setState(() {
+                            selectedTags = result!;
+                          });
+                        },
+                        text: 'Tags',
+                        icon: Icons.add,
+                      ),
+                      StyledButtons.primaryElevatedButton(
+                        onPressed: () async {
+                          List<Tag>? result = await AddTagDialog.show(context);
+                          setState(() {
+                            selectedTags = result!;
+                          });
+                        },
+                        text: 'Image',
+                        icon: Icons.camera,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.0),
+                  if (selectedTags.isNotEmpty)
                     Text(
-                      'Event Date',
+                      'Tags',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Switch(
-                          value: isMultiDay,
-                          onChanged: (bool newValue) => setState(() {
-                            isMultiDay = newValue;
-                          }),
+                  Wrap(
+                    children:
+                        selectedTags.map((tag) => _buildChip(tag)).toList(),
+                    spacing: 3,
+                  ),
+                  SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Event Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text('Multiple Days'),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        if (isMultiDay) Text("Begins:"),
-                        StyledButtons.secondaryOutlinedButton(
-                          onPressed: () => _selectDate(context, fromDate, true),
-                          text: '${fromDate.toLocal()}'.split(' ')[0],
-                          icon: Icons.calendar_month,
-                          context: context,
-                        ),
-                      ],
-                    ),
-                    if (isMultiDay)
-                      Column(
-                        children: [
-                          Text("Ends:"),
-                          StyledButtons.secondaryOutlinedButton(
-                            onPressed: () =>
-                                _selectDate(context, toDate, false),
-                            text: '${toDate.toLocal()}'.split(' ')[0],
-                            icon: Icons.calendar_month,
-                            context: context,
-                          ),
-                        ],
                       ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Event Duration',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (isMultiDay)
                       Row(
                         children: [
                           Switch(
-                            value: sameEachDay,
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                sameEachDay = newValue;
-                              });
-                            },
+                            value: isMultiDay,
+                            onChanged: (bool newValue) => setState(() {
+                              isMultiDay = newValue;
+                            }),
                           ),
-                          Text('Same each day'),
+                          Text('Multiple Days'),
                         ],
                       ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text("Starts:"),
-                        StyledButtons.secondaryOutlinedButton(
-                          onPressed: () => _selectTime(context, fromDate, true),
-                          text:
-                              '${fromDate.toLocal().hour.toString().padLeft(2, '0')}:${fromDate.toLocal().minute.toString().padLeft(2, '0')}',
-                          icon: Icons.access_time,
-                          context: context,
-                          borderRadius: 3,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text("Closes:"),
-                        StyledButtons.secondaryOutlinedButton(
-                          onPressed: () => _selectTime(context, toDate, false),
-                          text:
-                              '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
-                          icon: Icons.access_time,
-                          context: context,
-                          borderRadius: 3,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                LocationCard(),
-                SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: BottomBorderTextField(
-                        controller: TextEditingController(),
-                        hintText: 'Number of Tickets',
-                        trailingIcon: Icons.add,
-                        leadingIcon: Icons.remove,
-                        inputType: TextInputType.number,
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: BottomBorderTextField(
-                        controller: TextEditingController(),
-                        hintText: 'Cost per Ticket',
-                        leadingIcon: Icons.attach_money,
-                        inputType: TextInputType.number,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Repeat Event',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Switch(
-                      value: isRepeating,
-                      onChanged: (bool newValue) {
-                        setState(() {
-                          isRepeating = newValue;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Visibility(
-                  visible: isRepeating,
-                  child: Column(
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      StyledDropdown(
-                        selectedValue: frequencyDropdownValue,
-                        items: repeatFrequencyList,
-                        onChanged: (String value) {
-                          setState(() {
-                            frequencyDropdownValue = value;
-                          });
-                        },
+                      Column(
+                        children: [
+                          StyledButtons.secondaryOutlinedButton(
+                            onPressed: () =>
+                                _selectDate(context, fromDate, true),
+                            text: '${fromDate.toLocal()}'.split(' ')[0],
+                            icon: Icons.calendar_month,
+                            context: context,
+                            borderRadius: 30,
+                            verticalPadding: 10,
+                            horizontalPadding: 35,
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 16.0),
-                      StyledDropdown(
-                        selectedValue: cartegoeyDropdownValue,
-                        items: eventCategoryList,
-                        onChanged: (String value) {
+                      if (isMultiDay) Icon(Icons.remove),
+                      if (isMultiDay)
+                        Column(
+                          children: [
+                            StyledButtons.secondaryOutlinedButton(
+                              onPressed: () =>
+                                  _selectDate(context, toDate, false),
+                              text: '${toDate.toLocal()}'.split(' ')[0],
+                              icon: Icons.calendar_month,
+                              context: context,
+                              borderRadius: 30,
+                              verticalPadding: 10,
+                              horizontalPadding: 35,
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Event Duration',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (isMultiDay)
+                          Row(
+                            children: [
+                              Switch(
+                                value: sameEachDay,
+                                onChanged: (bool newValue) {
+                                  setState(() {
+                                    sameEachDay = newValue;
+                                  });
+                                },
+                              ),
+                              Text('Same each day'),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          StyledButtons.secondaryOutlinedButton(
+                            onPressed: () =>
+                                _selectTime(context, fromDate, true),
+                            text:
+                                '${fromDate.toLocal().hour.toString().padLeft(2, '0')}:${fromDate.toLocal().minute.toString().padLeft(2, '0')}',
+                            icon: Icons.access_time,
+                            context: context,
+                            borderRadius: 5,
+                            verticalPadding: 10,
+                            horizontalPadding: 40,
+                          ),
+                        ],
+                      ),
+                      Icon(Icons.remove),
+                      Column(
+                        children: [
+                          StyledButtons.secondaryOutlinedButton(
+                            onPressed: () =>
+                                _selectTime(context, toDate, false),
+                            text:
+                                '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
+                            icon: Icons.access_time,
+                            context: context,
+                            borderRadius: 5,
+                            verticalPadding: 10,
+                            horizontalPadding: 40,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 26.0),
+                  LocationCard(),
+                  SizedBox(height: 26.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BottomBorderTextField(
+                          controller: TextEditingController(),
+                          hintText: 'Number of Tickets',
+                          trailingIcon: Icons.add,
+                          leadingIcon: Icons.remove,
+                          inputType: TextInputType.number,
+                        ),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: BottomBorderTextField(
+                          controller: TextEditingController(),
+                          hintText: 'Cost per Ticket',
+                          leadingIcon: Icons.attach_money,
+                          inputType: TextInputType.number,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Repeat Event',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Switch(
+                        value: isRepeating,
+                        onChanged: (bool newValue) {
                           setState(() {
-                            cartegoeyDropdownValue = value;
+                            isRepeating = newValue;
                           });
                         },
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: 16.0),
-                StyledButtons.primaryElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _createEvent();
-                    }
-                  },
-                  text: 'Create Event',
-                  icon: Icons.check,
-                ),
-              ],
+                  Visibility(
+                    visible: isRepeating,
+                    child: Column(
+                      children: [
+                        StyledDropdown(
+                          selectedValue: frequencyDropdownValue,
+                          items: repeatFrequencyList,
+                          onChanged: (String value) {
+                            setState(() {
+                              frequencyDropdownValue = value;
+                            });
+                          },
+                        ),
+                        SizedBox(height: 16.0),
+                        StyledDropdown(
+                          selectedValue: cartegoeyDropdownValue,
+                          items: eventCategoryList,
+                          onChanged: (String value) {
+                            setState(() {
+                              cartegoeyDropdownValue = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  StyledButtons.primaryElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        _createEvent();
+                      }
+                    },
+                    text: 'Create Event',
+                    icon: Icons.check,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -408,7 +409,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
       selectedTags.remove(tag);
     });
     print("Tag removed " + tag.tag);
-    print("remaining tags : "+ selectedTags.toString());
+    print("remaining tags : " + selectedTags.toString());
   }
 
   void _createEvent() {

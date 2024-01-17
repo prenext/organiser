@@ -30,39 +30,33 @@ class StyledTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          label,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 8.0),
-        _buildRegularTextField(),
+        _buildRegularTextField(context),
       ],
     );
   }
 
-  Widget _buildRegularTextField() {
-    return TextFormField(
-      controller: controller,
-      keyboardType: isMultiline ? TextInputType.multiline : TextInputType.text,
-      maxLines: isMultiline ? maxLines : 1,
-      onChanged: onChanged,
-      validator: validator,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.0),
+  Widget _buildRegularTextField(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).secondaryHeaderColor.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: TextField(
+        style: TextStyle(
+            fontSize: 20.0,
+            ),
+        decoration: InputDecoration(
+          hintText: label,
+          hintStyle: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.normal
+              ),
+          border: InputBorder.none,
+          suffixIcon: Icon(trailingIcon)
         ),
-        prefixIcon: leadingIcon != null
-            ? GestureDetector(
-                onTap: onLeadingIconTap,
-                child: Icon(leadingIcon),
-              )
-            : null,
-        suffixIcon: trailingIcon != null
-            ? GestureDetector(
-                onTap: onTrailingIconTap,
-                child: Icon(trailingIcon),
-              )
-            : null,
+                  
+
       ),
     );
   }
@@ -91,7 +85,7 @@ class BottomBorderTextField extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: Theme.of(context).primaryColor,
-            width: 2.0,
+            width: 0.0,
           ),
         ),
       ),
@@ -99,7 +93,7 @@ class BottomBorderTextField extends StatelessWidget {
         controller: controller,
         keyboardType: inputType,
         decoration: InputDecoration(
-          labelText: hintText,
+          hintText: hintText,
           prefixIcon: Icon(leadingIcon),
           suffixIcon: Icon(trailingIcon),
           border: InputBorder.none,

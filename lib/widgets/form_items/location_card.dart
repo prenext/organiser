@@ -9,9 +9,10 @@ class LocationCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        elevation: 1,
+        elevation: 2,
         margin: EdgeInsets.zero,
-        child: Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
           child: Stack(
             children: [
               Image.network(
@@ -19,19 +20,17 @@ class LocationCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 150,
-               
               ),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                     SizedBox(height: 15),
+                    SizedBox(height: 15),
                     Icon(
-                        Icons.location_on,
-                        size: 50,
-                      ),
-                     
+                      Icons.location_on,
+                      size: 50,
+                    ),
                     SizedBox(height: 15),
                     Text(
                       'Select Location',
@@ -45,7 +44,7 @@ class LocationCard extends StatelessWidget {
             ],
           ),
         ),
-        ),
+      ),
     );
   }
 }
