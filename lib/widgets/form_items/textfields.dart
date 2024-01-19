@@ -11,6 +11,7 @@ class StyledTextField extends StatelessWidget {
   final IconData? trailingIcon;
   final void Function()? onLeadingIconTap;
   final void Function()? onTrailingIconTap;
+  final TextInputType? inputType;
 
   StyledTextField({
     required this.controller,
@@ -22,7 +23,8 @@ class StyledTextField extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.onLeadingIconTap,
-    this.onTrailingIconTap,
+    this.onTrailingIconTap, 
+    this.inputType,
   });
 
   @override
@@ -55,6 +57,7 @@ class StyledTextField extends StatelessWidget {
           border: InputBorder.none,
           suffixIcon: Icon(trailingIcon)
         ),
+        keyboardType: inputType,
                   
 
       ),

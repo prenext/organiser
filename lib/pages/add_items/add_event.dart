@@ -139,9 +139,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => DescriptionEditorPage(),
-                              ));
+                              DialogRoute(
+                                  context: context,
+                                  builder: (context) =>
+                                      DescriptionEditorPage()));
                         },
                         text: 'Notes',
                         icon: Icons.add,
@@ -172,9 +173,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   if (selectedTags.isNotEmpty)
                     Text(
                       'Tags',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   Wrap(
                     children:
@@ -186,20 +186,19 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Event Date',
+                        'Date',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Row(
                         children: [
+                          Text('Multiple Days'),
                           Switch(
                             value: isMultiDay,
                             onChanged: (bool newValue) => setState(() {
                               isMultiDay = newValue;
                             }),
                           ),
-                          Text('Multiple Days'),
                         ],
                       ),
                     ],
@@ -246,14 +245,14 @@ class _CreateEventPageState extends State<CreateEventPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Event Duration',
+                          'Duration',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                         if (isMultiDay)
                           Row(
                             children: [
+                              Text('Same each day'),
                               Switch(
                                 value: sameEachDay,
                                 onChanged: (bool newValue) {
@@ -262,7 +261,6 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   });
                                 },
                               ),
-                              Text('Same each day'),
                             ],
                           ),
                       ],
@@ -280,7 +278,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 '${fromDate.toLocal().hour.toString().padLeft(2, '0')}:${fromDate.toLocal().minute.toString().padLeft(2, '0')}',
                             icon: Icons.access_time,
                             context: context,
-                            borderRadius: 5,
+                            borderRadius: 10,
                             verticalPadding: 10,
                             horizontalPadding: 40,
                           ),
@@ -296,7 +294,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
                             icon: Icons.access_time,
                             context: context,
-                            borderRadius: 5,
+                            borderRadius: 10,
                             verticalPadding: 10,
                             horizontalPadding: 40,
                           ),
@@ -310,21 +308,19 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: BottomBorderTextField(
+                        child: StyledTextField(
                           controller: TextEditingController(),
-                          hintText: 'Number of Tickets',
-                          trailingIcon: Icons.add,
-                          leadingIcon: Icons.remove,
-                          inputType: TextInputType.number,
+                          label: 'Number of Tickets',
+                          inputType: TextInputType.numberWithOptions(),
                         ),
                       ),
                       SizedBox(width: 16),
                       Expanded(
-                        child: BottomBorderTextField(
+                        child: StyledTextField(
                           controller: TextEditingController(),
-                          hintText: 'Cost per Ticket',
-                          leadingIcon: Icons.attach_money,
-                          inputType: TextInputType.number,
+                          label: 'Cost per Ticket',
+                          trailingIcon: Icons.attach_money,
+                          inputType: TextInputType.numberWithOptions(),
                         ),
                       ),
                     ],
@@ -334,10 +330,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Repeat Event',
+                        'Repeat',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Switch(
                         value: isRepeating,
