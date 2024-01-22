@@ -2,10 +2,10 @@ import 'package:Organiser/pages/home/screens/socials.dart';
 import 'package:Organiser/pages/home/screens/food.dart';
 import 'package:Organiser/pages/home/screens/schedules.dart';
 import 'package:Organiser/pages/home/screens/tasks.dart';
-import 'package:Organiser/widgets/action_button.dart';
-import 'package:Organiser/widgets/app_bar.dart';
-import 'package:Organiser/widgets/bottom_app_bar.dart';
-import 'package:Organiser/widgets/drawer.dart';
+import 'package:Organiser/widgets/universal/action_button.dart';
+import 'package:Organiser/widgets/universal/app_bar.dart';
+import 'package:Organiser/widgets/universal/bottom_app_bar.dart';
+import 'package:Organiser/widgets/universal/drawer.dart';
 import 'package:flutter/material.dart';
 import 'screens/dashboard.dart';
 

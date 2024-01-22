@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'widgets/splash.dart';
+import 'widgets/universal/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ Future<void> main() async {
     persistenceEnabled: true,
   );
 
- runApp(
+  runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
       child: OrganiserApp(),
@@ -41,7 +41,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarColor: Colors.transparent,
     ));
 
-    var colorPrimary = Colors.blueGrey;
+    var colorPrimary = Colors.blue;
 
     var myColor = ThemeData(
       primarySwatch: colorPrimary,
@@ -52,8 +52,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
 
     return MaterialApp(
       theme: ThemeData(
-          outlinedButtonTheme: OutlinedButtonThemeData(
-          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(),
           primarySwatch: colorPrimary,
           appBarTheme: AppBarTheme(
             backgroundColor: myColor,
@@ -61,12 +60,9 @@ class _OrganiserAppState extends State<OrganiserApp> {
             elevation: 1,
           ),
           expansionTileTheme: ExpansionTileThemeData(
-            shape: Border.all(color: Colors.transparent, width: 0),
-            collapsedShape: Border.all(color: Colors.transparent, width: 0),
-            childrenPadding: EdgeInsets.all(20)
-            )
-          ),
-          
+              shape: Border.all(color: Colors.transparent, width: 0),
+              collapsedShape: Border.all(color: Colors.transparent, width: 0),
+              childrenPadding: EdgeInsets.all(20))),
       home: SplashScreen(
         onSelectThemeColor: () {},
       ),
