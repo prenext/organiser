@@ -12,6 +12,10 @@ class StyledTextField extends StatelessWidget {
   final void Function()? onLeadingIconTap;
   final void Function()? onTrailingIconTap;
   final TextInputType? inputType;
+  final double? paddingX;
+  final double? paddingY;
+    final double? textSize;
+
 
   StyledTextField({
     required this.controller,
@@ -23,8 +27,10 @@ class StyledTextField extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.onLeadingIconTap,
-    this.onTrailingIconTap, 
+    this.onTrailingIconTap,
     this.inputType,
+    this.paddingX = 10.0,
+    this.paddingY = 20.0, this.textSize = 15,
   });
 
   @override
@@ -39,32 +45,29 @@ class StyledTextField extends StatelessWidget {
 
   Widget _buildRegularTextField(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.symmetric(horizontal: paddingX!, vertical: paddingY!),
       decoration: BoxDecoration(
-        color: Theme.of(context).secondaryHeaderColor.withOpacity(0.9),
+        color: Theme.of(context).secondaryHeaderColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: TextField(
-        style: TextStyle(
-            fontSize: 20.0,
+      child: Expanded(
+        child: Center(
+          child: TextField(
+            style: TextStyle(
+              fontSize: textSize,
             ),
-        decoration: InputDecoration(
-          hintText: label,
-          hintStyle: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.normal
-              ),
-          border: InputBorder.none,
-          suffixIcon: Icon(trailingIcon)
+            decoration: InputDecoration(
+                hintText: label,
+                hintStyle: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal),
+                border: InputBorder.none,
+                suffixIcon: Icon(trailingIcon)),
+            keyboardType: inputType,
+          ),
         ),
-        keyboardType: inputType,
-                  
-
       ),
     );
   }
 }
-
 
 class BottomBorderTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -193,5 +196,3 @@ class AutocompleteTextField<T extends Object> extends StatelessWidget {
     );
   }
 }
-
-

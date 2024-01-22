@@ -41,7 +41,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarColor: Colors.transparent,
     ));
 
-    var colorPrimary = Colors.cyan;
+    var colorPrimary = Colors.blueGrey;
 
     var myColor = ThemeData(
       primarySwatch: colorPrimary,
@@ -52,6 +52,8 @@ class _OrganiserAppState extends State<OrganiserApp> {
 
     return MaterialApp(
       theme: ThemeData(
+          outlinedButtonTheme: OutlinedButtonThemeData(
+          ),
           primarySwatch: colorPrimary,
           appBarTheme: AppBarTheme(
             backgroundColor: myColor,

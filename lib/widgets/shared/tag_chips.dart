@@ -1,4 +1,4 @@
-import 'package:Organiser/widgets/form_items/buttons.dart';
+import 'package:Organiser/widgets/shared/buttons.dart';
 import 'package:flutter/material.dart';
 
 class TagChips extends StatefulWidget {
@@ -44,7 +44,7 @@ class _TagChipsState extends State<TagChips> {
             });
           },
           text: 'Add tags',
-          icon: Icons.add,
+          icon: Icons.add, context: context,
         ),
       ],
     );

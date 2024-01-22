@@ -4,6 +4,7 @@ class StyledButtons {
   static Widget primaryElevatedButton({
     required VoidCallback onPressed,
     required String text,
+    required BuildContext context,
     IconData? icon,
     double borderRadius = 35.0,
     double horizontalPadding = 16.0,
@@ -14,6 +15,10 @@ class StyledButtons {
       icon: Icon(icon),
       label: Text(text),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor:
+            Theme.of(context).secondaryHeaderColor.withOpacity(0.7),
+        foregroundColor: Theme.of(context).primaryColor,
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
           vertical: verticalPadding,
@@ -30,24 +35,21 @@ class StyledButtons {
     required VoidCallback onPressed,
     required String text,
     IconData? icon,
-    double borderRadius = 35.0,
-    double horizontalPadding = 16.0,
-    double verticalPadding = 8.0,
+    double borderRadius = 55.0,
+    double horizontalPadding = 0,
+    double verticalPadding = 0,
   }) {
-    return OutlinedButton.icon(
+    return OutlinedButton(
+
       onPressed: onPressed,
-      icon: Icon(icon),
-      label: Text(text),
       style: OutlinedButton.styleFrom(
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding,
-          vertical: verticalPadding,
-        ),
+        padding: EdgeInsets.zero,
         side: BorderSide(color: Theme.of(context).primaryColor),
         shape: RoundedRectangleBorder(
+          side: BorderSide(),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-      ),
+      ), child: Text(text),
     );
   }
 }

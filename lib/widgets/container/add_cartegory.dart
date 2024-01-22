@@ -1,4 +1,4 @@
-import 'package:Organiser/widgets/form_items/buttons.dart';
+import 'package:Organiser/widgets/shared/buttons.dart';
 import 'package:flutter/material.dart';
 
 class AddCategoryDialog {
@@ -51,7 +51,7 @@ class AddCategoryDialog {
                         }
                       },
                       text: 'Done',
-                      icon: Icons.check,
+                      icon: Icons.check, context: context,
                     ),
                   ],
                 ),
