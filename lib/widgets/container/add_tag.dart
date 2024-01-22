@@ -1,4 +1,4 @@
-import 'package:Organiser/widgets/form_items/buttons.dart';
+import 'package:Organiser/widgets/shared/buttons.dart';
 import 'package:flutter/material.dart';
 
 class AddTagDialog {
@@ -52,12 +52,12 @@ class AddTagDialog {
                       text: 'Cancel',
                     ),
                     Text('|'),
-                    StyledButtons.primaryElevatedButton(
+                    StyledButtons.secondaryOutlinedButton(
                       onPressed: () {
                         Navigator.of(context).pop(selectedTags);
                       },
                       text: 'Done',
-                      icon: Icons.check,
+                      icon: Icons.check, context: context,
                     ),
                   ],
                 ),

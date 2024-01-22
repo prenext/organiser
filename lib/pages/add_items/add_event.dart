@@ -1,12 +1,11 @@
 import 'package:Organiser/models/sub_collections/event_model.dart';
 import 'package:Organiser/pages/add_items/add_description.dart';
-import 'package:Organiser/widgets/dialogues/add_cartegory.dart';
-import 'package:Organiser/widgets/dialogues/add_tag.dart';
-import 'package:Organiser/widgets/form_items/buttons.dart';
-import 'package:Organiser/widgets/form_items/dropdown.dart';
-import 'package:Organiser/widgets/form_items/location_card.dart';
-import 'package:Organiser/widgets/form_items/pickers.dart';
-import 'package:Organiser/widgets/form_items/textfields.dart';
+import 'package:Organiser/widgets/container/add_cartegory.dart';
+import 'package:Organiser/widgets/container/add_tag.dart';
+import 'package:Organiser/widgets/shared/buttons.dart';
+import 'package:Organiser/widgets/shared/location_card.dart';
+import 'package:Organiser/widgets/shared/pickers.dart';
+import 'package:Organiser/widgets/shared/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/models/sub_collections/event.dart';
 import 'package:image_picker/image_picker.dart';
@@ -48,6 +47,16 @@ class _CreateEventPageState extends State<CreateEventPage> {
   TextEditingController ticketsController = TextEditingController();
   TextEditingController costPerTicketController = TextEditingController();
   List<Tag> selectedTags = [];
+  bool setEventTime = true;
+  bool setEventTickets = true;
+  String selectedChip = '';
+
+  List<SelectableChip> selectableChips = List.generate(
+    5, // Adjust the number of chips as needed
+    (index) => SelectableChip(
+      label: 'Date ${index + 1}',
+    ),
+  );
 
   Future<void> _selectDate(
       BuildContext context, DateTime selectedDate, bool isFromDate) async {
@@ -64,6 +73,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
     }
   }
 
+  // ignore: unused_element
   Future<void> _selectTime(
       BuildContext context, DateTime selectedDate, bool isStartTime) async {
     // Set default values
@@ -120,21 +130,13 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   StyledTextField(
                     controller: _titleController,
                     label: 'Title',
+                    textSize: 25,
                     trailingIcon: Icons.sports_kabaddi_rounded,
                   ),
                   SizedBox(height: 16.0),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      StyledButtons.primaryElevatedButton(
-                        onPressed: () async {
-                          String? result =
-                              await AddCategoryDialog.show(context);
-                          if (result != null) {}
-                        },
-                        text: 'Cartegory',
-                        icon: Icons.add,
-                      ),
                       StyledButtons.primaryElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -145,18 +147,33 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                       DescriptionEditorPage()));
                         },
                         text: 'Notes',
-                        icon: Icons.add,
+                        icon: Icons.edit_document,
+                        context: context,
+                        verticalPadding: 0,
                       ),
                       StyledButtons.primaryElevatedButton(
                         onPressed: () async {
-                          List<Tag>? result = await AddTagDialog.show(context);
-                          setState(() {
-                            selectedTags = result!;
-                          });
+                          String? result =
+                              await AddCategoryDialog.show(context);
+                          if (result != null) {}
                         },
-                        text: 'Tags',
-                        icon: Icons.add,
+                        text: 'Cartegory',
+                        icon: Icons.post_add_rounded,
+                        context: context,
+                        verticalPadding: 0,
                       ),
+                      StyledButtons.primaryElevatedButton(
+                          onPressed: () async {
+                            List<Tag>? result =
+                                await AddTagDialog.show(context);
+                            setState(() {
+                              selectedTags = result!;
+                            });
+                          },
+                          verticalPadding: 0,
+                          text: 'Tags',
+                          icon: Icons.bookmark_add_outlined,
+                          context: context),
                       StyledButtons.primaryElevatedButton(
                         onPressed: () async {
                           List<Tag>? result = await AddTagDialog.show(context);
@@ -165,89 +182,153 @@ class _CreateEventPageState extends State<CreateEventPage> {
                           });
                         },
                         text: 'Image',
-                        icon: Icons.camera,
+                        icon: Icons.add_photo_alternate_outlined,
+                        context: context,
+                        verticalPadding: 0,
                       ),
                     ],
                   ),
-                  SizedBox(height: 16.0),
                   if (selectedTags.isNotEmpty)
-                    Text(
-                      'Tags',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    Wrap(
+                      children:
+                          selectedTags.map((tag) => _buildChip(tag)).toList(),
+                      spacing: 3,
                     ),
-                  Wrap(
-                    children:
-                        selectedTags.map((tag) => _buildChip(tag)).toList(),
-                    spacing: 3,
+                  SizedBox(
+                    height: 16,
                   ),
-                  SizedBox(height: 16.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Date',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      Row(
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    margin: EdgeInsets.zero,
+                    elevation: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Multiple Days'),
-                          Switch(
-                            value: isMultiDay,
-                            onChanged: (bool newValue) => setState(() {
-                              isMultiDay = newValue;
-                            }),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (!isMultiDay)
+                                SizedBox(
+                                  width: 10,
+                                ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () =>
+                                          _selectDate(context, fromDate, true),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          if (isMultiDay)
+                                            Text(
+                                              'BEGIN:',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w300),
+                                            ),
+                                          if (isMultiDay)
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                          Text(
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .hintColor,
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.w400),
+                                              "Sat, Feb 23"),
+                                        ],
+                                      ),
+                                    ),
+                                    if (isMultiDay)
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    if (isMultiDay)
+                                      GestureDetector(
+                                        onTap: () => _selectDate(
+                                            context, fromDate, true),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'ENDS:',
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w300),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                                style: TextStyle(
+                                                    fontSize: 24,
+                                                    color: Theme.of(context)
+                                                        .hintColor,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                                "Mon, Mar 15"),
+                                          ],
+                                        ),
+                                      ),
+                                  ]),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Multiple Days'),
+                              Switch(
+                                value: isMultiDay,
+                                onChanged: (bool newValue) => setState(() {
+                                  isMultiDay = newValue;
+                                }),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          StyledButtons.secondaryOutlinedButton(
-                            onPressed: () =>
-                                _selectDate(context, fromDate, true),
-                            text: '${fromDate.toLocal()}'.split(' ')[0],
-                            icon: Icons.calendar_month,
-                            context: context,
-                            borderRadius: 30,
-                            verticalPadding: 10,
-                            horizontalPadding: 35,
-                          ),
-                        ],
-                      ),
-                      if (isMultiDay) Icon(Icons.remove),
-                      if (isMultiDay)
-                        Column(
-                          children: [
-                            StyledButtons.secondaryOutlinedButton(
-                              onPressed: () =>
-                                  _selectDate(context, toDate, false),
-                              text: '${toDate.toLocal()}'.split(' ')[0],
-                              icon: Icons.calendar_month,
-                              context: context,
-                              borderRadius: 30,
-                              verticalPadding: 10,
-                              horizontalPadding: 35,
-                            ),
-                          ],
-                        ),
-                    ],
+                  SizedBox(
+                    height: 16,
                   ),
-                  SizedBox(height: 16.0),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: 5.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Duration',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                        SizedBox(
+                          height: 25,
+                          child: ToggleButtons(
+                            children: [
+                              Text(
+                                'Time',
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w300),
+                              ),
+                              Text(
+                                'All day',
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w300),
+                              ),
+                            ],
+                            isSelected: [setEventTime, !setEventTime],
+                            onPressed: (index) {
+                              setState(() {
+                                setEventTime = index == 0 ? true : false;
+                              });
+                            },
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
                         ),
                         if (isMultiDay)
                           Row(
@@ -266,126 +347,313 @@ class _CreateEventPageState extends State<CreateEventPage> {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          StyledButtons.secondaryOutlinedButton(
-                            onPressed: () =>
-                                _selectTime(context, fromDate, true),
-                            text:
-                                '${fromDate.toLocal().hour.toString().padLeft(2, '0')}:${fromDate.toLocal().minute.toString().padLeft(2, '0')}',
-                            icon: Icons.access_time,
-                            context: context,
-                            borderRadius: 10,
-                            verticalPadding: 10,
-                            horizontalPadding: 40,
-                          ),
-                        ],
-                      ),
-                      Icon(Icons.remove),
-                      Column(
-                        children: [
-                          StyledButtons.secondaryOutlinedButton(
-                            onPressed: () =>
-                                _selectTime(context, toDate, false),
-                            text:
-                                '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
-                            icon: Icons.access_time,
-                            context: context,
-                            borderRadius: 10,
-                            verticalPadding: 10,
-                            horizontalPadding: 40,
-                          ),
-                        ],
-                      )
-                    ],
+                  SizedBox(
+                    height: 15,
                   ),
-                  SizedBox(height: 26.0),
+                  if (setEventTime)
+                    Card(
+                      margin: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 5),
+                        child: Column(
+                          children: [
+                            if (!sameEachDay)
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                    10, // Adjust the number of chips as needed
+                                    (index) => SelectableChip(
+                                        label: 'Sat, Mar  ${index + 1}'),
+                                  ),
+                                ),
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "STARTS",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                  Text(
+                                    "ENDS",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      color: Theme.of(context).hintColor
+                                        ..withOpacity(0.7),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${toDate.toLocal().hour.toString().padLeft(2, '0')}:${toDate.toLocal().minute.toString().padLeft(2, '0')}',
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      color: Theme.of(context)
+                                          .hintColor
+                                          .withOpacity(0.7),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            if (!sameEachDay)
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: onResetClicked,
+                                    child: Text('RESET TIME'),
+                                  ),
+                                  TextButton(
+                                    onPressed: onSaveClicked,
+                                    child: Text("SAVE DATE'S TIME"),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    elevation: 0,
+                    margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 10.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _showRepeatFrequencyDialog(context);
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Every Week",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.repeat,
+                                    size: 25,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                buildSelectableChip('S'),
+                                buildSelectableChip('M'),
+                                buildSelectableChip('T'),
+                                buildSelectableChip('W'),
+                                buildSelectableChip('T'),
+                                buildSelectableChip('F'),
+                                buildSelectableChip('S'),
+                              ],
+                            )
+                          ]),
+                    ),
+                  ),
                   LocationCard(),
                   SizedBox(height: 26.0),
                   Row(
-                    children: [
-                      Expanded(
-                        child: StyledTextField(
-                          controller: TextEditingController(),
-                          label: 'Number of Tickets',
-                          inputType: TextInputType.numberWithOptions(),
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: StyledTextField(
-                          controller: TextEditingController(),
-                          label: 'Cost per Ticket',
-                          trailingIcon: Icons.attach_money,
-                          inputType: TextInputType.numberWithOptions(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Repeat',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                      SizedBox(
+                        height: 25,
+                        child: ToggleButtons(
+                          children: [
+                            Text(
+                              'Tickets',
+                              style: TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.w300),
+                            ),
+                            Text(
+                              'No Ticket',
+                              style: TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.w300),
+                            ),
+                          ],
+                          isSelected: [setEventTickets, !setEventTickets],
+                          onPressed: (index) {
+                            setState(() {
+                              setEventTickets = index == 0 ? true : false;
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                       ),
-                      Switch(
-                        value: isRepeating,
-                        onChanged: (bool newValue) {
-                          setState(() {
-                            isRepeating = newValue;
-                          });
-                        },
-                      ),
+                      Text("Does this event have tickets?",
+                          style: TextStyle(color: Theme.of(context).hintColor)),
                     ],
                   ),
-                  Visibility(
-                    visible: isRepeating,
-                    child: Column(
+                  SizedBox(
+                    height: 15,
+                  ),
+                  if (setEventTickets)
+                    Row(
                       children: [
-                        StyledDropdown(
-                          selectedValue: frequencyDropdownValue,
-                          items: repeatFrequencyList,
-                          onChanged: (String value) {
-                            setState(() {
-                              frequencyDropdownValue = value;
-                            });
-                          },
+                        Expanded(
+                          child: StyledTextField(
+                            paddingX: 15,
+                            paddingY: 5,
+                                                        textSize: 16,
+
+                            controller: TextEditingController(),
+                            label: 'Number of Tickets',
+                            inputType: TextInputType.numberWithOptions(),
+                          ),
                         ),
-                        SizedBox(height: 16.0),
-                        StyledDropdown(
-                          selectedValue: cartegoeyDropdownValue,
-                          items: eventCategoryList,
-                          onChanged: (String value) {
-                            setState(() {
-                              cartegoeyDropdownValue = value;
-                            });
-                          },
+                        SizedBox(width: 40),
+                        Expanded(
+                          child: StyledTextField(
+                            paddingX: 15,
+                            paddingY: 5,
+                            textSize: 16,
+                            controller: TextEditingController(),
+                            label: 'Cost per Ticket',
+                            trailingIcon: Icons.attach_money,
+                            inputType: TextInputType.numberWithOptions(),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 16.0),
-                  StyledButtons.primaryElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        _createEvent();
-                      }
-                    },
-                    text: 'Create Event',
-                    icon: Icons.check,
-                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        elevation: 0,
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  _createEvent();
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    'NEXT',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  _createEvent();
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    'SAVE',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onSaveClicked() {
+    // Handle save logic here
+    print('Save clicked');
+    setState(() {
+      selectableChips.forEach((chip) {
+        if (chip.isSelected) {
+          chip.showAvatar = true;
+        }
+      });
+    });
+  }
+
+  void onResetClicked() {
+    // Handle reset logic here
+    print('Reset clicked');
+    setState(() {
+      selectableChips.forEach((chip) {
+        chip.showAvatar = false;
+        chip.isSelected = false;
+      });
+    });
+  }
+
+  Widget buildSelectableChip(String label, {double fontSize = 14}) {
+    return ChoiceChip(
+      label: Text(
+        label,
+        style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.w300,
+            color: selectedChip == label
+                ? Theme.of(context).cardColor
+                : Theme.of(context).primaryColor),
+      ),
+      selected: selectedChip == label,
+      selectedColor: Theme.of(context).primaryColor,
+      onSelected: (bool selected) {
+        setState(() {
+          selectedChip = selected ? label : '';
+        });
+      },
+      side: BorderSide(color: Theme.of(context).primaryColor),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      backgroundColor: Theme.of(context).primaryColor.withOpacity(0),
     );
   }
 
@@ -396,6 +664,45 @@ class _CreateEventPageState extends State<CreateEventPage> {
         _removeTag(tag);
       },
       deleteIcon: Icon(Icons.cancel),
+    );
+  }
+
+  void _showRepeatFrequencyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          backgroundColor: Theme.of(context).cardColor.withOpacity(0.90),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: IntrinsicHeight(
+              child: RepeatFrequencyOptions(),
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Perform the necessary actions with the selected frequency
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            )
+          ],
+        );
+      },
     );
   }
 
@@ -434,5 +741,131 @@ class _CreateEventPageState extends State<CreateEventPage> {
     widget.eventModel.addEvent(newEvent);
 
     Navigator.pop(context);
+  }
+}
+
+// ignore: must_be_immutable
+class SelectableChip extends StatefulWidget {
+  final String label;
+  bool isSelected = false;
+  bool showAvatar = false;
+
+  SelectableChip({required this.label});
+
+  @override
+  _SelectableChipState createState() => _SelectableChipState();
+}
+
+class _SelectableChipState extends State<SelectableChip> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ChoiceChip(
+            backgroundColor: Colors.transparent,
+            label: Text(widget.label),
+            selected: widget.isSelected,
+            onSelected: (selected) {
+              setState(() {
+                widget.isSelected = selected;
+              });
+            },
+            selectedColor: Theme.of(context).secondaryHeaderColor,
+            labelStyle: TextStyle(
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          if (widget.showAvatar)
+            CircleAvatar(
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class RepeatFrequencyOptions extends StatefulWidget {
+  @override
+  _RepeatFrequencyOptionsState createState() => _RepeatFrequencyOptionsState();
+}
+
+class _RepeatFrequencyOptionsState extends State<RepeatFrequencyOptions> {
+  String selectedFrequency = 'Daily';
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RadioListTile<String>(
+          title: Text("Don't Repeat Event"),
+          value: "Don't Repeat",
+          groupValue: selectedFrequency,
+          onChanged: (value) {
+            setState(() {
+              selectedFrequency = value!;
+            });
+          },
+        ),
+        Divider(
+          height: 1,
+        ),
+        RadioListTile<String>(
+          title: Text('Daily'),
+          value: 'Daily',
+          groupValue: selectedFrequency,
+          onChanged: (value) {
+            setState(() {
+              selectedFrequency = value!;
+            });
+          },
+        ),
+        Divider(
+          height: 1,
+        ),
+        RadioListTile<String>(
+          title: Text('Weekly'),
+          value: 'Weekly',
+          groupValue: selectedFrequency,
+          onChanged: (value) {
+            setState(() {
+              selectedFrequency = value!;
+            });
+          },
+        ),
+        Divider(
+          height: 1,
+        ),
+        RadioListTile<String>(
+          title: Text('Monthly'),
+          value: 'Monthly',
+          groupValue: selectedFrequency,
+          onChanged: (value) {
+            setState(() {
+              selectedFrequency = value!;
+            });
+          },
+        ),
+        Divider(
+          height: 1,
+        ),
+        RadioListTile<String>(
+          title: Text('Yearly'),
+          value: 'Yearly',
+          groupValue: selectedFrequency,
+          onChanged: (value) {
+            setState(() {
+              selectedFrequency = value!;
+            });
+          },
+        ),
+      ],
+    );
   }
 }

@@ -4,8 +4,8 @@ import 'package:Organiser/pages/settings/screens/settings.dart';
 import 'package:Organiser/pages/theme/screens/theme_color.dart';
 import 'package:Organiser/pages/theme/screens/theme_mode.dart';
 import 'package:Organiser/pages/user/screens/account.dart';
-import 'package:Organiser/widgets/dialogues/logout.dart';
-import 'package:Organiser/widgets/dialogues/rate_app.dart';
+import 'package:Organiser/widgets/container/logout.dart';
+import 'package:Organiser/widgets/container/rate_app.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
