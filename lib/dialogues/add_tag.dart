@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class AddTagDialog {
   static List<Tag> selectedTags = [];
 
-  static Future<List<Tag>?> show(BuildContext context) async {
+  static Future<List<String>?> show(BuildContext context) async {
     //TextEditingController tagController = TextEditingController();
 
-    return showDialog<List<Tag>>(
+    return showDialog<List<String>>(
       context: context,
       builder: (BuildContext context) {
         return Dialog(

@@ -1,103 +1,69 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-enum ReferenceType {
-  task,
-  event,
-  schedule,
-  meal,
-}
-
-
 class Event with ChangeNotifier {
-  String id;
+  String id = "";
   String title;
-  String description;
-  DateTime startDate;
-  DateTime endDate;
-  TimeOfDay startTime;
-  TimeOfDay endTime;
-  List<Map<String, TimeOfDay>> timeMap;
+  String notes;
   String category;
   List<String> tags;
+  String photoURL;
+  List<Map<DateTime, TimeOfDay>> dateAndTime;
   bool isRepeating;
-  String repeatFrequency;
-  bool isMultiDayEvent;
-  bool sameEachDay;
-  String location;
+  List<Map<RepeatFrequency, List>> repetition;
+  List<Map<String, String>> location;
   double ticketCost;
   int numberOfTickets;
-  String photoURL;
 
-  // Constructor
   Event({
-    required this.id,
     required this.title,
-    required this.description,
+    required this.notes,
     required this.category,
     required this.tags,
-    required this.startDate,
-    required this.endDate,
-    required this.startTime,
-    required this.endTime,
-    required this.timeMap,
+    required this.photoURL,
+    required this.dateAndTime,
     required this.isRepeating,
-    required this.repeatFrequency,
-    required this.isMultiDayEvent,
-    required this.sameEachDay,
+    required this.repetition,
     required this.location,
     required this.ticketCost,
     required this.numberOfTickets,
-    required this.photoURL,
   });
 
   // Factory constructor to create an Event instance from a Firebase snapshot
   factory Event.fromMap(Map<String, dynamic> data, String documentId) {
     return Event(
-        id: documentId,
-        title: data['title'],
-        description: data['description'],
-        startDate: (data['startDate'] as Timestamp).toDate(),
-        endDate: (data['endDate'] as Timestamp).toDate(),
-        startTime: _convertMapToTimeOfDay(data['startTime']),
-        endTime: _convertMapToTimeOfDay(data['endTime']),
-        timeMap: List<Map<String, TimeOfDay>>.from(data['timeMap']),
-        category: data['category'],
-        tags: List<String>.from(data['tags']),
-        isRepeating: data['isRepeating'],
-        repeatFrequency: data['repeatFrequency'],
-        isMultiDayEvent: data['isMultiDayEvent'],
-        sameEachDay: data['sameEachDay'],
-        location: data['location'],
-        ticketCost: data['ticketCost'],
-        numberOfTickets: data['numberOfTickets'],
-        photoURL: data['photoURL']);
+      title: data['title'],
+      notes: data['description'],
+      category: data['category'],
+      tags: List<String>.from(data['tags']),
+      photoURL: data['photoURL'],
+      dateAndTime: List<Map<DateTime, TimeOfDay>>.from(data['dateAndTime']),
+      isRepeating: data['isRepeating'],
+      repetition: List<Map<RepeatFrequency, List>>.from(data['repetition']),
+      location: List<Map<String, String>>.from(data['location']),
+      ticketCost: data['ticketCost'],
+      numberOfTickets: data['numberOfTickets'],
+    );
   }
 
   // Method to convert Event instance to a map for Firebase
   Map<String, dynamic> toMap() {
     return {
       'title': title,
-      'description': description,
-      'startDate': startDate,
-      'endDate': endDate,
-      'startTime':startTime,
-      'endTime':endTime,
-      'timeMap': timeMap,
+      'notes': notes,
       'category': category,
       'tags': tags,
+      'photoURL': photoURL,
+      'dateAndTime': dateAndTime,
       'isRepeating': isRepeating,
-      'repeatFrequency': repeatFrequency,
-      'isMultiDayEvent': isMultiDayEvent,
-      'sameEachDay': sameEachDay,
+      'repetition': repetition,
       'location': location,
       'ticketCost': ticketCost,
       'numberOfTickets': numberOfTickets,
-      'photoURL': photoURL
     };
   }
 }
 
+// ignore: unused_element
 TimeOfDay _convertMapToTimeOfDay(Map<String, dynamic> timeMap) {
   // Assuming 'hour' and 'minute' are the keys in your Firestore data
   int hour = timeMap['hour'];
@@ -105,23 +71,17 @@ TimeOfDay _convertMapToTimeOfDay(Map<String, dynamic> timeMap) {
   return TimeOfDay(hour: hour, minute: minute);
 }
 
-enum EventCategory {
-  concert,
-  conference,
-  party,
-  seminar,
-  workshop,
-  wedding,
-  hackathon,
-  technology,
-  gathering,
-  church,
-  other,
-}
-
 enum RepeatFrequency {
   Daily,
   Weekly,
   Monthly,
   Yearly,
+}
+
+
+enum ReferenceType {
+  task,
+  event,
+  schedule,
+  meal,
 }

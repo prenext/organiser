@@ -1,10 +1,10 @@
 import 'package:Organiser/widgets/shared/input/textfields.dart';
 import 'package:flutter/material.dart';
 
-class TitleInput extends StatelessWidget {
+class TitleAdder extends StatelessWidget {
   final TextEditingController titleController;
 
-  TitleInput({required this.titleController});
+  TitleAdder({required this.titleController});
 
   @override
   Widget build(BuildContext context) {

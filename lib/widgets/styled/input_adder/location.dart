@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-class LocationCard extends StatelessWidget {
+// ignore: must_be_immutable
+class LocationAdder extends StatelessWidget {
+  
+  final Map<String, String> locationController;
+
+
+  LocationAdder({required this.locationController});
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+   return GestureDetector(
       onTap: () {},
       child: Card(
         shape: RoundedRectangleBorder(
@@ -38,13 +45,14 @@ class LocationCard extends StatelessWidget {
                     ),
                     SizedBox(height: 15),
                     Card(
-                       shape: RoundedRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                       elevation: 0,
                       color: Theme.of(context).cardColor.withOpacity(0.70),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25.0, vertical: 5.0),
                         child: Column(
                           children: [
                             Text(
@@ -53,7 +61,9 @@ class LocationCard extends StatelessWidget {
                                   fontSize: 20,
                                   color: Theme.of(context).primaryColor),
                             ),
-                            SizedBox(height: 3,),
+                            SizedBox(
+                              height: 3,
+                            ),
                             Text(
                               'More description about specific event location...',
                               style: TextStyle(
@@ -73,4 +83,6 @@ class LocationCard extends StatelessWidget {
       ),
     );
   }
+
+  void setState(Null Function() param0) {}
 }

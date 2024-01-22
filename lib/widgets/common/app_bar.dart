@@ -1,4 +1,4 @@
-import 'package:Organiser/pages/messages/screens/messages.dart';
+import 'package:Organiser/pages/messages/messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

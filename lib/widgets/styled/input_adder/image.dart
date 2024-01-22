@@ -1,19 +1,17 @@
 import 'package:Organiser/widgets/shared/input/description.dart';
 import 'package:Organiser/widgets/shared/input/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ImageAdder extends StatelessWidget {
-  final ImagePicker imageController;
+  final String imageUrlController;
 
-  ImageAdder({required this.imageController});
+  ImageAdder({required this.imageUrlController});
 
-   // ignore: unused_element
   // Future<void> _pickImage() async {
   //   XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
   //   if (image != null) {
   //     setState(() {
-  //       selectedImage = image as PickedFile?;
+  //       imageUrlController = image as PickedFile?;
   //     });
   //   }
   // }

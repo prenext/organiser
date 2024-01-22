@@ -1,28 +1,29 @@
 // date_picker.dart
 import 'package:flutter/material.dart';
 
-class DatePickerWidget extends StatelessWidget {
-  final DateTime selectedDate;
-  final bool isMultiDay;
-  final bool canBeMultiDay;
-  final Function(DateTime) onDateSelected;
+// ignore: must_be_immutable
+class DateAdder extends StatelessWidget {
+  final DateTime? dateController;
+  final DateTime? startDateController;
+  final DateTime? endDateController;
+  final bool isMultiDayController;
 
-  DatePickerWidget({
-    required this.selectedDate,
-    required this.onDateSelected,
-    required this.isMultiDay,
-    required this.canBeMultiDay,
+  DateAdder({
+    this.dateController,
+    this.endDateController,
+    this.startDateController,
+    required this.isMultiDayController,
   });
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: dateController!,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (pickedDate != null && pickedDate != selectedDate) {
+    if (pickedDate != null && pickedDate != dateController) {
       onDateSelected(pickedDate);
     }
   }
@@ -106,7 +107,7 @@ class DatePickerWidget extends StatelessWidget {
                 children: [
                   Text('Multiple Days'),
                   Switch(
-                    value: isMultiDay,
+                    value: this.isMultiDayController,
                     onChanged: (bool newValue) {
                       // Handle the state change in the parent widget
                     },
@@ -120,3 +121,5 @@ class DatePickerWidget extends StatelessWidget {
     );
   }
 }
+
+void onDateSelected(DateTime pickedDate) {}

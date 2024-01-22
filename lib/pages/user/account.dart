@@ -1,5 +1,5 @@
 import 'package:Organiser/models/collections/user.dart';
-import 'package:Organiser/widgets/shared/container/logout.dart';
+import 'package:Organiser/dialogues/logout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

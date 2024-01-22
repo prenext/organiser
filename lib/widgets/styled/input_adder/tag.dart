@@ -1,10 +1,11 @@
-import 'package:Organiser/widgets/shared/container/add_tag.dart';
+import 'package:Organiser/dialogues/add_tag.dart';
 import 'package:Organiser/widgets/shared/input/buttons.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TagsAdder extends StatelessWidget {
-  List<Tag> selectedTags = [];
+
+  List<String> selectedTags = [];
 
   TagsAdder({required this.selectedTags});
 
@@ -12,7 +13,7 @@ class TagsAdder extends StatelessWidget {
   Widget build(BuildContext context) {
     return StyledButtons.primaryElevatedButton(
         onPressed: () async {
-          List<Tag>? result = await AddTagDialog.show(context);
+          List<String>? result = await AddTagDialog.show(context);
           setState(() {
             selectedTags = result!;
           });

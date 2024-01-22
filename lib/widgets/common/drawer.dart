@@ -1,11 +1,11 @@
-import 'package:Organiser/pages/info/screens/about.dart';
-import 'package:Organiser/pages/info/screens/tips.dart';
-import 'package:Organiser/pages/settings/screens/settings.dart';
-import 'package:Organiser/pages/theme/screens/theme_color.dart';
-import 'package:Organiser/pages/theme/screens/theme_mode.dart';
-import 'package:Organiser/pages/user/screens/account.dart';
-import 'package:Organiser/widgets/shared/container/logout.dart';
-import 'package:Organiser/widgets/shared/container/rate_app.dart';
+import 'package:Organiser/pages/info/about.dart';
+import 'package:Organiser/pages/info/tips.dart';
+import 'package:Organiser/pages/settings/settings.dart';
+import 'package:Organiser/pages/theme/theme_color.dart';
+import 'package:Organiser/pages/theme/theme_mode.dart';
+import 'package:Organiser/pages/user/account.dart';
+import 'package:Organiser/dialogues/logout.dart';
+import 'package:Organiser/dialogues/rate_app.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {

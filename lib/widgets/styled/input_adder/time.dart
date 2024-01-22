@@ -2,25 +2,22 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class TimePickerWidget extends StatelessWidget {
-  final TextEditingController timeController;
-  final TextEditingController? startTimeController;
-  final TextEditingController? endTimeController;
-  final bool setEventTime;
-  final bool sameEachDay;
-  final bool isMultiDay;
-  final Function() onResetClicked;
-  final Function() onSaveClicked;
+class TimeAdder extends StatelessWidget {
+  final TimeOfDay? timeController;
+  final TimeOfDay? startTimeController;
+  final TimeOfDay? endTimeController;
+  final bool isDuration;
+  bool setTime = true;
+  bool sameEachDay = true;
 
-  TimePickerWidget({
-    required this.timeController,
+  final bool isMultiDay;
+
+  TimeAdder({
+    this.timeController,
     this.startTimeController,
     this.endTimeController,
-    required this.setEventTime,
-    required this.sameEachDay,
     required this.isMultiDay,
-    required this.onResetClicked,
-    required this.onSaveClicked,
+    required this.isDuration,
   });
 
   List<SelectableChip> selectableChips = List.generate(
@@ -54,12 +51,12 @@ class TimePickerWidget extends StatelessWidget {
                           TextStyle(fontSize: 10, fontWeight: FontWeight.w300),
                     ),
                   ],
-                  isSelected: [setEventTime, !setEventTime],
+                  // isSelected: [setEventTime, !setEventTime],
                   onPressed: (index) {
                     // Handle the toggle logic
                     // You might want to update the state here if you are using a StatefulWidget
                   },
-                  borderRadius: BorderRadius.circular(50.0),
+                  borderRadius: BorderRadius.circular(50.0), isSelected: [],
                 ),
               ),
               if (isMultiDay)
@@ -81,7 +78,7 @@ class TimePickerWidget extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        if (setEventTime)
+        if (setTime)
           Card(
             margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
@@ -131,7 +128,7 @@ class TimePickerWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${timeController.text}',
+                          '${startTimeController}',
                           style: TextStyle(
                             fontSize: 40,
                             color: Theme.of(context).hintColor
@@ -139,7 +136,7 @@ class TimePickerWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${timeController.text}',
+                          '${endTimeController}',
                           style: TextStyle(
                             fontSize: 40,
                             color: Theme.of(context).hintColor.withOpacity(0.7),
@@ -171,28 +168,30 @@ class TimePickerWidget extends StatelessWidget {
     );
   }
 
-  //  void onSaveClicked() {
-  //   // Handle save logic here
-  //   print('Save clicked');
-  //   setState(() {
-  //     selectableChips.forEach((chip) {
-  //       if (chip.isSelected) {
-  //         chip.showAvatar = true;
-  //       }
-  //     });
-  //   });
-  // }
+   void onSaveClicked() {
+    // Handle save logic here
+    print('Save clicked');
+    setState(() {
+      selectableChips.forEach((chip) {
+        if (chip.isSelected) {
+          chip.showAvatar = true;
+        }
+      });
+    });
+  }
 
-  // void onResetClicked() {
-  //   // Handle reset logic here
-  //   print('Reset clicked');
-  //   setState(() {
-  //     selectableChips.forEach((chip) {
-  //       chip.showAvatar = false;
-  //       chip.isSelected = false;
-  //     });
-  //   });
-  // }
+  void onResetClicked() {
+    // Handle reset logic here
+    print('Reset clicked');
+    setState(() {
+      selectableChips.forEach((chip) {
+        chip.showAvatar = false;
+        chip.isSelected = false;
+      });
+    });
+  }
+  
+  void setState(Null Function() param0) {}
 }
 
 // ignore: must_be_immutable
@@ -241,4 +240,3 @@ class _SelectableChipState extends State<SelectableChip> {
     );
   }
 }
-

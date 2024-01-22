@@ -2,20 +2,19 @@ import 'package:Organiser/widgets/shared/input/textfields.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class CartegoryAdder extends StatelessWidget {
+class TicketsAdder extends StatelessWidget {
   final TextEditingController ticketsController;
   final TextEditingController costPerTicketController;
-
   bool setEventTime = true;
   bool setEventTickets = true;
 
-  CartegoryAdder({
+  TicketsAdder({
     required this.ticketsController,
     required this.costPerTicketController
   });
 
 
-    void setState(Null Function() param0) {}
+  void setState(Null Function() param0) {}
 
   @override
   Widget build(BuildContext context) {
