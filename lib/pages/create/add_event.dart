@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Organiser/models/sub_collections/event.dart';
-import 'package:Organiser/models/sub_collections/event_model.dart';
+import 'package:Organiser/models/collection/sub/event.dart';
+import 'package:Organiser/models/collection/sub/event_model.dart';
 import 'package:Organiser/widgets/styled/input_adder/title.dart';
 import 'package:Organiser/widgets/styled/input_adder/note.dart';
 import 'package:Organiser/widgets/styled/input_adder/cartegory.dart';

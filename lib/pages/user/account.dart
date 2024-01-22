@@ -1,4 +1,4 @@
-import 'package:Organiser/models/collections/user.dart';
+import 'package:Organiser/models/collection/user.dart';
 import 'package:Organiser/dialogues/logout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
