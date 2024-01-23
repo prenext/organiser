@@ -1,8 +1,8 @@
-// time_picker.dart
+// ignore_for_file: must_be_immutable
+import 'package:Organiser/widgets/styled/input_adder/chips.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class TimeAdder extends StatelessWidget {
+class TimeAdder extends StatefulWidget {
   final TimeOfDay? timeController;
   final TimeOfDay? startTimeController;
   final TimeOfDay? endTimeController;
@@ -11,6 +11,7 @@ class TimeAdder extends StatelessWidget {
   bool sameEachDay = true;
 
   final bool isMultiDay;
+  final bool canBeMultiDay;
 
   TimeAdder({
     this.timeController,
@@ -18,8 +19,14 @@ class TimeAdder extends StatelessWidget {
     this.endTimeController,
     required this.isMultiDay,
     required this.isDuration,
+    required this.canBeMultiDay,
   });
 
+  @override
+  _TimeAdder createState() => _TimeAdder();
+}
+
+class _TimeAdder extends State<TimeAdder> {
   List<SelectableChip> selectableChips = List.generate(
     5, // Adjust the number of chips as needed
     (index) => SelectableChip(
@@ -51,23 +58,26 @@ class TimeAdder extends StatelessWidget {
                           TextStyle(fontSize: 10, fontWeight: FontWeight.w300),
                     ),
                   ],
-                  // isSelected: [setEventTime, !setEventTime],
+                  isSelected: [widget.setTime, widget.setTime],
                   onPressed: (index) {
-                    // Handle the toggle logic
-                    // You might want to update the state here if you are using a StatefulWidget
+                    setState(() {
+                      widget.setTime = index == 0 ? true : false;
+                    });
                   },
-                  borderRadius: BorderRadius.circular(50.0), isSelected: [],
+                  borderRadius: BorderRadius.circular(50.0),
                 ),
               ),
-              if (isMultiDay)
+              if (widget.isMultiDay)
                 Row(
                   children: [
                     Text('Same each day'),
                     Switch(
-                      value: sameEachDay,
+                      value: widget.sameEachDay,
                       onChanged: (bool newValue) {
-                        // Handle the switch logic
-                        // You might want to update the state here if you are using a StatefulWidget
+                        setState(() {
+                           widget.sameEachDay = newValue;
+                        });
+                       
                       },
                     ),
                   ],
@@ -78,7 +88,7 @@ class TimeAdder extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        if (setTime)
+        if (widget.setTime)
           Card(
             margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
@@ -90,7 +100,7 @@ class TimeAdder extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5),
               child: Column(
                 children: [
-                  if (!sameEachDay)
+                  if (widget.sameEachDay)
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -128,7 +138,7 @@ class TimeAdder extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${startTimeController}',
+                          '08:00',
                           style: TextStyle(
                             fontSize: 40,
                             color: Theme.of(context).hintColor
@@ -136,7 +146,7 @@ class TimeAdder extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${endTimeController}',
+                          '16:00',
                           style: TextStyle(
                             fontSize: 40,
                             color: Theme.of(context).hintColor.withOpacity(0.7),
@@ -146,7 +156,7 @@ class TimeAdder extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10),
-                  if (!sameEachDay)
+                  if (widget.sameEachDay)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -168,75 +178,18 @@ class TimeAdder extends StatelessWidget {
     );
   }
 
-   void onSaveClicked() {
-    // Handle save logic here
-    print('Save clicked');
-    setState(() {
-      selectableChips.forEach((chip) {
-        if (chip.isSelected) {
-          chip.showAvatar = true;
-        }
-      });
+  void onSaveClicked() {
+    selectableChips.forEach((chip) {
+      if (chip.isSelected) {
+        chip.showAvatar = true;
+      }
     });
   }
 
   void onResetClicked() {
-    // Handle reset logic here
-    print('Reset clicked');
-    setState(() {
-      selectableChips.forEach((chip) {
-        chip.showAvatar = false;
-        chip.isSelected = false;
-      });
+    selectableChips.forEach((chip) {
+      chip.showAvatar = false;
+      chip.isSelected = false;
     });
-  }
-  
-  void setState(Null Function() param0) {}
-}
-
-// ignore: must_be_immutable
-class SelectableChip extends StatefulWidget {
-  final String label;
-  bool isSelected = false;
-  bool showAvatar = false;
-
-  SelectableChip({required this.label});
-
-  @override
-  _SelectableChipState createState() => _SelectableChipState();
-}
-
-class _SelectableChipState extends State<SelectableChip> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          ChoiceChip(
-            backgroundColor: Colors.transparent,
-            label: Text(widget.label),
-            selected: widget.isSelected,
-            onSelected: (selected) {
-              setState(() {
-                widget.isSelected = selected;
-              });
-            },
-            selectedColor: Theme.of(context).secondaryHeaderColor,
-            labelStyle: TextStyle(
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          if (widget.showAvatar)
-            CircleAvatar(
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-              ),
-            ),
-        ],
-      ),
-    );
   }
 }

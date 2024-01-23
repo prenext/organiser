@@ -22,14 +22,15 @@ class LocationAdder extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Stack(
+            alignment: Alignment.center,
             children: [
               ImageFiltered(
-                imageFilter: ui.ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                imageFilter: ui.ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                 child: Image.asset(
                   'assets/map.jpg',
                   fit: BoxFit.cover,
                   width: double.infinity,
-                  height: 150,
+                  height: 120,
                 ),
               ),
               Center(
@@ -41,38 +42,27 @@ class LocationAdder extends StatelessWidget {
                     Icon(
                       Icons.location_on,
                       color: Colors.red,
-                      size: 50,
+                      size: 20,
                     ),
-                    SizedBox(height: 15),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      elevation: 0,
-                      color: Theme.of(context).cardColor.withOpacity(0.70),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25.0, vertical: 5.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Select Location',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              'More description about specific event location...',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Theme.of(context).hintColor),
-                            ),
-                          ],
+                    SizedBox(height: 5),
+                    Column(
+                      children: [
+                        Text(
+                          'Select Location',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).primaryColor),
                         ),
-                      ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          'More description about specific event location...',
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: Theme.of(context).hintColor),
+                        ),
+                      ],
                     ),
                   ],
                 ),

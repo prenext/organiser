@@ -71,13 +71,13 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     dateAndTimeController: _dateAndTimeController,
                   ),
                   SizedBox(height: 16.0),
-                  LocationAdder(
-                    locationController: _locationController,
-                  ),
-                  SizedBox(height: 16.0),
                   TicketsAdder(
                     ticketsController: _ticketsController,
                     costPerTicketController: _ticketCostController,
+                  ),
+                  SizedBox(height: 16.0),
+                  LocationAdder(
+                    locationController: _locationController,
                   ),
                 ],
               ),

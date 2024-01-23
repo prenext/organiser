@@ -3,32 +3,40 @@ import 'package:Organiser/widgets/styled/input_adder/time.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class DateAndTimeAdder extends StatelessWidget {
+class DateAndTimeAdder extends StatefulWidget {
   final Map<DateTime, TimeOfDay> dateAndTimeController;
-  final DateTime _dateController = DateTime(1);
-  final DateTime _endDateController = DateTime(1);
-  final TimeOfDay _startTimeController = TimeOfDay(hour: 1, minute: 1);
-  final TimeOfDay _endTimeController = TimeOfDay(hour: 1, minute: 1);
+  DateTime? dateController;
+  DateTime? endDateController;
+  TimeOfDay? startTimeController;
+  TimeOfDay? endTimeController;
   bool isMultiDay = false;
 
   DateAndTimeAdder({required this.dateAndTimeController});
 
   @override
-  Widget build(BuildContext context) {
+  _DateAndTimeAdder createState() => _DateAndTimeAdder();
+}
+
+class _DateAndTimeAdder extends State<DateAndTimeAdder>{
+
+   Widget build(BuildContext context) {
     return Column(
       children: [
         DateAdder(
-          dateController: _dateController,
-          endDateController: _endDateController,
-          isMultiDayController: isMultiDay,
+          dateController: widget.dateController,
+          endDateController: widget.endDateController,
+          isMultiDayController: widget.isMultiDay,
         ),
+        SizedBox(height: 16.0,),
         TimeAdder(
-          isMultiDay: isMultiDay,
+          isMultiDay: widget.isMultiDay,
           isDuration: true,
-          startTimeController: _startTimeController,
-          endTimeController: _endTimeController,
+          startTimeController: widget.startTimeController,
+          endTimeController: widget.endTimeController,
+          canBeMultiDay: true,
         ),
       ],
     );
   }
+
 }
