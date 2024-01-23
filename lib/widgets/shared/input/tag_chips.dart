@@ -1,4 +1,4 @@
-import 'package:Organiser/widgets/shared/buttons.dart';
+import 'package:Organiser/widgets/shared/input/buttons.dart';
 import 'package:flutter/material.dart';
 
 class TagChips extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:Organiser/models/collections/user.dart';
-import 'package:Organiser/pages/user/screens/forgot_pwd.dart';
-import 'package:Organiser/pages/user/screens/register.dart';
+import 'package:Organiser/models/collection/user.dart';
+import 'package:Organiser/pages/user/forgot_pwd.dart';
+import 'package:Organiser/pages/user/register.dart';
 import 'package:Organiser/providers/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

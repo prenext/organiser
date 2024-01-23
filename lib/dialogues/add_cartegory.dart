@@ -1,45 +1,36 @@
-import 'package:Organiser/widgets/shared/buttons.dart';
+import 'package:Organiser/widgets/shared/input/buttons.dart';
 import 'package:flutter/material.dart';
 
-class AddTagDialog {
-  static List<Tag> selectedTags = [];
+class AddCategoryDialog {
+  static Future<String?> show(BuildContext context) async {
+    TextEditingController categoryController = TextEditingController();
 
-  static Future<List<Tag>?> show(BuildContext context) async {
-    //TextEditingController tagController = TextEditingController();
-
-    return showDialog<List<Tag>>(
+    return showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
+          backgroundColor: Color.fromARGB(235, 255, 255, 255),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
+            borderRadius: BorderRadius.circular(35.0),
           ),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 30.0),
-            padding: EdgeInsets.symmetric(vertical: 10.0),
+            padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    'Add Tag',
+                    'Add Category',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                Wrap(
-                  spacing: 8.0,
-                  children: AddTagDialog.selectedTags.map((tag) {
-                    return Chip(
-                      label: Text(tag.tag),
-                    );
-                  }).toList(),
-                ),
-                AutocompleteBasicTagExample(),
-                SizedBox(height: 20.0),
+                AutocompleteBasiccategoryExample(),
+                SizedBox(height: 40.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -52,9 +43,12 @@ class AddTagDialog {
                       text: 'Cancel',
                     ),
                     Text('|'),
-                    StyledButtons.secondaryOutlinedButton(
+                    StyledButtons.primaryElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pop(selectedTags);
+                        String category = categoryController.text.trim();
+                        if (category.isNotEmpty) {
+                          Navigator.of(context).pop(category);
+                        }
                       },
                       text: 'Done',
                       icon: Icons.check, context: context,
@@ -71,16 +65,16 @@ class AddTagDialog {
 }
 
 @immutable
-class Tag {
-  const Tag({
-    required this.tag,
+class Category {
+  const Category({
+    required this.category,
   });
 
-  final String tag;
+  final String category;
 
   @override
   String toString() {
-    return '$tag';
+    return '$category';
   }
 
   @override
@@ -88,55 +82,55 @@ class Tag {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is Tag && other.tag == Tag;
+    return other is Category && other.category == category;
   }
 
   @override
-  int get hashCode => tag.hashCode;
+  int get hashCode => category.hashCode;
 }
 
-class AutocompleteBasicTagExample extends StatelessWidget {
-  const AutocompleteBasicTagExample({Key? key});
+class AutocompleteBasiccategoryExample extends StatelessWidget {
+  const AutocompleteBasiccategoryExample({Key? key});
 
-  static const List<Tag> _TagOptions = <Tag>[
-    Tag(tag: "coding"),
-    Tag(tag: "Birthday"),
-    Tag(tag: "Anniversary"),
-    Tag(tag: "Graduation"),
-    Tag(tag: "Corporate"),
-    Tag(tag: "Concert"),
-    Tag(tag: "Sports Event"),
-    Tag(tag: "Conference"),
-    Tag(tag: "Exhibition"),
-    Tag(tag: "Party"),
+  static const List<Category> _categoryOptions = <Category>[
+    Category(category: "Wedding"),
+    Category(category: "Birthday"),
+    Category(category: "Anniversary"),
+    Category(category: "Graduation"),
+    Category(category: "Corporate Event"),
+    Category(category: "Concert"),
+    Category(category: "Sports Event"),
+    Category(category: "Conference"),
+    Category(category: "Exhibition"),
+    Category(category: "Party"),
   ];
 
-  static String _displayStringForOption(Tag option) => option.tag;
+  static String _displayStringForOption(Category option) => option.category;
 
   @override
   Widget build(BuildContext context) {
-    return RawAutocomplete<Tag>(
+    return RawAutocomplete<Category>(
       // Pass the necessary parameters.
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text == '') {
-          return const Iterable<Tag>.empty();
+          return const Iterable<Category>.empty();
         }
-        return _TagOptions.where((Tag option) {
+        return _categoryOptions.where((Category option) {
           return option
               .toString()
               .toLowerCase()
               .contains(textEditingValue.text.toLowerCase());
         });
       },
-      onSelected: (Tag selection) {
-        if (!AddTagDialog.selectedTags.contains(selection)) {
-          AddTagDialog.selectedTags.add(selection);
-        }
+      onSelected: (Category selection) {
+        debugPrint('You just selected ${_displayStringForOption(selection)}');
       },
-      fieldViewBuilder: (BuildContext context, tagController,
-          FocusNode focusNode, VoidCallback onFieldSubmitted) {
+      fieldViewBuilder: (BuildContext context,
+          TextEditingController textEditingController,
+          FocusNode focusNode,
+          VoidCallback onFieldSubmitted) {
         return TextField(
-          controller: tagController,
+          controller: textEditingController,
           focusNode: focusNode,
           onSubmitted: (_) {
             onFieldSubmitted();
@@ -144,7 +138,9 @@ class AutocompleteBasicTagExample extends StatelessWidget {
         );
       },
       optionsViewBuilder: (BuildContext context,
-          AutocompleteOnSelected<Tag> onSelected, Iterable<Tag> options) {
+          AutocompleteOnSelected<Category> onSelected,
+          Iterable<Category> options) {
+        // Return a widget to display the available options.
         return Align(
           alignment: Alignment.topLeft,
           child: Material(
@@ -153,7 +149,7 @@ class AutocompleteBasicTagExample extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(maxHeight: 150, maxWidth: 310),
               child: ListView(
-                children: options.map((Tag option) {
+                children: options.map((Category option) {
                   return InkWell(
                     onTap: () {
                       onSelected(option);

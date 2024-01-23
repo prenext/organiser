@@ -1,5 +1,5 @@
 import 'package:Organiser/pages/home/home_page.dart';
-import 'package:Organiser/pages/user/screens/login.dart';
+import 'package:Organiser/pages/user/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

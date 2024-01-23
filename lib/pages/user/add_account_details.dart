@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:Organiser/models/collections/user.dart';
+import 'package:Organiser/models/collection/user.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
