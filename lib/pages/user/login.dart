@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).secondaryHeaderColor,
+              Theme.of(context).colorScheme.secondary,
               Theme.of(context).scaffoldBackgroundColor,
             ],
             begin: Alignment.topLeft,
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor),
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                   SizedBox(
                     height: 20,
@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                 side: BorderSide(
-                                    color: Theme.of(context).primaryColor),
+                                    color: Theme.of(context).colorScheme.primary),
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                             ),

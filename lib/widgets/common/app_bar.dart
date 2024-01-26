@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               width: 2.0,
             ),
           ),
@@ -29,10 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: Text("Hello, " + userAccount.email!),
-      centerTitle: true,
-      backgroundColor: Theme.of(context).secondaryHeaderColor,
-      foregroundColor: Theme.of(context).primaryColor,
+      title: Text("Good Morning, Alidante"),
       actions: [
         IconButton(
           icon: Icon(Icons.notifications_outlined),

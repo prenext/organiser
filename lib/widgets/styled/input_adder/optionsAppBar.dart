@@ -7,8 +7,8 @@ class OptionsAppBar extends StatelessWidget {
   final Function() onCancelClicked;
   final Function() onAcceptClicked;
 
-  OptionsAppBar({
-      required this.formKey,
+  OptionsAppBar(
+      {required this.formKey,
       required this.cancelTitle,
       required this.AcceptTitle,
       required this.onCancelClicked,
@@ -19,7 +19,7 @@ class OptionsAppBar extends StatelessWidget {
     return BottomAppBar(
       color: Colors.transparent,
       elevation: 0,
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -31,9 +31,13 @@ class OptionsAppBar extends StatelessWidget {
             },
             child: Row(
               children: [
-                Text(
-                  this.cancelTitle,
-                  style: TextStyle(fontSize: 18),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0, vertical: 15),
+                  child: Text(
+                    this.cancelTitle,
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ],
             ),
@@ -44,13 +48,13 @@ class OptionsAppBar extends StatelessWidget {
                 this.onAcceptClicked();
               }
             },
-            child: Row(
-              children: [
-                Text(
-                  this.AcceptTitle,
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 15),
+              child: Text(
+                this.AcceptTitle,
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ),
         ],

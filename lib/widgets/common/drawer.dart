@@ -1,12 +1,14 @@
 import 'package:Organiser/pages/info/about.dart';
 import 'package:Organiser/pages/info/tips.dart';
 import 'package:Organiser/pages/settings/settings.dart';
-import 'package:Organiser/pages/theme/theme_color.dart';
-import 'package:Organiser/pages/theme/theme_mode.dart';
+import 'package:Organiser/pages/theme/color.dart';
+import 'package:Organiser/pages/theme/light.dart';
+import 'package:Organiser/pages/theme/theme_provider.dart';
 import 'package:Organiser/pages/user/account.dart';
 import 'package:Organiser/dialogues/logout.dart';
 import 'package:Organiser/dialogues/rate_app.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();
@@ -25,7 +27,7 @@ class CustomDrawer extends StatelessWidget {
       leading: Icon(
         icon,
         size: 35,
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).colorScheme.primary,
       ),
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
@@ -37,7 +39,6 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 10,
-      backgroundColor: Theme.of(context).secondaryHeaderColor,
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +60,7 @@ class CustomDrawer extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       border: Border.all(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 4.0, // Adjust the width as needed
                       ),
                     ),
@@ -126,8 +127,7 @@ class CustomDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  AccountPage()),
+                              builder: (context) => AccountPage()),
                         );
                       },
                       context: context),
@@ -158,17 +158,17 @@ class CustomDrawer extends StatelessWidget {
                       },
                       context: context),
                   _buildListTileWithDecoration(
-                      title: 'Light Theme',
-                      icon: Icons.sunny,
+                      title: Provider.of<ThemeProvider>(context).themeData ==
+                              lightMode
+                          ? 'Light Mode'
+                          : 'Dark Mode',
+                      icon: Provider.of<ThemeProvider>(context).themeData ==
+                              lightMode
+                          ? Icons.sunny
+                          : Icons.dark_mode,
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            DialogRoute(
-                              context: context,
-                              builder: (context) => ThemeDialog(
-                                onThemeSelected: (String) {},
-                              ),
-                            ));
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .toggleTheme();
                       },
                       context: context),
                   _buildListTileWithDecoration(
@@ -240,7 +240,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       Icon(
                         Icons.arrow_circle_right_outlined,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ]),
                   )
@@ -259,5 +259,4 @@ class CustomDrawer extends StatelessWidget {
   Future<void> _showConfirmationDialog(BuildContext context) async {
     await LogoutDialog.show(context);
   }
-  
 }

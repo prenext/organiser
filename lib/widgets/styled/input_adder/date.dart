@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class DateAdder extends StatelessWidget {
+class DateAdder extends StatefulWidget {
   final DateTime? dateController;
   final DateTime? startDateController;
   final DateTime? endDateController;
-  final bool isMultiDayController;
+  bool isMultiDayController;
 
   DateAdder({
     this.dateController,
@@ -15,15 +15,20 @@ class DateAdder extends StatelessWidget {
     required this.isMultiDayController,
   });
 
+  @override
+  _DateAdder createState() => _DateAdder();
+}
+
+class _DateAdder extends State<DateAdder> {
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: dateController!,
+      initialDate: widget.dateController!,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (pickedDate != null && pickedDate != dateController) {
+    if (pickedDate != null && pickedDate != widget.dateController) {
       onDateSelected(pickedDate);
     }
   }
@@ -55,7 +60,7 @@ class DateAdder extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                         if (widget.isMultiDayController) Text(
                             'BEGIN:',
                             style: TextStyle(
                                 fontSize: 10, fontWeight: FontWeight.w300),
@@ -64,7 +69,7 @@ class DateAdder extends StatelessWidget {
                             width: 8,
                           ),
                           Text(
-                            'Selected Date:',
+                            'Wen, 24 Jan',
                             style: TextStyle(
                                 color: Theme.of(context).hintColor,
                                 fontSize: 24,
@@ -72,10 +77,11 @@ class DateAdder extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                     if(widget.isMultiDayController) SizedBox(
                         height: 10,
                       ),
-                      GestureDetector(
+                     if (widget.isMultiDayController)
+                        GestureDetector(
                         onTap: () => _selectDate(context),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +95,7 @@ class DateAdder extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              'Selected Date:',
+                              'Thu, 25 Jan',
                               style: TextStyle(
                                   fontSize: 24,
                                   color: Theme.of(context).hintColor,
@@ -107,9 +113,11 @@ class DateAdder extends StatelessWidget {
                 children: [
                   Text('Multiple Days'),
                   Switch(
-                    value: this.isMultiDayController,
+                    value: widget.isMultiDayController,
                     onChanged: (bool newValue) {
-                      // Handle the state change in the parent widget
+                      setState(() {
+                        widget.isMultiDayController = newValue;
+                      });
                     },
                   ),
                 ],

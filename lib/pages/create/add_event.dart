@@ -1,3 +1,5 @@
+import 'package:Organiser/widgets/styled/input_adder/repeat.dart';
+import 'package:Organiser/widgets/styled/input_adder/timezone.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/models/collection/sub/event.dart';
 import 'package:Organiser/models/collection/sub/event_model.dart';
@@ -23,6 +25,7 @@ class CreateEventPage extends StatefulWidget {
 class _CreateEventPageState extends State<CreateEventPage> {
   //create a the required controllers for event model
   final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _priorityController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   final TextEditingController _cartegoryController = TextEditingController();
   final List<String> _tagsController = [];
@@ -47,7 +50,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TitleAdder(titleController: _titleController),
+                  TitleAdder(
+                      titleController: _titleController,
+                      priorityController: _priorityController),
                   SizedBox(height: 16.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,14 +76,21 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     dateAndTimeController: _dateAndTimeController,
                   ),
                   SizedBox(height: 16.0),
-                  TicketsAdder(
-                    ticketsController: _ticketsController,
-                    costPerTicketController: _ticketCostController,
+                  RepeatAdderWidget(
+                    repeatOnController: _isRepetingController,
+                    repeatController: _repetitionController,
                   ),
                   SizedBox(height: 16.0),
                   LocationAdder(
                     locationController: _locationController,
                   ),
+                  SizedBox(height: 16.0),
+                  TicketsAdder(
+                    ticketsController: _ticketsController,
+                    costPerTicketController: _ticketCostController,
+                  ),
+                  SizedBox(height: 16.0),
+                  TimeZoneAdder()
                 ],
               ),
             ),
@@ -102,6 +114,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
   void createEvent() {
     Event newEvent = Event(
       title: _titleController.text,
+      priority: _priorityController.text,
       notes: _notesController.text,
       category: _cartegoryController.text,
       tags: _tagsController,

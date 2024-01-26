@@ -128,7 +128,7 @@ class _AdditionalSignUpDetailsPageState
             Center(
               child: Text('Finish Setting Up Your Account:',
               style: TextStyle(
-                fontSize: 25, color: Theme.of(context).primaryColor
+                fontSize: 25, color: Theme.of(context).colorScheme.primary
               ),),
             ),
             SizedBox(
@@ -146,7 +146,7 @@ class _AdditionalSignUpDetailsPageState
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                             width: 4.0,
                           ),
                         ),
@@ -173,12 +173,12 @@ class _AdditionalSignUpDetailsPageState
                             padding: EdgeInsets.all(4.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Theme.of(context).secondaryHeaderColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                             child: Icon(
                               Icons.edit,
                               size: 20,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ),

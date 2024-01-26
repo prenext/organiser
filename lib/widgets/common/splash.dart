@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).secondaryHeaderColor,
+              Theme.of(context).colorScheme.secondary,
               Theme.of(context).scaffoldBackgroundColor,
             ],
             begin: Alignment.topLeft,
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 'Organizer',
                 style: TextStyle(
                   fontSize: 50,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),

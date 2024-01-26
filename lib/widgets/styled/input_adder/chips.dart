@@ -28,14 +28,12 @@ class _SelectableChipState extends State<SelectableChip> {
                 widget.isSelected = selected;
               });
             },
-            selectedColor: Theme.of(context).secondaryHeaderColor,
-            labelStyle: TextStyle(
-              color: Theme.of(context).primaryColor,
-            ),
+            selectedColor: Theme.of(context).colorScheme.secondary,
+            
           ),
           if (widget.showAvatar)
             CircleAvatar(
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               child: Icon(
                 Icons.check,
                 color: Colors.white,

@@ -18,8 +18,8 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).secondaryHeaderColor,
-        foregroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Select Theme Color"),
         elevation: 1,
          actions: [

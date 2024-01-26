@@ -48,7 +48,7 @@ class _RestPasswordScreenState extends State<RestPasswordScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).secondaryHeaderColor,
+              Theme.of(context).colorScheme.secondary,
               Theme.of(context).scaffoldBackgroundColor,
             ],
             begin: Alignment.topLeft,
@@ -75,7 +75,7 @@ class _RestPasswordScreenState extends State<RestPasswordScreen> {
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                         SizedBox(
                           height: 20,
@@ -97,7 +97,7 @@ class _RestPasswordScreenState extends State<RestPasswordScreen> {
                           style: TextStyle(
                               fontSize: 35,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                         SizedBox(
                           height: 20,
@@ -158,7 +158,7 @@ class _RestPasswordScreenState extends State<RestPasswordScreen> {
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             side: BorderSide(
-                                color: Theme.of(context).primaryColor),
+                                color: Theme.of(context).colorScheme.primary),
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),

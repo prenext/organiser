@@ -274,7 +274,7 @@ class SettingsScreen extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
           size: 25,
         ),
         SizedBox(width: 20),

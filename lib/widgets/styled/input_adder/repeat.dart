@@ -1,73 +1,83 @@
 // repeat_adder.dart
+import 'package:Organiser/models/collection/sub/event.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class RepeatAdderWidget extends StatelessWidget {
-  final TextEditingController repeatController;
-  final TextEditingController frequencyController;
-  final TextEditingController repeatOnController;
+  final Map<RepeatFrequency, List> repeatController;
+  final bool repeatOnController;
   String selectedChip = '';
 
   RepeatAdderWidget({
     required this.repeatController,
-    required this.frequencyController,
     required this.repeatOnController,
   });
 
   @override
   Widget build(BuildContext context) {
-    return  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    elevation: 0,
-                    margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                _showRepeatFrequencyDialog(context);
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Every Week",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.repeat,
-                                    size: 25,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                buildSelectableChip('S'),
-                                buildSelectableChip('M'),
-                                buildSelectableChip('T'),
-                                buildSelectableChip('W'),
-                                buildSelectableChip('T'),
-                                buildSelectableChip('F'),
-                                buildSelectableChip('S'),
-                              ],
-                            )
-                          ]),
-                    ),
-                  );
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      elevation: 0,
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10.0),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          GestureDetector(
+            onTap: () {
+              _showRepeatFrequencyDialog(context);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Every Year",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Icon(
+                  Icons.repeat,
+                  size: 25,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "On: Jan, 15",
+            style: TextStyle(
+              fontSize: 24,
+              color: Theme.of(context).hintColor,
+            ),
+          ),
+          // Text(
+          //   "On the last Wednesday",
+          //   style: TextStyle(
+          //     fontSize: 24,
+          //     color: Theme.of(context).hintColor,
+          //   ),
+          // )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     buildSelectableChip('S'),
+          //     buildSelectableChip('M'),
+          //     buildSelectableChip('T'),
+          //     buildSelectableChip('W'),
+          //     buildSelectableChip('T'),
+          //     buildSelectableChip('F'),
+          //     buildSelectableChip('S'),
+          //   ],
+          // )
+        ]),
+      ),
+    );
   }
 
   Widget buildSelectableChip(String label, {double fontSize = 14}) {
@@ -75,27 +85,27 @@ class RepeatAdderWidget extends StatelessWidget {
       label: Text(
         label,
         style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w300,
-            // color: selectedChip == label
-                // ? Theme.of(context).cardColor
-                // : Theme.of(context).primaryColor),
+          fontSize: fontSize,
+          fontWeight: FontWeight.w300,
+          // color: selectedChip == label
+          // ? Theme.of(context).cardColor
+          // : Theme.of(context).colorScheme.primary),
+        ),
+        // selected:
+        // selectedColor: Theme.of(context).colorScheme.primary,
+        // onSelected: (bool selected) {
+        //   setState(() {
+        //     selectedChip = selected ? label : '';
+        //   });
+        // },
+        // side: BorderSide(color: Theme.of(context).colorScheme.primary),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(30.0),
+        // ),
+        // backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0),
       ),
-      // selected: 
-      // selectedColor: Theme.of(context).primaryColor,
-      // onSelected: (bool selected) {
-      //   setState(() {
-      //     selectedChip = selected ? label : '';
-      //   });
-      // },
-      // side: BorderSide(color: Theme.of(context).primaryColor),
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(30.0),
-      // ),
-      // backgroundColor: Theme.of(context).primaryColor.withOpacity(0),
-      ), selected: selectedChip == label,
+      selected: selectedChip == label,
     );
-
   }
 
   void _showRepeatFrequencyDialog(BuildContext context) {
@@ -136,8 +146,6 @@ class RepeatAdderWidget extends StatelessWidget {
       },
     );
   }
-
-
 }
 
 class RepeatFrequencyOptions extends StatefulWidget {

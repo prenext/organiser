@@ -24,7 +24,7 @@ class _AppRatingDialogState extends State<AppRatingDialog> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Theme.of(context).secondaryHeaderColor,
+              Theme.of(context).colorScheme.secondary,
               Theme.of(context).cardColor,
             ],
           ),
@@ -97,7 +97,7 @@ class _AppRatingDialogState extends State<AppRatingDialog> {
           style: TextStyle(
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         SizedBox(height: 10.0),
@@ -124,7 +124,7 @@ class _AppRatingDialogState extends State<AppRatingDialog> {
           },
           icon: Icon(
             index < selectedStars ? Icons.star : Icons.star_border,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.secondary,
             size: 40.0,
           ),
         );
@@ -158,7 +158,7 @@ class _AppRatingDialogState extends State<AppRatingDialog> {
     return Icon(
       emojiIcon,
       size: 80.0,
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).colorScheme.secondary,
     );
   }
 

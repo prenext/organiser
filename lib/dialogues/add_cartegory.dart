@@ -9,7 +9,6 @@ class AddCategoryDialog {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: Color.fromARGB(235, 255, 255, 255),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35.0),
           ),

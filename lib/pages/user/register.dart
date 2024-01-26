@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           content: Text('Error: Something went wrong'),
           duration: Duration(seconds: 3),
         ),
@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   SizedBox(
@@ -215,7 +215,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           RoundedRectangleBorder(
                             side: BorderSide(
                                 color: Theme.of(context)
-                                    .primaryColor), // Customize the border color
+                                    .colorScheme
+                                    .primary), // Customize the border color
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),

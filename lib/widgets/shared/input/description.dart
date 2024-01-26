@@ -41,7 +41,7 @@ class _DescriptionEditorPageState extends State<DescriptionEditorPage> {
               margin: EdgeInsets.zero,
               elevation: 20,
               shadowColor: Colors.black,
-              color: Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).colorScheme.secondary,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
