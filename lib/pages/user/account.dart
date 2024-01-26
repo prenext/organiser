@@ -136,8 +136,8 @@ class _AccountPageState extends State<AccountPage> {
         appBar: AppBar(
           elevation: 0,
           title: Text('Account'),
-          backgroundColor: Theme.of(context).secondaryHeaderColor,
-          foregroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          foregroundColor: Theme.of(context).colorScheme.primary,
           actions: [
             IconButton(
               icon: Icon(Icons.settings, size: 30),
@@ -163,7 +163,7 @@ class _AccountPageState extends State<AccountPage> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).colorScheme.primary,
                                 width: 4.0,
                               ),
                             ),
@@ -190,12 +190,12 @@ class _AccountPageState extends State<AccountPage> {
                                 padding: EdgeInsets.all(4.0),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Theme.of(context).secondaryHeaderColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                                 child: Icon(
                                   Icons.edit,
                                   size: 20,
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ),
@@ -210,7 +210,7 @@ class _AccountPageState extends State<AccountPage> {
                           _user.fname + " " + _user.lname,
                           style: TextStyle(
                             fontSize: 35,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         SizedBox(height: 16),
@@ -235,7 +235,7 @@ class _AccountPageState extends State<AccountPage> {
                   IconButton(
                     icon: Icon(
                       Icons.calendar_month,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     onPressed: () {
                       // Add your logic to handle the time range selection
@@ -433,7 +433,7 @@ class _AccountPageState extends State<AccountPage> {
               Icon(
                 icon,
                 size: 40,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
               SizedBox(height: 8),
               Text(

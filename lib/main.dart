@@ -1,5 +1,5 @@
 import 'package:Organiser/firebase_options.dart';
-import 'package:Organiser/providers/user_provider.dart';
+import 'package:Organiser/pages/theme/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ Future<void> main() async {
 
   runApp(
     ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+      create: (context) => ThemeProvider(),
       child: OrganiserApp(),
     ),
   );
@@ -40,29 +40,8 @@ class _OrganiserAppState extends State<OrganiserApp> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-
-    var colorPrimary = Colors.blue;
-
-    var myColor = ThemeData(
-      primarySwatch: colorPrimary,
-    ).secondaryHeaderColor;
-    var textColor = ThemeData(
-      primarySwatch: colorPrimary,
-    ).primaryColor;
-
-    return MaterialApp(
-      theme: ThemeData(
-          outlinedButtonTheme: OutlinedButtonThemeData(),
-          primarySwatch: colorPrimary,
-          appBarTheme: AppBarTheme(
-            backgroundColor: myColor,
-            foregroundColor: textColor,
-            elevation: 1,
-          ),
-          expansionTileTheme: ExpansionTileThemeData(
-              shape: Border.all(color: Colors.transparent, width: 0),
-              collapsedShape: Border.all(color: Colors.transparent, width: 0),
-              childrenPadding: EdgeInsets.all(20))),
+    return MaterialApp( 
+      theme: Provider.of<ThemeProvider>(context).themeData,      
       home: SplashScreen(
         onSelectThemeColor: () {},
       ),

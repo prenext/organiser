@@ -17,8 +17,8 @@ class StyledButtons {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         backgroundColor:
-            Theme.of(context).secondaryHeaderColor.withOpacity(0.7),
-        foregroundColor: Theme.of(context).primaryColor,
+            Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+        foregroundColor: Theme.of(context).colorScheme.primary,
         padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
           vertical: verticalPadding,
@@ -44,7 +44,7 @@ class StyledButtons {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: EdgeInsets.zero,
-        side: BorderSide(color: Theme.of(context).primaryColor),
+        side: BorderSide(color: Theme.of(context).colorScheme.primary),
         shape: RoundedRectangleBorder(
           side: BorderSide(),
           borderRadius: BorderRadius.circular(borderRadius),

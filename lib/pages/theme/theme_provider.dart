@@ -1,30 +1,23 @@
+import 'package:Organiser/pages/theme/dark.dart';
+import 'package:Organiser/pages/theme/light.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-enum ThemeModeOption { light, dark, systemDefault }
 
 class ThemeProvider with ChangeNotifier {
-  ThemeModeOption _currentThemeMode = ThemeModeOption.light;
+  ThemeData _themeData = lightMode;
 
-  ThemeModeOption get currentThemeMode => _currentThemeMode;
+  ThemeData get themeData => _themeData;
 
-  Future<void> setThemeMode(ThemeModeOption mode) async {
-    _currentThemeMode = mode;
+  set themeData(ThemeData themeData) {
+    _themeData = themeData;
     notifyListeners();
-
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('themeMode', mode.toString());
   }
 
-  Future<void> loadThemeMode() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final savedMode = prefs.getString('themeMode');
-
-    if (savedMode != null) {
-      _currentThemeMode = ThemeModeOption.values
-          .firstWhere((mode) => mode.toString() == savedMode);
+  void toggleTheme(){
+    if(_themeData == lightMode){
+      themeData = darkMode;
+    } else {
+      themeData = lightMode;
     }
-
-    notifyListeners();
   }
+
 }

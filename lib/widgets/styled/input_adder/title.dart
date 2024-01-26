@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class TitleAdder extends StatelessWidget {
   final TextEditingController titleController;
+  final TextEditingController priorityController;
 
-  TitleAdder({required this.titleController});
+  TitleAdder({required this.titleController, required this.priorityController});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class TitleAdder extends StatelessWidget {
       controller: titleController,
       label: 'Title',
       textSize: 25,
-      trailingIcon: Icons.sports_kabaddi_rounded,
+      trailingIcon: Icons.circle,
+      iconColor: Colors.green,
     );
   }
 }

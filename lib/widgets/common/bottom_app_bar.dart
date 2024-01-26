@@ -14,7 +14,6 @@ class CustomBottomAppBar extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Icon(
         iconData,
-        size: 25
         ),
       label: label,
     );
@@ -31,11 +30,8 @@ class CustomBottomAppBar extends StatelessWidget {
         _buildBottomNavItem(Icons.check_circle_outlined, 'Tasks', context),
         _buildBottomNavItem(Icons.people_rounded, 'social', context),
         _buildBottomNavItem(Icons.schedule, 'Schedules', context),
-        _buildBottomNavItem(Icons.restaurant, 'Food', context),
+        _buildBottomNavItem(Icons.restaurant_menu_outlined, 'Food', context),
       ],
-      backgroundColor: Theme.of(context).secondaryHeaderColor,
-      selectedItemColor: Theme.of(context).primaryColor,
-      unselectedItemColor: Color.fromARGB(255, 139, 139, 139),
       type:  BottomNavigationBarType.fixed,
     );
   }

@@ -39,7 +39,7 @@ class _TimeAdder extends State<TimeAdder> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 5.0),
+          padding: const EdgeInsets.only(bottom: 5.0, left: 8.0, right: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -58,7 +58,7 @@ class _TimeAdder extends State<TimeAdder> {
                           TextStyle(fontSize: 10, fontWeight: FontWeight.w300),
                     ),
                   ],
-                  isSelected: [widget.setTime, widget.setTime],
+                  isSelected: [widget.setTime, !widget.setTime],
                   onPressed: (index) {
                     setState(() {
                       widget.setTime = index == 0 ? true : false;
@@ -77,7 +77,6 @@ class _TimeAdder extends State<TimeAdder> {
                         setState(() {
                            widget.sameEachDay = newValue;
                         });
-                       
                       },
                     ),
                   ],

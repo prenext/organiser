@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class Event with ChangeNotifier {
   String id = "";
+  String priority;
   String title;
   String notes;
   String category;
@@ -17,6 +18,7 @@ class Event with ChangeNotifier {
   Event({
     required this.title,
     required this.notes,
+    required this.priority,
     required this.category,
     required this.tags,
     required this.photoURL,
@@ -32,6 +34,7 @@ class Event with ChangeNotifier {
   factory Event.fromMap(Map<String, dynamic> data, String documentId) {
     return Event(
       title: data['title'],
+      priority: data['priority'],
       notes: data['description'],
       category: data['category'],
       tags: List<String>.from(data['tags']),
@@ -41,7 +44,7 @@ class Event with ChangeNotifier {
       repetition: List<Map<RepeatFrequency, List>>.from(data['repetition']),
       location: List<Map<String, String>>.from(data['location']),
       ticketCost: data['ticketCost'],
-      numberOfTickets: data['numberOfTickets'],
+      numberOfTickets: data['numberOfTickets'], 
     );
   }
 
@@ -49,6 +52,7 @@ class Event with ChangeNotifier {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'priority': priority,
       'notes': notes,
       'category': category,
       'tags': tags,
@@ -77,7 +81,6 @@ enum RepeatFrequency {
   Monthly,
   Yearly,
 }
-
 
 enum ReferenceType {
   task,

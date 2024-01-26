@@ -78,9 +78,8 @@ class _TipsPageState extends State<TipsPage> {
   }) {
 
     return Card(
-      elevation: 4,
+      elevation: 0,
       margin: EdgeInsets.symmetric(vertical: 8),
-      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -94,7 +93,7 @@ class _TipsPageState extends State<TipsPage> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             SizedBox(height: 8),
@@ -112,7 +111,7 @@ class _TipsPageState extends State<TipsPage> {
                   onPressed: () => _handleAction(onLike),
                   icon: Icon(
                     isLiked ? Icons.thumb_up : Icons.thumb_up_outlined,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 Text("$likes Likes"),
@@ -120,7 +119,7 @@ class _TipsPageState extends State<TipsPage> {
                   onPressed: () => _handleAction(onDislike),
                   icon: Icon(
                     isDisliked ? Icons.thumb_down : Icons.thumb_down_outlined,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 Text("$dislikes Dislikes"),

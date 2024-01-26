@@ -14,12 +14,13 @@ class StyledTextField extends StatelessWidget {
   final TextInputType? inputType;
   final double? paddingX;
   final double? paddingY;
-    final double? textSize;
-
+  final double? textSize;
+  final Color? iconColor;
 
   StyledTextField({
     required this.controller,
     required this.label,
+    this.iconColor,
     this.isMultiline = false,
     this.maxLines = 1,
     this.onChanged,
@@ -30,7 +31,8 @@ class StyledTextField extends StatelessWidget {
     this.onTrailingIconTap,
     this.inputType,
     this.paddingX = 10.0,
-    this.paddingY = 20.0, this.textSize = 15,
+    this.paddingY = 20.0,
+    this.textSize = 15,
   });
 
   @override
@@ -47,7 +49,7 @@ class StyledTextField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: paddingX!, vertical: paddingY!),
       decoration: BoxDecoration(
-        color: Theme.of(context).secondaryHeaderColor.withOpacity(0.5),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Expanded(
@@ -58,9 +60,13 @@ class StyledTextField extends StatelessWidget {
             ),
             decoration: InputDecoration(
                 hintText: label,
-                hintStyle: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal),
+                hintStyle: TextStyle(
+                    fontSize: textSize, fontWeight: FontWeight.normal),
                 border: InputBorder.none,
-                suffixIcon: Icon(trailingIcon)),
+                suffixIcon: Icon(
+                  trailingIcon,
+                  color: iconColor,
+                )),
             keyboardType: inputType,
           ),
         ),
@@ -90,7 +96,7 @@ class BottomBorderTextField extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             width: 0.0,
           ),
         ),

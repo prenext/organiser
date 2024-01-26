@@ -99,7 +99,7 @@ class _AboutPageState extends State<AboutPage> {
               children: [
                 Icon(
                   icon,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   size: 25,
                 ),
                 SizedBox(width: 8.0),

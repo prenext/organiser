@@ -67,7 +67,7 @@ class _CustomFABState extends State<CustomFAB>
               }),
             FloatingActionButton(
               child: Icon(isMenuOpen ? Icons.close : Icons.add),
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               foregroundColor: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 setState(() {
@@ -98,7 +98,7 @@ class _CustomFABState extends State<CustomFAB>
               Icon(
                 icon,
                 size: 25.0,
-                color: Theme.of(context).secondaryHeaderColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ],
           ),

@@ -13,7 +13,7 @@ class _SchedulesState extends State<Schedules> {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          children: [Center(child: Text("Schedules"))],
+          
         ),
       ),
     );
