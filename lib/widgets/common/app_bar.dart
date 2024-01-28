@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Scaffold.of(context).openDrawer();
         },
         child: Container(
-          margin: EdgeInsets.only(left: 10),
+          margin: EdgeInsets.all(10),
           padding: EdgeInsets.all(0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -24,8 +24,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           child: CircleAvatar(
-            radius: 20.0,
-            backgroundImage: NetworkImage('https://picsum.photos/200'),
+            maxRadius: 10.0,
+            backgroundImage: NetworkImage('https://picsum.photos/80'),
           ),
         ),
       ),

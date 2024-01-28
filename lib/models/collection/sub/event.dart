@@ -14,6 +14,7 @@ class Event with ChangeNotifier {
   List<Map<String, String>> location;
   double ticketCost;
   int numberOfTickets;
+  String timezone;
 
   Event({
     required this.title,
@@ -28,6 +29,7 @@ class Event with ChangeNotifier {
     required this.location,
     required this.ticketCost,
     required this.numberOfTickets,
+     required this.timezone,
   });
 
   // Factory constructor to create an Event instance from a Firebase snapshot
@@ -44,7 +46,7 @@ class Event with ChangeNotifier {
       repetition: List<Map<RepeatFrequency, List>>.from(data['repetition']),
       location: List<Map<String, String>>.from(data['location']),
       ticketCost: data['ticketCost'],
-      numberOfTickets: data['numberOfTickets'], 
+      numberOfTickets: data['numberOfTickets'], timezone: data['timezone'],
     );
   }
 
@@ -63,6 +65,7 @@ class Event with ChangeNotifier {
       'location': location,
       'ticketCost': ticketCost,
       'numberOfTickets': numberOfTickets,
+      'timezone': timezone,
     };
   }
 }
