@@ -1,5 +1,9 @@
+import 'package:Organiser/pages/theme/light.dart';
+import 'package:Organiser/pages/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class LocationAdder extends StatelessWidget {
@@ -25,9 +29,9 @@ class LocationAdder extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               ImageFiltered(
-                imageFilter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Image.asset(
-                  'assets/map.jpg',
+                imageFilter: ui.ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                child: Image.asset( Provider.of<ThemeProvider>(context).themeData == lightMode?
+                  'assets/map.jpg' : 'assets/map_dark.jpg',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 120,

@@ -9,7 +9,7 @@ class DateAndTimeAdder extends StatefulWidget {
   DateTime? endDateController;
   TimeOfDay? startTimeController;
   TimeOfDay? endTimeController;
-  bool isMultiDay = false;
+  bool isMultiDay = true;
 
   DateAndTimeAdder({required this.dateAndTimeController});
 

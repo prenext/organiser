@@ -36,6 +36,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
   final Map<String, String> _locationController = {};
   final TextEditingController _ticketsController = TextEditingController();
   final TextEditingController _ticketCostController = TextEditingController();
+  final TextEditingController _timezoneConroller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -90,7 +91,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     costPerTicketController: _ticketCostController,
                   ),
                   SizedBox(height: 16.0),
-                  TimeZoneAdder()
+                  TimezoneAdder(timezoneConroller: _timezoneConroller,)
                 ],
               ),
             ),
@@ -125,6 +126,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
       location: [_locationController],
       ticketCost: _ticketCostController.text as double,
       numberOfTickets: _ticketsController.text as int,
+      timezone: _timezoneConroller.text
     );
     Navigator.pop(context);
     print(" Clicked a function");

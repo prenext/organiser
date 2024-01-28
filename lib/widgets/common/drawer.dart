@@ -3,12 +3,12 @@ import 'package:Organiser/pages/info/tips.dart';
 import 'package:Organiser/pages/settings/settings.dart';
 import 'package:Organiser/pages/theme/color.dart';
 import 'package:Organiser/pages/theme/light.dart';
-import 'package:Organiser/pages/theme/theme_provider.dart';
 import 'package:Organiser/pages/user/account.dart';
 import 'package:Organiser/dialogues/logout.dart';
 import 'package:Organiser/dialogues/rate_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:Organiser/providers/theme_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();

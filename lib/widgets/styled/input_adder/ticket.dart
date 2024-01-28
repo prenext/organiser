@@ -105,7 +105,7 @@ class _TicketsAdder extends State<TicketsAdder> {
         suffixIcon: Icon(myIcon),
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(15)),
+            borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
