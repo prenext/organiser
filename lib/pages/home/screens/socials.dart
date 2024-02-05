@@ -65,7 +65,7 @@ class Screen1 extends StatelessWidget {
           onPressed: () {},
           child: Icon(
             Icons.group_add_rounded,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ));
   }
@@ -89,7 +89,7 @@ class Screen2 extends StatelessWidget {
           onPressed: () {},
           child: Icon(
             Icons.domain_add_sharp,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ));
   }

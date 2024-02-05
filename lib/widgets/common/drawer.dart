@@ -83,8 +83,8 @@ class CustomDrawer extends StatelessWidget {
                           Text(
                             'alidante@gmail.com',
                             style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.grey,
+                              fontSize: 16.0,
+                              color: Theme.of(context).hintColor,
                             ),
                           ),
                         ],
@@ -101,8 +101,8 @@ class CustomDrawer extends StatelessWidget {
                           Text(
                             '25',
                             style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.grey,
+                              fontSize: 16.0,
+                              color:  Theme.of(context).hintColor,
                             ),
                           ),
                         ],
@@ -114,6 +114,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             Divider(
               height: 1,
+              color: Theme.of(context).hintColor.withOpacity(0.2),
             ),
             Expanded(
               child: ListView(
@@ -212,11 +213,12 @@ class CustomDrawer extends StatelessWidget {
             ),
             Divider(
               height: 1,
+              color: Theme.of(context).hintColor.withOpacity(0.2),
             ),
             Container(
                 child: Padding(
               padding: const EdgeInsets.only(
-                  top: 12, left: 16.0, bottom: 12.0, right: 10.0),
+                  top: 12, left: 16.0, bottom: 12.0, right: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -224,8 +226,8 @@ class CustomDrawer extends StatelessWidget {
                     '© 2023 Alidante',
                     style: TextStyle(
                       fontSize: 14.0,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+                      color: Theme.of(context).hintColor,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
                   GestureDetector(
@@ -234,13 +236,12 @@ class CustomDrawer extends StatelessWidget {
                       _showConfirmationDialog(context);
                     },
                     child: Row(children: <Widget>[
-                      Text("Log out"),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.arrow_circle_right_outlined,
-                        color: Theme.of(context).colorScheme.primary,
+                      Text(
+                        "Log out",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
                       ),
                     ]),
                   )

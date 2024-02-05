@@ -98,7 +98,7 @@ class _CustomFABState extends State<CustomFAB>
               Icon(
                 icon,
                 size: 25.0,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ],
           ),

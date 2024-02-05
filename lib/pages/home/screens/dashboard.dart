@@ -1,6 +1,5 @@
 import 'package:Organiser/widgets/common/action_button.dart';
 import 'package:Organiser/widgets/common/app_bar.dart';
-import 'package:Organiser/widgets/common/drawer.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -17,7 +16,6 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: IntrinsicHeight(
           child: Column(
@@ -60,7 +58,6 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -95,7 +92,6 @@ class _DashboardState extends State<Dashboard> {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -122,7 +118,6 @@ class _DashboardState extends State<Dashboard> {
         Text(label),
         LinearProgressIndicator(
           value: value,
-          backgroundColor: Colors.grey[300],
           valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
         ),
         SizedBox(height: 10),
