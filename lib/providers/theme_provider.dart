@@ -1,5 +1,5 @@
-import 'package:Organiser/pages/theme/dark.dart';
-import 'package:Organiser/pages/theme/light.dart';
+import 'package:Organiser/models/theme/dark.dart';
+import 'package:Organiser/models/theme/light.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -12,12 +12,11 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleTheme(){
-    if(_themeData == lightMode){
+  void toggleTheme() {
+    if (_themeData == lightMode) {
       themeData = darkMode;
     } else {
       themeData = lightMode;
     }
   }
-
 }

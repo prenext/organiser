@@ -1,4 +1,4 @@
-import 'package:Organiser/models/collection/sub/event_model.dart';
+import 'package:Organiser/models/collections/children/event_model.dart';
 import 'package:Organiser/pages/create/add_event.dart';
 import 'package:flutter/material.dart';
 

@@ -1,8 +1,8 @@
+import 'package:Organiser/models/theme/light.dart';
 import 'package:Organiser/pages/info/about.dart';
 import 'package:Organiser/pages/info/tips.dart';
 import 'package:Organiser/pages/settings/settings.dart';
 import 'package:Organiser/pages/theme/color.dart';
-import 'package:Organiser/pages/theme/light.dart';
 import 'package:Organiser/pages/user/account.dart';
 import 'package:Organiser/dialogues/logout.dart';
 import 'package:Organiser/dialogues/rate_app.dart';

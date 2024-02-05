@@ -1,5 +1,5 @@
 import 'package:Organiser/firebase_options.dart';
-import 'package:Organiser/pages/theme/theme_provider.dart';
+import 'package:Organiser/providers/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarColor: Colors.transparent,
     ));
     return MaterialApp( 
-      theme: Provider.of<ThemeProvider>(context).themeData,      
+      theme: Provider.of<ThemeProvider>(context).themeData,  
       home: SplashScreen(
         onSelectThemeColor: () {},
       ),

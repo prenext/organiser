@@ -1,5 +1,5 @@
 // repeat_adder.dart
-import 'package:Organiser/models/collection/sub/event.dart';
+import 'package:Organiser/models/collections/children/event.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
