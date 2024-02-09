@@ -1,5 +1,5 @@
 import 'package:Organiser/pages/theme/light.dart';
-import 'package:Organiser/pages/theme/theme_provider.dart';
+import 'package:Organiser/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
