@@ -3,6 +3,7 @@ import 'package:Organiser/pages/home/screens/food.dart';
 import 'package:Organiser/pages/home/screens/schedules.dart';
 import 'package:Organiser/pages/home/screens/tasks.dart';
 import 'package:Organiser/widgets/common/bottom_app_bar.dart';
+import 'package:Organiser/widgets/common/drawer.dart';
 import 'package:flutter/material.dart';
 import 'screens/dashboard.dart';
 
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
+      drawer: CustomDrawer(),
       bottomNavigationBar: CustomBottomAppBar(
         currentIndex: _currentIndex,
         onTap: (index) {

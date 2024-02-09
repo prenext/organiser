@@ -1,4 +1,4 @@
-import 'package:Organiser/models/collection/user.dart';
+import 'package:Organiser/models/collections/parents/user.dart';
 import 'package:Organiser/pages/user/forgot_pwd.dart';
 import 'package:Organiser/pages/user/register.dart';
 import 'package:Organiser/providers/user_provider.dart';

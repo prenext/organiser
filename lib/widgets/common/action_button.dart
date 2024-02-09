@@ -1,4 +1,4 @@
-import 'package:Organiser/models/collection/sub/event_model.dart';
+import 'package:Organiser/models/collections/children/event_model.dart';
 import 'package:Organiser/pages/create/add_event.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +98,7 @@ class _CustomFABState extends State<CustomFAB>
               Icon(
                 icon,
                 size: 25.0,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ],
           ),
