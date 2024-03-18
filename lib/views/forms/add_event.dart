@@ -1,8 +1,8 @@
+import 'package:Organiser/models/common/event.dart';
 import 'package:Organiser/widgets/styled/input_adder/repeat.dart';
 import 'package:Organiser/widgets/styled/input_adder/timezone.dart';
 import 'package:flutter/material.dart';
-import 'package:Organiser/models/collections/children/event.dart';
-import 'package:Organiser/models/collections/children/event_model.dart';
+import 'package:Organiser/controllers/event_model.dart';
 import 'package:Organiser/widgets/styled/input_adder/title.dart';
 import 'package:Organiser/widgets/styled/input_adder/note.dart';
 import 'package:Organiser/widgets/styled/input_adder/cartegory.dart';

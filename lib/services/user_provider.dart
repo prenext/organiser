@@ -1,4 +1,4 @@
-import 'package:Organiser/models/collections/parents/user.dart';
+import 'package:Organiser/models/user.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {

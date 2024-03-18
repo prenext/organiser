@@ -34,14 +34,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
   firebase_core: ^2.24.2
-  font_awesome_flutter: ^10.6.0
   image_picker: ^1.0.5
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   firebase_auth: ^4.15.3
   cloud_firestore: ^4.13.6
   url_launcher: ^6.2.2
-  syncfusion_flutter_calendar: ^24.1.47
+  # syncfusion_flutter_calendar: ^24.1.47
 
 
 dev_dependencies:

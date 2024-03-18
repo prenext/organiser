@@ -1,4 +1,3 @@
-
 enum MealType {
   fastFood,
   breakfast,

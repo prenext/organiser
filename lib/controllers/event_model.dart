@@ -1,5 +1,5 @@
+import 'package:Organiser/models/common/event.dart';
 import 'package:flutter/material.dart';
-import 'package:Organiser/models/collections/children/event.dart';
 
 class EventModel extends ChangeNotifier {
   List<Event> events = [];

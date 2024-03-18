@@ -1,7 +1,6 @@
 import 'package:Organiser/views/auth/add_account_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -62,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       // Notify the caller that signup failed
-     // onSignupComplete(false);
+      // onSignupComplete(false);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -225,61 +224,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 150.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Google registration logic here
-                      print('Google registration pressed');
-                    },
-                    icon: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 4, 88, 223),
-                            Color.fromARGB(255, 2, 216, 59),
-                            Color.fromARGB(255, 236, 178, 1),
-                            Color.fromARGB(255, 192, 17, 1),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ).createShader(bounds);
-                      },
-                      child: FaIcon(
-                        FontAwesomeIcons.google,
-                        size: 30,
-                        color: const Color.fromARGB(255, 255, 223, 223),
-                      ),
-                    ),
-                    label: "Google",
-                  ),
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Apple registration logic here
-                      print('Apple registration pressed');
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.apple,
-                      size: 40,
-                    ),
-                    label: 'Apple',
-                  ),
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Microsoft registration logic here
-                      print('Microsoft registration pressed');
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.microsoft,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    label: 'Microsoft',
-                  ),
-                ],
-              )
             ],
           ),
         ),
@@ -303,26 +247,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           borderRadius: BorderRadius.circular(25.0),
         ),
       ),
-    );
-  }
-
-  Widget _buildIconButton({
-    required VoidCallback onPressed,
-    required Widget icon,
-    required String label,
-  }) {
-    return Column(
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          icon: icon,
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12.0),
-        ),
-      ],
     );
   }
 }

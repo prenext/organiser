@@ -1,5 +1,5 @@
 import 'package:Organiser/widgets/dialogs/add_tag.dart';
-import 'package:Organiser/widgets/shared/input/buttons.dart';
+import 'package:Organiser/widgets/input/buttons.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

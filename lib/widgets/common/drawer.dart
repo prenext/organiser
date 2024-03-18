@@ -1,4 +1,4 @@
-import 'package:Organiser/models/theme/light.dart';
+import 'package:Organiser/utils/theme/light.dart';
 import 'package:Organiser/views/auth/account.dart';
 import 'package:Organiser/views/info/about.dart';
 import 'package:Organiser/views/info/tips.dart';

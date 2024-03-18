@@ -1,5 +1,5 @@
-import 'package:Organiser/widgets/shared/input/description.dart';
-import 'package:Organiser/widgets/shared/input/buttons.dart';
+import 'package:Organiser/widgets/input/buttons.dart';
+import 'package:Organiser/widgets/input/description.dart';
 import 'package:flutter/material.dart';
 
 class ImageAdder extends StatelessWidget {

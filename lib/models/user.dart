@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Define an enum for subcollections
-enum SubCollection {
-  goals,
-  tasks,
-  events,
-  meals,
-  schedules,
+// Define a class to represent subcollections
+class SubCollection {
+  static const goals = 'goals';
+  static const tasks = 'tasks';
+  static const events = 'events';
+  static const meals = 'meals';
+  static const schedules = 'schedules';
 }
 
 class UserModel {
@@ -18,7 +18,7 @@ class UserModel {
   final String? gender;
   final DateTime? dob;
   final String? profilePhotoUrl;
-  final Map<SubCollection, List<dynamic>> subcollections;
+  final Map<String, List<dynamic>> subcollections;
 
   UserModel({
     required this.id,
@@ -29,7 +29,7 @@ class UserModel {
     this.gender,
     this.dob,
     this.profilePhotoUrl,
-    Map<SubCollection, List<dynamic>>? subcollections,
+    Map<String, List<dynamic>>? subcollections,
   }) : subcollections = subcollections ?? {};
 
   Map<String, dynamic> toMap() {
@@ -42,8 +42,7 @@ class UserModel {
       'gender': gender,
       'dob': dob,
       'profilePhotoUrl': profilePhotoUrl,
-      'subcollections':
-          subcollections.map((key, value) => MapEntry(key.toString(), value)),
+      'subcollections': subcollections,
     };
   }
 
@@ -57,14 +56,8 @@ class UserModel {
       gender: map['gender'],
       dob: map['dob'] != null ? (map['dob'] as Timestamp).toDate() : null,
       profilePhotoUrl: map['profilePhotoUrl'],
-      subcollections: Map<SubCollection, List<dynamic>>.fromEntries(
-        SubCollection.values.map((subcollection) {
-          final key = subcollection;
-          final value =
-              List<dynamic>.from(map['subcollections'][key.toString()] ?? []);
-          return MapEntry(key, value);
-        }),
-      ),
+      subcollections:
+          Map<String, List<dynamic>>.from(map['subcollections'] ?? {}),
     );
   }
 }

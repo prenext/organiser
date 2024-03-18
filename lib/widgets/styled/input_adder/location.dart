@@ -1,4 +1,4 @@
-import 'package:Organiser/models/theme/light.dart';
+import 'package:Organiser/utils/theme/light.dart';
 import 'package:Organiser/services/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;

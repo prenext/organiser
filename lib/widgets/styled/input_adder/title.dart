@@ -1,4 +1,4 @@
-import 'package:Organiser/widgets/shared/input/textfields.dart';
+import 'package:Organiser/widgets/input/textfields.dart';
 import 'package:flutter/material.dart';
 
 class TitleAdder extends StatelessWidget {

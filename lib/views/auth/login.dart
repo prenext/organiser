@@ -1,12 +1,11 @@
-import 'package:Organiser/models/collections/parents/user.dart';
-import 'package:Organiser/views/auth/register.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:Organiser/models/user.dart';
 import 'package:Organiser/services/user_provider.dart';
 import 'package:Organiser/views/auth/forgot_pwd.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
+import 'package:Organiser/views/auth/register.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,11 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // login text contollers fields
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
-
 
   Future<void> Signin(BuildContext context) async {
     showDialog(
@@ -86,186 +83,118 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(top: 80.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).colorScheme.secondary,
-              Theme.of(context).scaffoldBackgroundColor,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Welocome Back!",
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(30.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Welocome Back!",
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Signin to yout account:",
                     style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Signin to yout account:",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w100,
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              SizedBox(height: 16.0),
-              _buildRoundedTextField(
-                controller: _emailController,
-                labelText: 'Email',
-                myIcon: Icons.mail_outlined,
-              ),
-              SizedBox(height: 16.0),
-              _buildRoundedTextField(
-                controller: _passwordController,
-                labelText: 'Password',
-                obscureText: true,
-                myIcon: Icons.lock_clock_outlined,
-              ),
-              SizedBox(height: 40.0),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        // button to handle user sign in
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(15),
-                            padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 50.0, vertical: 15.0),
-                            ),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                            ),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w100,
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            SizedBox(height: 16.0),
+            _buildRoundedTextField(
+              controller: _emailController,
+              labelText: 'Email',
+              myIcon: Icons.mail_outlined,
+            ),
+            SizedBox(height: 16.0),
+            _buildRoundedTextField(
+              controller: _passwordController,
+              labelText: 'Password',
+              obscureText: true,
+              myIcon: Icons.lock_clock_outlined,
+            ),
+            SizedBox(height: 40.0),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      // button to handle user sign in
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(15),
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                horizontal: 50.0, vertical: 15.0),
                           ),
-                          onPressed: () {
-                            Signin(context);
-                          },
-                          child: Text('Login'),
-                        ),
-                        Text('OR'),
-
-                        // Button to direct user to the signup page
-                        OutlinedButton(
-                          onPressed: () {
-                             showDialog(
-                               useSafeArea: false,
-                              context: context,
-                              builder: (BuildContext context) {
-                                return RegisterScreen();
-                              },
-                            );
-                          },
-                          child: Text('Sign Up'),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
-                                  horizontal: 50.0, vertical: 15.0),
-                            ),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                side: BorderSide(
-                                    color: Theme.of(context).colorScheme.primary),
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
                             ),
                           ),
                         ),
-                      ])),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RestPasswordScreen()),
-                      );
-                    },
-                    child: Text("Forgot Password?")),
-              ),
-              SizedBox(height: 100.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Google login logic here
-                      print('Google login pressed');
-                    },
-                    icon: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 4, 88, 223),
-                            Color.fromARGB(255, 2, 216, 59),
-                            Color.fromARGB(255, 236, 178, 1),
-                            Color.fromARGB(255, 192, 17, 1),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ).createShader(bounds);
-                      },
-                      child: FaIcon(
-                        FontAwesomeIcons.google,
-                        size: 30,
-                        color: const Color.fromARGB(255, 255, 223, 223),
+                        onPressed: () {
+                          Signin(context);
+                        },
+                        child: Text('Login'),
                       ),
-                    ),
-                    label: "Google",
-                  ),
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Apple login logic here
-                      print('Apple login pressed');
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.apple,
-                      size: 40,
-                    ),
-                    label: 'Apple',
-                  ),
-                  _buildIconButton(
-                    onPressed: () {
-                      // Add your Microsoft login logic here
-                      print('Microsoft login pressed');
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.microsoft,
-                      size: 30,
-                      color: Colors.lightBlue,
-                    ),
-                    label: 'Microsoft',
-                  ),
-                ],
-              )
-            ],
-          ),
+                      Text('OR'),
+      
+                      // Button to direct user to the signup page
+                      OutlinedButton(
+                        onPressed: () {
+                          showDialog(
+                            useSafeArea: false,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return RegisterScreen();
+                            },
+                          );
+                        },
+                        child: Text('Sign Up'),
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(
+                                horizontal: 50.0, vertical: 15.0),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              side: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.primary),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ])),
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RestPasswordScreen()),
+                    );
+                  },
+                  child: Text("Forgot Password?")),
+            ),
+          ],
         ),
       ),
     );
@@ -287,26 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
           borderRadius: BorderRadius.circular(25.0),
         ),
       ),
-    );
-  }
-
-  Widget _buildIconButton({
-    required VoidCallback onPressed,
-    required Widget icon,
-    required String label,
-  }) {
-    return Column(
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          icon: icon,
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12.0),
-        ),
-      ],
     );
   }
 }

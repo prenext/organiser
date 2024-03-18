@@ -1,6 +1,7 @@
 // repeat_adder.dart
-import 'package:Organiser/models/collections/children/event.dart';
+import 'package:Organiser/models/common/event.dart';
 import 'package:flutter/material.dart';
+
 
 // ignore: must_be_immutable
 class RepeatAdderWidget extends StatelessWidget {

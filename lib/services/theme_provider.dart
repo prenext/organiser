@@ -1,5 +1,5 @@
-import 'package:Organiser/models/theme/dark.dart';
-import 'package:Organiser/models/theme/light.dart';
+import 'package:Organiser/utils/theme/dark.dart';
+import 'package:Organiser/utils/theme/light.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
