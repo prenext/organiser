@@ -1,4 +1,4 @@
-import 'package:Organiser/dialogues/add_cartegory.dart';
+import 'package:Organiser/widgets/dialogs/add_cartegory.dart';
 import 'package:Organiser/widgets/shared/input/buttons.dart';
 import 'package:flutter/material.dart';
 

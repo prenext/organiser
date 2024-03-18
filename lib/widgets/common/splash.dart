@@ -1,4 +1,4 @@
-import 'package:Organiser/pages/landing_page.dart';
+import 'package:Organiser/views/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

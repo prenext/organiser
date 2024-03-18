@@ -2,7 +2,7 @@
 windows
 # Firebase configuration
 lib/firebase_options.dart
-android
+# android
 ios
 web
 linux

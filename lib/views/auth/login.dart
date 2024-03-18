@@ -1,7 +1,7 @@
 import 'package:Organiser/models/collections/parents/user.dart';
-import 'package:Organiser/pages/user/forgot_pwd.dart';
-import 'package:Organiser/pages/user/register.dart';
-import 'package:Organiser/providers/user_provider.dart';
+import 'package:Organiser/views/auth/register.dart';
+import 'package:Organiser/services/user_provider.dart';
+import 'package:Organiser/views/auth/forgot_pwd.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
