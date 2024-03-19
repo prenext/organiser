@@ -5,7 +5,7 @@ ThemeData lightMode = ThemeData(
     cardTheme: CardTheme(color: Colors.white, elevation: 1),
     drawerTheme:
         DrawerThemeData(backgroundColor: Colors.cyan.shade50,),
-    scaffoldBackgroundColor: Colors.grey.shade50,
+    scaffoldBackgroundColor: Colors.white,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade400,

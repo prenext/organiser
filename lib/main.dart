@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'widgets/common/splash.dart';
+import 'views/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +27,7 @@ Future<void> main() async {
   );
 }
 
+//
 class OrganiserApp extends StatefulWidget {
   const OrganiserApp({Key? key}) : super(key: key);
 
@@ -37,15 +38,31 @@ class OrganiserApp extends StatefulWidget {
 class _OrganiserAppState extends State<OrganiserApp> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness:
+          themeProvider.themeData.brightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
+      systemNavigationBarColor:
+          themeProvider.themeData.brightness == Brightness.dark
+              ? Colors.black.withOpacity(0.9)
+              : Colors.white.withOpacity(0.9),
+      statusBarIconBrightness:
+          themeProvider.themeData.brightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
     ));
-    return MaterialApp( 
-      theme: Provider.of<ThemeProvider>(context).themeData,  
+    return MaterialApp(
+      theme: themeProvider.themeData,
       home: SplashScreen(
         onSelectThemeColor: () {},
       ),
       debugShowCheckedModeBanner: false,
+      themeAnimationCurve: Curves.easeInOut,
+      themeAnimationDuration: const Duration(milliseconds: 500),
     );
   }
 }

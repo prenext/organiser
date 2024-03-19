@@ -1,4 +1,4 @@
-import 'package:Organiser/controllers/event_model.dart';
+import 'package:Organiser/controllers/common/event_controller.dart';
 import 'package:Organiser/views/forms/add_event.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:Organiser/views/auth/login.dart';
+import 'package:Organiser/views/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -26,7 +26,7 @@ class LogoutDialog {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                        builder: (context) => SignInScreen(),
                       ),
                     );
                   },

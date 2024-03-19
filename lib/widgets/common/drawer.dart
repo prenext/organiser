@@ -169,7 +169,7 @@ class CustomDrawer extends StatelessWidget {
                           : Icons.dark_mode,
                       onTap: () {
                         Provider.of<ThemeProvider>(context, listen: false)
-                            .toggleTheme();
+                            .toggleTheme(context);
                       },
                       context: context),
                   _buildListTileWithDecoration(
@@ -235,15 +235,11 @@ class CustomDrawer extends StatelessWidget {
                       Navigator.of(context).pop();
                       _showConfirmationDialog(context);
                     },
-                    child: Row(children: <Widget>[
-                      Text(
-                        "Log out",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ]),
+                    child:Icon(
+                      Icons.logout,
+                      size: 35,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   )
                 ],
               ),

@@ -1,5 +1,5 @@
-import 'package:Organiser/views/auth/login.dart';
 import 'package:Organiser/views/home/home_page.dart';
+import 'package:Organiser/views/onboarding_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class _LandingPageState extends State<LandingPage> {
         } else if (snapshot.hasData && snapshot.data != null) {
           return HomePage();
         } else {
-          return LoginScreen();
+         return OnboardingPage();
         }
       },
     ));

@@ -12,11 +12,15 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleTheme() {
+  void toggleTheme(BuildContext context) async {
+   
+    // Toggle the theme
     if (_themeData == lightMode) {
       themeData = darkMode;
     } else {
       themeData = lightMode;
     }
+
   }
 }
+
