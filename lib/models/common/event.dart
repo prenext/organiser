@@ -1,3 +1,4 @@
+import 'package:Organiser/models/common/meal.dart';
 import 'package:flutter/material.dart';
 
 class Event with ChangeNotifier {
@@ -78,16 +79,3 @@ TimeOfDay _convertMapToTimeOfDay(Map<String, dynamic> timeMap) {
   return TimeOfDay(hour: hour, minute: minute);
 }
 
-enum RepeatFrequency {
-  Daily,
-  Weekly,
-  Monthly,
-  Yearly,
-}
-
-enum ReferenceType {
-  task,
-  event,
-  schedule,
-  meal,
-}

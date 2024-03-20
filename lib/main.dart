@@ -1,11 +1,11 @@
 import 'package:Organiser/firebase_options.dart';
-import 'package:Organiser/services/theme_provider.dart';
+import 'package:Organiser/views/pages/splash.dart';
+import 'package:Organiser/views/services/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'views/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
