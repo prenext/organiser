@@ -56,13 +56,14 @@ class _AddAccountInfoState extends State<AddAccountInfo> {
       }
       // Create UserModel object
       UserModel user = UserModel(
-        id: widget.user.uid, // Assuming uid is the user ID
+        id: widget.user.uid,
         email: widget.user.email!,
         username: _usernameController.text,
         fname: _fnameController.text,
         lname: _lnameController.text,
         gender: _selectedGender,
         dob: _selectedDate,
+        createdAt: widget.user.metadata.creationTime,
         profilePhotoUrl: profilePhotoUrl,
       );
 

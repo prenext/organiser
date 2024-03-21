@@ -8,6 +8,7 @@ class UserModel {
   final String? lname;
   final String? gender;
   final DateTime? dob;
+  final DateTime? createdAt;
   final String? profilePhotoUrl;
   final List<String> groupIds;
   final List<String> communityIds;
@@ -20,6 +21,7 @@ class UserModel {
     this.lname,
     this.gender,
     this.dob,
+    this.createdAt,
     this.profilePhotoUrl,
     this.groupIds = const [],
     this.communityIds = const [],
@@ -34,10 +36,12 @@ class UserModel {
       fname: data['fname'],
       lname: data['lname'],
       gender: data['gender'],
-      dob: data['dob']?.toDate(),
+      dob: DateTime.parse(data['dob']!),
+      createdAt: DateTime.parse(data['createdAt']!),
       profilePhotoUrl: data['profilePhotoUrl'],
       groupIds: List<String>.from(data['groupIds'] ?? []),
       communityIds: List<String>.from(data['communityIds'] ?? []),
+      
     );
   }
 
@@ -49,6 +53,7 @@ class UserModel {
       'lname': lname,
       'gender': gender,
       'dob': dob?.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String(),
       'profilePhotoUrl': profilePhotoUrl,
       'groupIds': groupIds,
       'communityIds': communityIds,

@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/app_bar.dart';
 import 'package:Organiser/views/widgets/common/bottom_app_bar.dart';
 import 'package:Organiser/views/widgets/common/drawer.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar:_currentIndex == 0 ? CustomAppBar(): null,
+      // extendBody: true  ,
+      // extendBodyBehindAppBar: true,
       body: _screens[_currentIndex],
       drawer: CustomDrawer(),
       bottomNavigationBar: CustomBottomAppBar(

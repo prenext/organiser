@@ -1,3 +1,4 @@
+import 'package:Organiser/controllers/auth/forgot_pwd_controller.dart';
 import 'package:Organiser/views/widgets/common/auth/decorate.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/views/widgets/common/auth/custom_text_field.dart';
@@ -13,9 +14,33 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
 
-  void _resetPassword() {
+  ResetPasswordController _resetPasswordController = ResetPasswordController();
+
+  String? _errorText;
+
+  void _resetPassword(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      //TODO: Implement your password reset logic here
+      if (_formKey.currentState!.validate()) {
+        final result = await _resetPasswordController.resetPassword(
+          context,
+          _emailController.text,
+        );
+        result.fold(
+          (errorMessage) {
+            setState(() {
+              _errorText = errorMessage;
+            });
+          },
+          (user) {
+            if (user != null) {
+              // Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => AddAccountInfo(user: user)),
+              // );
+            }
+          },
+        );
+      }
     }
   }
 
@@ -58,19 +83,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ),
                         SizedBox(height: 40.0),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             AuthButtonPrimary(
                               text: 'Reset',
-                              onPressed: _resetPassword,
+                              onPressed: () => _resetPassword(context),
                             ),
-                            Text("or"),
+                            Text("OR"),
                             AuthButtonSecondary(
                               text: 'Back',
                               onPressed: () {
                                 Navigator.pop(context);
                               },
                             ),
+                            SizedBox(
+                              height: 25.0,
+                            ),
+                            if (_errorText != null)
+                              Text(
+                                (_errorText! + " Please try again."),
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 14.0,
+                                ),
+                              ),
                           ],
                         ),
                       ],

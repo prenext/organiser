@@ -1,14 +1,28 @@
 import 'package:Organiser/views/pages/messages/messages.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Organiser/views/services/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final userAccount = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
+    // Get user data from the provider
+    final user = Provider.of<UserProvider>(context).user;
+
+    // Get current time
+    final currentTime = DateTime.now();
+
+    // Determine greeting based on current time
+    String greeting;
+    if (currentTime.hour < 12) {
+      greeting = 'Good morning';
+    } else if (currentTime.hour < 18) {
+      greeting = 'Good afternoon';
+    } else {
+      greeting = 'Good evening';
+    }
+
     return AppBar(
-      elevation: 1,
       leading: GestureDetector(
         onTap: () {
           Scaffold.of(context).openDrawer();
@@ -25,11 +39,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: CircleAvatar(
             maxRadius: 10.0,
-            backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/organiser-dcd2c.appspot.com/o/profile-photos%2FIMG-20240320-WA0018.jpg?alt=media&token=603228ea-f437-4b49-beaa-a33a712e9357'),
+            // Use the user's image URL from the provider
+            // If the user is not null and has an image URL, use it, otherwise use a default image
+            backgroundImage: user != null && user.profilePhotoUrl != null
+                ? NetworkImage(user.profilePhotoUrl ?? '')
+                : null,
+            child: user != null && user.profilePhotoUrl == null
+                ? Icon(Icons.person)
+                : null,
           ),
         ),
       ),
-      title: Text("Good Morning, Alidante"),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('$greeting, ${user != null ? user.fname : "Guest"}'),
+        ],
+      ),
       actions: [
         IconButton(
           icon: Icon(Icons.notifications_outlined),

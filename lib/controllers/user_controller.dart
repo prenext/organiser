@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  // Create a new user document in the users collection
   Future<void> createUser(UserModel user) async {
     await _firestore.collection('users').doc(user.id).set(user.toMap());
   }

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-
 import 'views/services/user_provider.dart';
 
 void main() async {
@@ -26,8 +25,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider(
-            create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: OrganiserApp(),
     ),
@@ -54,8 +52,8 @@ class _OrganiserAppState extends State<OrganiserApp> {
               : Brightness.dark,
       systemNavigationBarColor:
           themeProvider.themeData.brightness == Brightness.dark
-              ? Colors.black.withOpacity(0.9)
-              : Colors.white.withOpacity(0.9),
+              ? Colors.black
+              : Colors.white,
       statusBarIconBrightness:
           themeProvider.themeData.brightness == Brightness.dark
               ? Brightness.light
@@ -63,9 +61,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
     ));
     return MaterialApp(
       theme: themeProvider.themeData,
-      home: SplashScreen(
-        onSelectThemeColor: () {},
-      ),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       themeAnimationCurve: Curves.easeInOut,
       themeAnimationDuration: const Duration(milliseconds: 500),

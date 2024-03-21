@@ -7,11 +7,11 @@ ThemeData darkMode = ThemeData(
       primary: Colors.cyan.shade500,
       secondary: Colors.cyan.shade800,
     ),
+    
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: Colors.cyan.shade500,
-        foregroundColor: Colors.white,
-        elevation: 1),
+        backgroundColor: Colors.transparent,
+        elevation: 0),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedItemColor: Colors.grey.shade400.withOpacity(0.8),
         selectedItemColor: Colors.cyan.shade200,

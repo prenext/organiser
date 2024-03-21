@@ -1,8 +1,10 @@
 import 'package:Organiser/config/themes/light.dart';
+import 'package:Organiser/views/pages/auth/account.dart';
 import 'package:Organiser/views/pages/info/about.dart';
 import 'package:Organiser/views/pages/info/tips.dart';
 import 'package:Organiser/views/pages/settings/settings.dart';
 import 'package:Organiser/views/pages/theme/color.dart';
+import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/dialogs/logout.dart';
 import 'package:Organiser/views/widgets/dialogs/rate_app.dart';
 import 'package:flutter/material.dart';
@@ -42,74 +44,86 @@ class CustomDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage('https://picsum.photos/200/200'),
-                        fit: BoxFit.cover,
-                      ),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 4.0, // Adjust the width as needed
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 36.0),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+            Consumer<UserProvider>(
+              builder: (context, userProvider, _) {
+                final user = userProvider.user;
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Alidante',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    children: [
+                      Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 4.0, // Adjust the width as needed
                           ),
-                          Text(
-                            'alidante@gmail.com',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Theme.of(context).hintColor,
-                            ),
+                        ),
+                        child: CircleAvatar(
+                          maxRadius: 10.0,
+                          backgroundImage:
+                              user != null && user.profilePhotoUrl != null
+                                  ? NetworkImage(user.profilePhotoUrl ?? '')
+                                  : null,
+                          child: user != null && user.profilePhotoUrl == null
+                              ? Icon(Icons.person)
+                              : null,
+                        ),
+                      ),
+                      const SizedBox(height: 36.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Display the user's name
+                              Text(
+                                user != null ? user.username : 'Guest',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              // Optionally, display additional user information like email
+                              Text(
+                                user != null ? user.email : '',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).hintColor,
+                                ),
+                              ),
+                            ],
                           ),
+                          Column(
+                            children: [
+                              // Display user-specific data like goals count
+                              Text(
+                                'Goals',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '0',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).hintColor,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Text(
-                            'Goals',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '25',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Theme.of(context).hintColor,
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
             Divider(
               height: 1,
@@ -124,11 +138,11 @@ class CustomDrawer extends StatelessWidget {
                       icon: Icons.account_box,
                       onTap: () {
                         Navigator.pop(context);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => AccountPage()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AccountPage()),
+                        );
                       },
                       context: context),
                   _buildListTileWithDecoration(
