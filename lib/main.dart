@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
+
+import 'views/services/user_provider.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -20,14 +23,17 @@ Future<void> main() async {
   );
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
+            create: (context) => UserProvider()),
+      ],
       child: OrganiserApp(),
     ),
   );
 }
 
-//
 class OrganiserApp extends StatefulWidget {
   const OrganiserApp({Key? key}) : super(key: key);
 

@@ -1,66 +1,68 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
+import 'package:Organiser/views/widgets/common/snack_bar.dart';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-// class AuthController {
+class SignUpController {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
-//   Future<String?> signUp(
-//       BuildContext context, String email, String password) async {
-//     showDialog(
-//       context: context,
-//       builder: (context) {
-//         return Center(
-//           child: CircularProgressIndicator(),
-//         );
-//       },
-//     );
+  Future<Either<String, User?>> signUp(
+      BuildContext context, String email, String password) async {
+    try {
+      isLoading.value = true;
 
-//     try {
-//       if (passwordConfirmed()) {
-//         Navigator.pop(context); // Close the loading dialog
-//         showDialog(
-//           useSafeArea: false,
-//           context: context,
-//           builder: (BuildContext context) {
-//             return AdditionalSignUpDetailsPage();
-//           },
-//         );
-//         return null; // Sign-up successful, no error
-//       }
-//     } on FirebaseAuthException catch (e) {
-//       String errorMessage = "";
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
 
-//       if (e.code == 'weak-password') {
-//         errorMessage = 'The password provided is too weak.';
-//       } else if (e.code == 'email-already-in-use') {
-//         errorMessage = 'The account already exists for that email.';
-//       } else {
-//         errorMessage = e.message ?? 'Error: Something went wrong';
-//       }
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
 
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           content: Text(errorMessage),
-//           duration: Duration(seconds: 3),
-//         ),
-//       );
+      isLoading.value = false;
+      Navigator.pop(context);
+      CustomSnackbar.show(context, 'success', 'Sign up successful.');
 
-//       return errorMessage;
-//     } catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           backgroundColor: Theme.of(context).colorScheme.primary,
-//           content: Text('Error: Something went wrong'),
-//           duration: Duration(seconds: 3),
-//         ),
-//       );
+      return Right(userCredential.user);
+    } on FirebaseAuthException catch (e) {
+      isLoading.value = false;
+      Navigator.pop(context);
+      // print('FirebaseAuthException: ${e.code}');
 
-//       return 'Error: Something went wrong';
-//     }
-//     return null;
-//   }
+      String errorMessage;
+      switch (e.code) {
+        case 'email-already-in-use':
+          errorMessage = 'Email already in use.';
+          break;
+        case 'network-request-failed':
+          errorMessage = 'No network connection.';
+          break;
+        default:
+          errorMessage = 'An unexpected auth error occurred.';
+          break;
+      }
 
-//   bool passwordConfirmed() {
-//     // Implement your password confirmation logic here
-//     return true;
-//   }
-// }
+      CustomSnackbar.show(context, 'error', errorMessage);
+
+      return Left(errorMessage);
+    } catch (e) {
+      isLoading.value = false;
+      Navigator.pop(context);
+      // print('Error: $e');
+      CustomSnackbar.show(context, 'error', 'An unexpected error occurred.');
+
+      return Left('An unexpected error occurred.');
+    }
+  }
+
+  //TODO: Implement email verification
+}

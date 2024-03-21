@@ -12,6 +12,8 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onSubmitted;
   final FocusNode? focusNode;
   final TextInputType inputType;
+  final String? Function(String?)? validator;
+  final bool? autovalidate;
 
   const CustomTextField({
     Key? key,
@@ -25,6 +27,8 @@ class CustomTextField extends StatefulWidget {
     this.onSubmitted,
     this.trailingIcon,
     this.focusNode,
+    this.validator,
+    this.autovalidate,
   }) : super(key: key);
 
   @override
@@ -48,9 +52,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return TextFormField(
           controller: widget.controller,
           obscureText: _isObscure,
-          validator: (value) => _validateInput(value, widget.inputType),
+          validator: widget.validator ??
+              (value) => _validateInput(value, widget.inputType),
           autocorrect: true,
-          autovalidateMode: _hasError
+          autovalidateMode: _hasError || widget.autovalidate == true
               ? AutovalidateMode.onUserInteraction
               : AutovalidateMode.disabled,
           keyboardType: widget.keyboardType,

@@ -1,24 +1,14 @@
-// bool _isSuccess = false;
-// // ignore: unused_field
-// String _message = '';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// Future<void> resetPassword() async {
-//   try {
-//     await FirebaseAuth.instance
-//         .sendPasswordResetEmail(email: _emailController.text.trim());
-//     setState(() {
-//       _isSuccess = true;
-//       _message = 'Email sent successfully';
-//     });
-//   } on FirebaseAuthException catch (e) {
-//     setState(() {
-//       _isSuccess = false;
-//       _message = 'Error: ${e.message}';
-//     });
-//   } catch (e) {
-//     setState(() {
-//       _isSuccess = false;
-//       _message = 'Error: Something went wrong';
-//     });
-//   }
-// }
+class PasswordResetController {
+  Future<String> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
+      return 'Email sent successfully';
+    } on FirebaseAuthException catch (e) {
+      return 'Error: ${e.message}';
+    } catch (e) {
+      return 'Error: Something went wrong';
+    }
+  }
+}

@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: CircleAvatar(
             maxRadius: 10.0,
-            backgroundImage: NetworkImage('https://picsum.photos/80'),
+            backgroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/organiser-dcd2c.appspot.com/o/profile-photos%2FIMG-20240320-WA0018.jpg?alt=media&token=603228ea-f437-4b49-beaa-a33a712e9357'),
           ),
         ),
       ),

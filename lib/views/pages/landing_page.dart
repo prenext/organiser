@@ -1,4 +1,3 @@
-import 'package:Organiser/views/pages/auth/add_account_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home/home_page.dart';
@@ -24,10 +23,8 @@ class _LandingPageState extends State<LandingPage> {
             } else if (snapshot.hasData && snapshot.data != null) {
               return HomePage();
             } else {
-              return AddAccountInfo(
-                userId: 'testuseridfortestingscreen',
-              );
-              //  return OnboardingPage();
+               
+               return OnboardingPage();
             }
           },
         ));

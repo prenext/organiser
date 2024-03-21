@@ -43,6 +43,7 @@ dependencies:
   email_validator: ^2.1.17
   smooth_page_indicator: ^1.1.0
   dartz: ^0.10.1
+  firebase_storage: ^11.6.9
   # syncfusion_flutter_calendar: ^24.1.47
 
 dev_dependencies:
@@ -79,6 +80,7 @@ flutter:
     - assets/gif/meal.png
     - assets/gif/community.png
     - assets/gif/analysis.png
+    - assets/gif/avatar.gif
     - assets/images/bg.jpeg
     - assets/images/bg_decorate.webp
     - assets/icon/google_signin.png

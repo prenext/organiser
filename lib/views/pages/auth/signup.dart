@@ -1,9 +1,13 @@
+import 'package:Organiser/controllers/auth/signup_controller.dart';
+import 'package:Organiser/views/pages/auth/add_user_info.dart';
 import 'package:Organiser/views/widgets/common/auth/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/views/widgets/common/auth/decorate.dart';
 import 'package:Organiser/views/widgets/common/auth/custom_text_field.dart';
 import 'package:Organiser/views/widgets/common/auth/auth_buttons.dart';
 import 'package:Organiser/views/widgets/common/auth/greet.dart';
+
+import 'signin.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -17,6 +21,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
+  SignUpController _signUpController = SignUpController();
+  String? _errorText;
+
+  // Add listeners to the text controllers
+  void initState() {
+    super.initState();
+
+    _emailController.addListener(() {
+      setState(() {
+        _errorText = null;
+      });
+    });
+
+    _passwordController.addListener(() {
+      setState(() {
+        _errorText = null;
+      });
+    });
+
+    _confirmPasswordController.addListener(() {
+      setState(() {
+        _errorText = null;
+      });
+    });
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -26,10 +56,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void _submitForm() {
+  String? _validatePasswords(String? value) {
+    if (_passwordController.text != value) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      // Form is valid, proceed with sign-up logic
-      //TODO: Implement user sign up
+      final result = await _signUpController.signUp(
+        context,
+        _emailController.text,
+        _passwordController.text,
+      );
+      result.fold(
+        (errorMessage) {
+          setState(() {
+            _errorText = errorMessage;
+          });
+        },
+        (user) {
+          if (user != null) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => AddAccountInfo(user: user)),
+            );
+          }
+        },
+      );
     }
   }
 
@@ -78,6 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           obscureText: true,
                           trailingIcon: Icons.lock_clock_outlined,
                           inputType: TextInputType.visiblePassword,
+                          validator: _validatePasswords,
+                          autovalidate: true,
                         ),
                         SizedBox(height: 40.0),
                         Row(
@@ -91,13 +148,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             AuthButtonSecondary(
                               text: 'Sign In',
                               onPressed: () {
-                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignInScreen()),
+                                );
                               },
                             ),
-                           
                           ],
                         ),
-                         SizedBox(
+                        SizedBox(height: 10.0),
+                        if (_errorText != null)
+                          Text(
+                            (_errorText! + " Please try again."),
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                        SizedBox(height: 20.0),
+                        SizedBox(height: 20.0),
+                        Text(
+                          'Or Sign Up with',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
                             height: MediaQuery.of(context).size.height * 0.1),
                         SocialSignIn(
                           onGoogleSignInPressed: () {

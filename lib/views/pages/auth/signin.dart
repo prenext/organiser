@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:Organiser/views/widgets/common/auth/custom_text_field.dart';
 import 'package:Organiser/views/widgets/common/auth/auth_buttons.dart';
 import 'package:Organiser/views/widgets/common/auth/greet.dart';
-import 'package:Organiser/views/pages/auth/signup.dart';
+
+import 'signup.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -27,20 +28,21 @@ class _SignInScreenState extends State<SignInScreen> {
   void initState() {
     super.initState();
 
-    // Add listeners to the text controllers
+  // Add listeners to the text controllers
     _emailController.addListener(() {
       setState(() {
-        _errorText = null; // Reset error text when email changes
+        _errorText = null;
       });
     });
 
     _passwordController.addListener(() {
       setState(() {
-        _errorText = null; // Reset error text when password changes
+        _errorText = null;
       });
     });
   }
 
+ // Method to submit the form
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final result = await _signInController.signIn(
@@ -50,20 +52,17 @@ class _SignInScreenState extends State<SignInScreen> {
       );
       result.fold(
         (errorMessage) {
-          // Display error message
-
           setState(() {
             _errorText = errorMessage;
           });
         },
-        (user) {
-          // if (user != null) {
-
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-          // }
+        (signedIn) {
+          if (signedIn == true) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
         },
       );
     }
@@ -136,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             AuthButtonSecondary(
                               text: 'Sign Up',
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => SignUpScreen()),
