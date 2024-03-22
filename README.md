@@ -3,6 +3,7 @@
 The Organizer App is a mobile application designed to empower users to efficiently organize and manage their schedules and daily routines. This app aims to eliminate missed appointments and forgotten to-dos, helping users stay on top of their lives and make the most of each day.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Installation](#installation)
@@ -71,3 +72,112 @@ We'll review your contribution and merge it if it aligns with the project's goal
 ## License
 
 This project is licensed under the MIT License[LICENSE].
+
+# PROJECT STRUCTURE
+
+```js
+organiser/
+├── lib/
+│   ├── models/
+│   │   ├── collections/
+│   │   │   ├── children/
+│   │   │   │   ├── event.dart
+│   │   │   │   ├── goal.dart
+│   │   │   │   ├── meal.dart
+│   │   │   │   ├── schedule.dart
+│   │   │   │   └── task.dart
+│   │   │   ├── parents/
+│   │   │   │   ├── community.dart
+│   │   │   │   ├── group.dart
+│   │   │   │   └── user.dart
+│   │   │   └── event_model.dart
+│   │   ├── theme/
+│   │   │   ├── dark.dart
+│   │   │   └── light.dart
+│   │   └── time/
+│   │       └── week.dart
+│   ├── views/
+│   │   ├── auth/
+│   │   │   ├── account_view.dart
+│   │   │   ├── add_account_details_view.dart
+│   │   │   ├── forgot_pwd_view.dart
+│   │   │   ├── login_view.dart
+│   │   │   └── register_view.dart
+│   │   ├── forms/
+│   │   │   ├── add_event_view.dart
+│   │   │   ├── add_goal_view.dart
+│   │   │   ├── add_meal_view.dart
+│   │   │   ├── add_schedule_view.dart
+│   │   │   └── add_task_view.dart
+│   │   ├── home/
+│   │   │   ├── home_page.dart
+│   │   │   └── screens/
+│   │   │       ├── dashboard.dart
+│   │   │       ├── food.dart
+│   │   │       ├── schedules.dart
+│   │   │       ├── socials.dart
+│   │   │       └── tasks.dart
+│   │   ├── info/
+│   │   │   ├── about_view.dart
+│   │   │   └── tips_view.dart
+│   │   ├── messages/
+│   │   │   └── messages_view.dart
+│   │   ├── settings/
+│   │   │   └── settings_view.dart
+│   │   └── theme/
+│   │       └── color_view.dart
+│   ├── viewmodels/
+│   │   ├── auth/
+│   │   │   ├── account_viewmodel.dart
+│   │   │   ├── add_account_details_viewmodel.dart
+│   │   │   ├── forgot_pwd_viewmodel.dart
+│   │   │   ├── login_viewmodel.dart
+│   │   │   └── register_viewmodel.dart
+│   │   ├── forms/
+│   │   │   ├── add_event_viewmodel.dart
+│   │   │   ├── add_goal_viewmodel.dart
+│   │   │   ├── add_meal_viewmodel.dart
+│   │   │   ├── add_schedule_viewmodel.dart
+│   │   │   └── add_task_viewmodel.dart
+│   │   ├── home/
+│   │   │   └── home_viewmodel.dart
+│   │   ├── info/
+│   │   │   ├── about_viewmodel.dart
+│   │   │   └── tips_viewmodel.dart
+│   │   ├── messages/
+│   │   │   └── messages_viewmodel.dart
+│   │   ├── settings/
+│   │   │   └── settings_viewmodel.dart
+│   │   └── theme/
+│   │       └── color_viewmodel.dart
+│   ├── services/
+│   │   └── authentication_service.dart
+│   ├── widgets/
+│   │   ├── common/
+│   │   │   ├── action_button.dart
+│   │   │   ├── app_bar.dart
+│   │   │   ├── bottom_app_bar.dart
+│   │   │   ├── drawer.dart
+│   │   │   └── splash.dart
+│   │   ├── shared/
+│   │   │   └── input/
+│   │   │       ├── auto_complete.dart
+│   │   │       ├── buttons.dart
+│   │   │       ├── description.dart
+│   │   │       ├── dropdown.dart
+│   │   │       ├── pickers.dart
+│   │   │       ├── tag_chips.dart
+│   │   │       └── textfields.dart
+│   │   └── styled/
+│   │       └── input_adder/
+│   │           ├── cartegory.dart
+│   │           ├── chips.dart
+│   │           ├── date_duration.dart
+│   │           ├── location.dart
+│   │           ├── optionsAppBar.dart
+│   │           ├── tag.dart
+│   │           ├── time.dart
+│   │           └── title.dart
+│   ├── main.dart
+│   └── pubspec.yaml
+```
