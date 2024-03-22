@@ -23,99 +23,84 @@ class _CustomFABState extends State<CustomFAB>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10.0),
-      child: AnimatedBuilder(
-        animation: fabAnimation,
-        builder: (context, child) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isMenuOpen)
-                buildMenuItem(Icons.check_circle, () {
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                }),
-              if (isMenuOpen)
-                buildMenuItem(Icons.schedule, () {
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                }),
-              if (isMenuOpen)
-                buildMenuItem(Icons.stars_rounded, () {
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                }),
-              if (isMenuOpen)
-                buildMenuItem(Icons.event, () {
-                  EventModel eventModel =
-                      new EventModel(); // Initialize your EventModel instance
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CreateEventPage(eventModel)),
-                  );
-      
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                }),
-              if (isMenuOpen)
-                buildMenuItem(Icons.restaurant, () {
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                }),
-              FloatingActionButton(
-                child: Icon(isMenuOpen ? Icons.close : Icons.add),
-                mini: true,
-                elevation: 4.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Colors.white,
-                onPressed: () {
-                  setState(() {
-                    isMenuOpen = !isMenuOpen;
-                  });
-                  fabAnimation.status == AnimationStatus.completed
-                      ? fabAnimation.reverse()
-                      : fabAnimation.forward();
-                },
-              ),
-            ],
-          );
-        },
-      ),
+    return AnimatedBuilder(
+      animation: fabAnimation,
+      builder: (context, child) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (isMenuOpen)
+              buildMenuItem(Icons.check_circle, () {
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+            if (isMenuOpen)
+              buildMenuItem(Icons.schedule, () {
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+            if (isMenuOpen)
+              buildMenuItem(Icons.stars_rounded, () {
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+            if (isMenuOpen)
+              buildMenuItem(Icons.event, () {
+                EventModel eventModel =
+                    new EventModel(); // Initialize your EventModel instance
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CreateEventPage(eventModel)),
+                );
+    
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+            if (isMenuOpen)
+              buildMenuItem(Icons.restaurant, () {
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+              }),
+            FloatingActionButton(
+              child: Icon(isMenuOpen ? Icons.close : Icons.add),
+              mini: true,
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Colors.white,
+              onPressed: () {
+                setState(() {
+                  isMenuOpen = !isMenuOpen;
+                });
+                fabAnimation.status == AnimationStatus.completed
+                    ? fabAnimation.reverse()
+                    : fabAnimation.forward();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget buildMenuItem(IconData icon, VoidCallback onPressed) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.0),
-      child: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-        elevation: 4.0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        mini: true,
-        onPressed: onPressed,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 25.0,
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ),
+    return FloatingActionButton(
+      backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+      elevation: 0.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      mini: true,
+      onPressed: onPressed,
+      child: Icon(
+        icon,
+        size: 25.0,
+        color: Colors.white,
       ),
     );
   }

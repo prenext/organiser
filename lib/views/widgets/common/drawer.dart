@@ -74,51 +74,54 @@ class CustomDrawer extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 36.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Display the user's name
-                              Text(
-                                user != null ? user.username : 'Guest',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Display the user's name
+                                Text(
+                                  user != null ? user.username : 'Guest',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              // Optionally, display additional user information like email
-                              Text(
-                                user != null ? user.email : '',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Theme.of(context).hintColor,
+                                // Optionally, display additional user information like email
+                                Text(
+                                  user != null ? user.email : '',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Theme.of(context).hintColor,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              // Display user-specific data like goals count
-                              Text(
-                                'Goals',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                // Display user-specific data like goals count
+                                Text(
+                                  'Goals',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '0',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Theme.of(context).hintColor,
+                                Text(
+                                  '0',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Theme.of(context).hintColor,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),

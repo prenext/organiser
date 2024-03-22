@@ -52,22 +52,16 @@ class Screen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-            itemCount: 20, // Replace with your actual list length
-            itemBuilder: (context, index) {
-              return ChatListItem(
-                groupName: 'Group $index',
-                iconLabels: ['Events', 'Tasks', 'Goals', 'Schedules'],
-                iconNumbers: [3, 5, 7, 2], // Replace with your actual numbers
-              );
-            }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.group_add_rounded,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ));
+      body: ListView.builder(
+          itemCount: 20, // Replace with your actual list length
+          itemBuilder: (context, index) {
+            return ChatListItem(
+              groupName: 'Group $index',
+              iconLabels: ['Events', 'Tasks', 'Goals', 'Schedules'],
+              iconNumbers: [3, 5, 7, 2], // Replace with your actual numbers
+            );
+          }),
+    );
   }
 }
 
@@ -75,23 +69,17 @@ class Screen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-          itemCount: 15, // Replace with your actual list length
-          itemBuilder: (context, index) {
-            return CommunityListItem(
-              communityName: 'Community $index',
-              eventsCount: 8, // Replace with your actual numbers
-              followersCount: 120, // Replace with your actual numbers
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.domain_add_sharp,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ));
+      body: ListView.builder(
+        itemCount: 15, // Replace with your actual list length
+        itemBuilder: (context, index) {
+          return CommunityListItem(
+            communityName: 'Community $index',
+            eventsCount: 8, // Replace with your actual numbers
+            followersCount: 120, // Replace with your actual numbers
+          );
+        },
+      ),
+    );
   }
 }
 

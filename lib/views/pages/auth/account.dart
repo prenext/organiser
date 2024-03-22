@@ -13,6 +13,7 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0),
         leading: CustomBackButton(),
         actions: [
           IconButton(
@@ -66,7 +67,7 @@ class AccountPage extends StatelessWidget {
                       ),
                       UserDetailsWidget(
                         email: user.email,
-                        dob: user.dob?.toIso8601String() ?? "",
+                        dob: user.dob ?? DateTime.now(), 
                         username: user.username,
                         gender: user.gender ?? "",
                       ),
@@ -93,7 +94,7 @@ class AccountPage extends StatelessWidget {
               ),
             );
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

@@ -78,17 +78,7 @@ class PageDecoration extends StatelessWidget {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.97),
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.98),
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.99),
-                ],
-              ),
-            ),
+            color: Theme.of(context).cardColor.withOpacity(0.95),
           ),
         ),
       ],

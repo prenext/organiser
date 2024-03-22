@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/action_button.dart';
 import 'package:Organiser/views/widgets/common/app_bar.dart';
 import 'package:Organiser/views/widgets/common/bottom_app_bar.dart';
 import 'package:Organiser/views/widgets/common/drawer.dart';
@@ -29,9 +30,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
+      extendBodyBehindAppBar: true,
       appBar:_currentIndex == 0 ? CustomAppBar(): null,
-      // extendBody: true  ,
-      // extendBodyBehindAppBar: true,
+      extendBody: true,
       body: _screens[_currentIndex],
       drawer: CustomDrawer(),
       bottomNavigationBar: CustomBottomAppBar(
@@ -42,6 +43,8 @@ class _HomePageState extends State<HomePage> {
           });
         },
       ),
+       floatingActionButton: CustomFAB(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 }
