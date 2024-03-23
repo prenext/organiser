@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:Organiser/controllers/file_controller.dart';
 import 'package:Organiser/models/user.dart';
-import 'package:Organiser/views/pages/home/home_page.dart';
+import 'package:Organiser/views/pages/landing_page.dart';
 import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/common/auth/auth_buttons.dart';
 import 'package:Organiser/views/widgets/common/auth/decorate.dart';
@@ -68,16 +68,14 @@ class _AddAccountInfoState extends State<AddAccountInfo> {
       );
 
       // Use UserProvider to create the user
-      userProvider.createUser(user);
+      await userProvider.createUser(user);
 
       CustomSnackbar.show(context, 'success', 'Account created successfully.');
 
-      // Navigate to the next screen
       Navigator.pop(context);
 
-      // Navigate to the next screen
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => LandingPage()));
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class Tasks extends StatefulWidget {
@@ -25,7 +26,10 @@ class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: Colors.transparent,
+      appBar: CustomAppBar(
+        leading: Icon(Icons.task),
+        centerTitle: false,
         title: Text('Tasks'),
         actions: [
           _buildFilterChips(),
@@ -41,6 +45,33 @@ class _TasksState extends State<Tasks> {
       children: filters.map((filter) {
         return FilterChip(
           label: Text(filter),
+
+          side: BorderSide(
+            color: Theme.of(context)
+                .primaryColor
+                .withOpacity(0.5), // Use theme primary color for border
+            width: 0.5, // Adjust border width as needed
+          ),
+
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(30.0), // Adjust border radius as needed
+            side: BorderSide(
+              color: Theme.of(context)
+                  .primaryColor, // Use theme primary color for border
+              width: 1.0, // Adjust border width as needed
+            ),
+          ),
+          padding: EdgeInsets.symmetric(
+              horizontal: 1, vertical: 0.0), // Adjust padding as needed
+          color: MaterialStateProperty.resolveWith((states) => Theme.of(context)
+              .scaffoldBackgroundColor), // Use theme scaffoldBackgroundColor for chip background
+          checkmarkColor: Theme.of(context)
+              .primaryColor, // Use theme primary color for checkmark
+          labelStyle: TextStyle(
+              fontSize: 12.0,
+              fontWeight: FontWeight.w300,
+              color: Theme.of(context).primaryColor),
           selected: selectedFilter == filter,
           onSelected: (isSelected) {
             setState(() {

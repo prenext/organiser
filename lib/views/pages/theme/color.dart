@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ThemeSelectionScreen extends StatefulWidget {
@@ -16,47 +17,43 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        foregroundColor: Theme.of(context).colorScheme.primary,
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
         title: Text("Select Theme Color"),
-        elevation: 1,
-         actions: [
+        actions: [
           IconButton(
             icon: Icon(Icons.refresh), // Use any icon you prefer
-            onPressed: () {
-             
-            },
+            onPressed: () {},
           ),
         ],
       ),
       body: GridView.builder(
-          padding: const EdgeInsets.all(16.0),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          itemCount: themeColors.length,
-          itemBuilder: (context, index) {
-            final themeColor = themeColors[index];
-
-            return ThemeColorCard(
-              color: themeColor,
-              isSelected: themeColor == selectedColor,
-              onTap: () {
-                setState(() {
-                  selectedColor = themeColor;
-                });
-                widget.onColorSelected(selectedColor!);
-              },
-            );
-          },
+        padding: const EdgeInsets.all(16.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
         ),
+        itemCount: themeColors.length,
+        itemBuilder: (context, index) {
+          final themeColor = themeColors[index];
+
+          return ThemeColorCard(
+            color: themeColor,
+            isSelected: themeColor == selectedColor,
+            onTap: () {
+              setState(() {
+                selectedColor = themeColor;
+              });
+              widget.onColorSelected(selectedColor!);
+            },
+          );
+        },
+      ),
     );
   }
 }
+
 class ThemeColorCard extends StatelessWidget {
   final Color color;
   final bool isSelected;
@@ -97,7 +94,9 @@ class ThemeColorCard extends StatelessWidget {
             Text(
               getColorName(color),
               style: TextStyle(
-                color: isSelected ? const Color.fromARGB(255, 0, 0, 0) : Colors.white,
+                color: isSelected
+                    ? const Color.fromARGB(255, 0, 0, 0)
+                    : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -143,4 +142,3 @@ List<Color> themeColors = [
   Colors.indigo,
   Colors.lightBlue,
 ];
-

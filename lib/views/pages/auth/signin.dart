@@ -1,6 +1,7 @@
 import 'package:Organiser/controllers/auth/signin_controller.dart';
 import 'package:Organiser/views/pages/auth/forgot_pwd.dart';
-import 'package:Organiser/views/pages/home/home_page.dart';
+import 'package:Organiser/views/pages/landing_page.dart';
+import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/common/auth/decorate.dart';
 import 'package:Organiser/views/widgets/common/auth/social_signin.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +24,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
   SignInController _signInController = SignInController();
 
+  UserProvider userProvider = UserProvider();
+
   String? _errorText;
   @override
   void initState() {
     super.initState();
 
-  // Add listeners to the text controllers
+    // Add listeners to the text controllers
     _emailController.addListener(() {
       setState(() {
         _errorText = null;
@@ -42,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
- // Method to submit the form
+  // Method to submit the form
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final result = await _signInController.signIn(
@@ -56,17 +59,19 @@ class _SignInScreenState extends State<SignInScreen> {
             _errorText = errorMessage;
           });
         },
-        (signedIn) {
+        (signedIn) async {
           if (signedIn == true) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => LandingPage()),
             );
           }
         },
       );
     }
   }
+
+ 
 
   @override
   void dispose() {

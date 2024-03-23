@@ -35,13 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 Image.asset(
                   'assets/icon/logo.png',
-                  width: 100,
-                  height: 100,
+                  width: 150,
+                  height: 150,
                 ),
                 Text(
                   'Organizer',
                   style: TextStyle(
                     fontSize: 40,
+                    
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -78,17 +79,7 @@ class PageDecoration extends StatelessWidget {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.97),
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.98),
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.99),
-                ],
-              ),
-            ),
+            color: Theme.of(context).cardColor.withOpacity(0.95),
           ),
         ),
       ],

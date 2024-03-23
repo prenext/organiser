@@ -1,125 +1,83 @@
 // settings_screen.dart
 
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
         title: Text("Settings"),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildSettingCard(
-                child: Column(
-              children: [
-                buildSettingsItem(
-                    icon: Icons.timer,
-                    title: "Time Zone",
-                    data: "UTC",
-                    switchWidget: DropdownButton<String>(
-                      value: 'UTC',
-                      onChanged: (String? value) {
-                        // Handle time zone dropdown change
-                      },
-                      items: <String>['UTC', 'GMT', 'EST', 'PST']
-                          .map<DropdownMenuItem<String>>(
-                            (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    context: context,
-                    last: true),
-              ],
-            )),
-            buildSettingCard(
-              child: Column(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildSettingCard(
+                  child: Column(
                 children: [
                   buildSettingsItem(
-                      icon: Icons.palette,
-                      title: "Theme Color",
-                      data: "Blue",
-                      switchWidget: ElevatedButton(
-                        onPressed: () {
-                          // Handle theme color button press
+                      icon: Icons.timer,
+                      title: "Time Zone",
+                      data: "UTC",
+                      switchWidget: DropdownButton<String>(
+                        value: 'UTC',
+                        onChanged: (String? value) {
+                          // Handle time zone dropdown change
                         },
-                        child: Text("Choose Theme Color"),
+                        items: <String>['UTC', 'GMT', 'EST', 'PST']
+                            .map<DropdownMenuItem<String>>(
+                              (String value) => DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              ),
+                            )
+                            .toList(),
                       ),
                       context: context,
                       last: true),
                 ],
-              ),
-            ),
-            buildSettingCard(
+              )),
+              buildSettingCard(
                 child: Column(
-              children: [
-                buildSettingsItem(
-                  icon: Icons.event_available,
-                  title: "Default Duration",
-                  data: "30 minutes",
-                  switchWidget: DropdownButton<String>(
-                    value: '30 minutes',
-                    onChanged: (String? value) {
-                      // Handle default duration dropdown change
-                    },
-                    items: <String>[
-                      '15 minutes',
-                      '30 minutes',
-                      '1 hour',
-                      '2 hours'
-                    ]
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  context: context,
+                  children: [
+                    buildSettingsItem(
+                        icon: Icons.palette,
+                        title: "Theme Color",
+                        data: "Blue",
+                        switchWidget: ElevatedButton(
+                          onPressed: () {
+                            // Handle theme color button press
+                          },
+                          child: Text("Choose Theme Color"),
+                        ),
+                        context: context,
+                        last: true),
+                  ],
                 ),
-                buildSettingsItem(
-                    icon: Icons.sync,
-                    title: "Sync Frequency",
-                    data: "Every hour",
-                    switchWidget: DropdownButton<String>(
-                      value: 'Every hour',
-                      onChanged: (String? value) {
-                        // Handle sync frequency dropdown change
-                      },
-                      items: <String>['Every hour', 'Every day', 'Every week']
-                          .map<DropdownMenuItem<String>>(
-                            (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    context: context,
-                    last: true),
-              ],
-            )),
-            buildSettingCard(
-              child: Column(
+              ),
+              buildSettingCard(
+                  child: Column(
                 children: [
                   buildSettingsItem(
-                    icon: Icons.priority_high,
-                    title: "Default Priority",
-                    data: "High",
+                    icon: Icons.event_available,
+                    title: "Default Duration",
+                    data: "30 minutes",
                     switchWidget: DropdownButton<String>(
-                      value: 'High',
+                      value: '30 minutes',
                       onChanged: (String? value) {
-                        // Handle priority dropdown change
+                        // Handle default duration dropdown change
                       },
-                      items: <String>['High', 'Medium', 'Low']
+                      items: <String>[
+                        '15 minutes',
+                        '30 minutes',
+                        '1 hour',
+                        '2 hours'
+                      ]
                           .map<DropdownMenuItem<String>>(
                             (String value) => DropdownMenuItem<String>(
                               value: value,
@@ -131,111 +89,157 @@ class SettingsScreen extends StatelessWidget {
                     context: context,
                   ),
                   buildSettingsItem(
-                    icon: Icons.category,
-                    title: "Default Category",
-                    data: "Personal",
-                    last: true,
-                    switchWidget: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        // Handle category edit button press
-                      },
-                    ),
-                    context: context,
-                  ),
+                      icon: Icons.sync,
+                      title: "Sync Frequency",
+                      data: "Every hour",
+                      switchWidget: DropdownButton<String>(
+                        value: 'Every hour',
+                        onChanged: (String? value) {
+                          // Handle sync frequency dropdown change
+                        },
+                        items: <String>['Every hour', 'Every day', 'Every week']
+                            .map<DropdownMenuItem<String>>(
+                              (String value) => DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      context: context,
+                      last: true),
                 ],
-              ),
-            ),
-            buildSettingCard(
+              )),
+              buildSettingCard(
                 child: Column(
-              children: [
-                buildSettingsItem(
-                  icon: Icons.repeat,
-                  title: "Recurring Tasks",
-                  data: "Enabled",
-                  switchWidget: Switch(
-                    value: true,
-                    onChanged: (bool value) {
-                      // Handle recurring tasks switch change
-                    },
-                  ),
-                  context: context,
+                  children: [
+                    buildSettingsItem(
+                      icon: Icons.priority_high,
+                      title: "Default Priority",
+                      data: "High",
+                      switchWidget: DropdownButton<String>(
+                        value: 'High',
+                        onChanged: (String? value) {
+                          // Handle priority dropdown change
+                        },
+                        items: <String>['High', 'Medium', 'Low']
+                            .map<DropdownMenuItem<String>>(
+                              (String value) => DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      context: context,
+                    ),
+                    buildSettingsItem(
+                      icon: Icons.category,
+                      title: "Default Category",
+                      data: "Personal",
+                      last: true,
+                      switchWidget: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          // Handle category edit button press
+                        },
+                      ),
+                      context: context,
+                    ),
+                  ],
                 ),
-                buildSettingsItem(
-                  icon: Icons.sort,
-                  last: true,
-                  title: "Sort Order",
-                  data: "By Priority",
-                  switchWidget: DropdownButton<String>(
-                    value: 'By Priority',
-                    onChanged: (String? value) {
-                      // Handle sort order dropdown change
-                    },
-                    items: <String>[
-                      'By Priority',
-                      'By Due Date',
-                      'By Creation Date'
-                    ]
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  context: context,
-                ),
-              ],
-            )),
-            buildSettingCard(
-              child: Column(
+              ),
+              buildSettingCard(
+                  child: Column(
                 children: [
                   buildSettingsItem(
-                    icon: Icons.vibration,
-                    title: "Vibrate on Reminder",
+                    icon: Icons.repeat,
+                    title: "Recurring Tasks",
                     data: "Enabled",
                     switchWidget: Switch(
                       value: true,
                       onChanged: (bool value) {
-                        // Handle vibrate on reminder switch change
+                        // Handle recurring tasks switch change
                       },
                     ),
                     context: context,
                   ),
                   buildSettingsItem(
-                    icon: Icons.alarm,
-                    title: "Reminders",
-                    data: "Enabled",
-                    switchWidget: Switch(
-                      value: true,
-                      onChanged: (bool value) {
-                        // Handle reminders switch change
-                      },
-                    ),
-                    context: context,
-                  ),
-                  buildSettingsItem(
-                    icon: Icons.notifications,
-                    title: "Notifications",
-                    data: "Enabled",
+                    icon: Icons.sort,
                     last: true,
-                    switchWidget: Switch(
-                      value: true,
-                      onChanged: (bool value) {
-                        // Handle notifications switch change
+                    title: "Sort Order",
+                    data: "By Priority",
+                    switchWidget: DropdownButton<String>(
+                      value: 'By Priority',
+                      onChanged: (String? value) {
+                        // Handle sort order dropdown change
                       },
+                      items: <String>[
+                        'By Priority',
+                        'By Due Date',
+                        'By Creation Date'
+                      ]
+                          .map<DropdownMenuItem<String>>(
+                            (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            ),
+                          )
+                          .toList(),
                     ),
                     context: context,
                   ),
                 ],
-              ),
-            ),
-            buildSettingCard(
+              )),
+              buildSettingCard(
                 child: Column(
-              children: [],
-            )),
-          ],
+                  children: [
+                    buildSettingsItem(
+                      icon: Icons.vibration,
+                      title: "Vibrate on Reminder",
+                      data: "Enabled",
+                      switchWidget: Switch(
+                        value: true,
+                        onChanged: (bool value) {
+                          // Handle vibrate on reminder switch change
+                        },
+                      ),
+                      context: context,
+                    ),
+                    buildSettingsItem(
+                      icon: Icons.alarm,
+                      title: "Reminders",
+                      data: "Enabled",
+                      switchWidget: Switch(
+                        value: true,
+                        onChanged: (bool value) {
+                          // Handle reminders switch change
+                        },
+                      ),
+                      context: context,
+                    ),
+                    buildSettingsItem(
+                      icon: Icons.notifications,
+                      title: "Notifications",
+                      data: "Enabled",
+                      last: true,
+                      switchWidget: Switch(
+                        value: true,
+                        onChanged: (bool value) {
+                          // Handle notifications switch change
+                        },
+                      ),
+                      context: context,
+                    ),
+                  ],
+                ),
+              ),
+              buildSettingCard(
+                  child: Column(
+                children: [],
+              )),
+            ],
+          ),
         ),
       ),
     );

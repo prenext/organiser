@@ -20,6 +20,7 @@ void main() async {
   FirebaseFirestore.instance.settings = Settings(
     persistenceEnabled: true,
   );
+  
 
   runApp(
     MultiProvider(
@@ -58,6 +59,10 @@ class _OrganiserAppState extends State<OrganiserApp> {
           themeProvider.themeData.brightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
+      statusBarBrightness: themeProvider.themeData.brightness == Brightness.dark
+          ? Brightness.light
+          : Brightness.dark,
+          systemStatusBarContrastEnforced: false,
     ));
     return MaterialApp(
       theme: themeProvider.themeData,

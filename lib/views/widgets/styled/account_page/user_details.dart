@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UserDetailsWidget extends StatelessWidget {
   final String email;
-  final String dob;
+  final DateTime dob;
   final String username;
   final String gender;
 
@@ -15,13 +16,15 @@ class UserDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedJoinDate = DateFormat('dd MMM yyyy').format(dob);
+
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.02),
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-          width: 2.0,
+          width: 0.5,
         ),
       ),
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
@@ -37,7 +40,7 @@ class UserDetailsWidget extends StatelessWidget {
           ListTileItem(
             icon: Icons.calendar_today,
             title: 'Date of Birth',
-            subtitle: dob,
+            subtitle: formattedJoinDate,
           ),
           ListTileItem(
             icon: Icons.person,

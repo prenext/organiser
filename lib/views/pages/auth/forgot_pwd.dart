@@ -33,10 +33,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           },
           (user) {
             if (user != null) {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AddAccountInfo(user: user)),
-              // );
+             Navigator.pop(context);
             }
           },
         );
