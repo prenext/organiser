@@ -39,94 +39,95 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      elevation: 10,
+      elevation: 0,
+      backgroundColor:
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
+      clipBehavior: Clip.hardEdge,
+      shape: Border.all(
+          width: 0.5, color: Theme.of(context).primaryColor.withOpacity(0.5)),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Consumer<UserProvider>(
-              builder: (context, userProvider, _) {
-                final user = userProvider.user;
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 4.0, // Adjust the width as needed
-                          ),
-                        ),
-                        child: CircleAvatar(
-                          maxRadius: 10.0,
-                          backgroundImage:
-                              user != null && user.profilePhotoUrl != null
-                                  ? NetworkImage(user.profilePhotoUrl ?? '')
-                                  : null,
-                          child: user != null && user.profilePhotoUrl == null
-                              ? Icon(Icons.person)
-                              : null,
-                        ),
-                      ),
-                      const SizedBox(height: 36.0),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Display the user's name
-                                Text(
-                                  user != null ? user.username : 'Guest',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AccountPage()))
+              },
+              child: Consumer<UserProvider>(
+                builder: (context, userProvider, _) {
+                  final user = userProvider.user;
+                  return SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      width: 1.0, // Adjust the width as needed
+                                    ),
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    maxRadius: 10.0,
+                                    backgroundImage: user != null &&
+                                            user.profilePhotoUrl != null
+                                        ? NetworkImage(
+                                            user.profilePhotoUrl ?? '')
+                                        : null,
+                                    child: user != null &&
+                                            user.profilePhotoUrl == null
+                                        ? Icon(Icons.person)
+                                        : null,
                                   ),
                                 ),
-                                // Optionally, display additional user information like email
-                                Text(
-                                  user != null ? user.email : '',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Theme.of(context).hintColor,
-                                  ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Display the user's name
+                                    Text(
+                                      user != null ? user.username : 'Guest',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    // Optionally, display additional user information like email
+                                    Text(
+                                      user != null ? user.email : '',
+                                      style: TextStyle(
+                                        fontSize: 13.0,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            Column(
-                              children: [
-                                // Display user-specific data like goals count
-                                Text(
-                                  'Goals',
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '0',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
+                    ),
+                  );
+                },
+              ),
             ),
             Divider(
               height: 1,
@@ -137,22 +138,9 @@ class CustomDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   _buildListTileWithDecoration(
-                      title: 'Account',
-                      icon: Icons.account_box,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AccountPage()),
-                        );
-                      },
-                      context: context),
-                  _buildListTileWithDecoration(
                       title: 'Settings',
                       icon: Icons.settings,
                       onTap: () {
-                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -164,7 +152,6 @@ class CustomDrawer extends StatelessWidget {
                       title: 'Theme Color',
                       icon: Icons.color_lens_outlined,
                       onTap: () {
-                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -204,7 +191,6 @@ class CustomDrawer extends StatelessWidget {
                       title: 'About',
                       icon: Icons.info_outline_rounded,
                       onTap: () {
-                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -216,7 +202,6 @@ class CustomDrawer extends StatelessWidget {
                       title: 'Tips',
                       icon: Icons.tips_and_updates,
                       onTap: () {
-                        Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

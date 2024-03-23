@@ -5,11 +5,11 @@ class UserActionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.02),
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-          width: 2.0,
+          width: 0.5,
         ),
       ),
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),

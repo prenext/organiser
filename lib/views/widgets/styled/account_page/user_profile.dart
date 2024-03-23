@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UserProfileWidget extends StatelessWidget {
-  final String fname;
-  final String lname;
   final String image;
   final DateTime joinDate;
 
   const UserProfileWidget({
-    required this.fname,
-    required this.lname,
     required this.image,
     required this.joinDate,
   });
@@ -53,15 +49,7 @@ class UserProfileWidget extends StatelessWidget {
                 : null,
           ),
         ),
-        const SizedBox(height: 26.0),
-        Text(
-          '$fname $lname',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          )
-        ),
-        SizedBox(height: 8),
+        const SizedBox(height: 16.0),
         Text(
           'Joined on ${formattedJoinDate}',
           style: TextStyle(

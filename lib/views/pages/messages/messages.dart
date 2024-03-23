@@ -1,63 +1,72 @@
 // notification_screen.dart
 
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
         title: Text("Notifications"),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          NotificationCard(
-            icon: Icons.event,
-            title: "Task Reminder",
-            description:
-                "You have a task due today. Don't forget to complete it.",
-            image: NetworkImage("https://picsum.photos/200"),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Dismissible(
+                key: Key("1"),
+                child: NotificationCard(
+                  icon: Icons.event,
+                  title: "Task Reminder",
+                  description:
+                      "You have a task due today. Don't forget to complete it.",
+                  image: NetworkImage("https://picsum.photos/200"),
+                ),
+              ),
+              NotificationCard(
+                title: "New Update Available",
+                description:
+                    "Update your app to access the latest features and improvements.",
+                icon: Icons.check_circle_outlined,
+              ),
+              NotificationCard(
+                icon: Icons.event,
+                title: "Task Reminder",
+                description:
+                    "You have a task due today. Don't forget to complete it.",
+                image: NetworkImage("https://picsum.photos/200"),
+              ),
+              NotificationCard(
+                title: "New Update Available",
+                description:
+                    "Update your app to access the latest features and improvements.",
+                icon: Icons.check_circle_outlined,
+              ),
+               NotificationCard(
+                title: "New Update Available",
+                description:
+                    "Update your app to access the latest features and improvements.",
+                icon: Icons.check_circle_outlined,
+              ),
+              NotificationCard(
+                icon: Icons.event,
+                title: "Task Reminder",
+                description:
+                    "You have a task due today. Don't forget to complete it.",
+                image: NetworkImage("https://picsum.photos/200"),
+              ),
+              NotificationCard(
+                title: "New Update Available",
+                description:
+                    "Update your app to access the latest features and improvements.",
+                icon: Icons.check_circle_outlined,
+              ),
+            ],
           ),
-          NotificationCard(
-            title: "New Update Available",
-            description:
-                "Update your app to access the latest features and improvements.",
-            icon: Icons.check_circle_outlined,
-          ),
-          NotificationCard(
-            icon: Icons.event,
-            title: "Task Reminder",
-            description:
-                "You have a task due today. Don't forget to complete it.",
-            image: NetworkImage("https://picsum.photos/200"),
-          ),
-          NotificationCard(
-            title: "New Update Available",
-            description:
-                "Update your app to access the latest features and improvements.",
-            icon: Icons.check_circle_outlined,
-          ),
-           NotificationCard(
-            title: "New Update Available",
-            description:
-                "Update your app to access the latest features and improvements.",
-            icon: Icons.check_circle_outlined,
-          ),
-          NotificationCard(
-            icon: Icons.event,
-            title: "Task Reminder",
-            description:
-                "You have a task due today. Don't forget to complete it.",
-            image: NetworkImage("https://picsum.photos/200"),
-          ),
-          NotificationCard(
-            title: "New Update Available",
-            description:
-                "Update your app to access the latest features and improvements.",
-            icon: Icons.check_circle_outlined,
-          ),
-        ],
+        ),
       ),
     );
   }

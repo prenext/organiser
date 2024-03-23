@@ -35,13 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 Image.asset(
                   'assets/icon/logo.png',
-                  width: 100,
-                  height: 100,
+                  width: 150,
+                  height: 150,
                 ),
                 Text(
                   'Organizer',
                   style: TextStyle(
                     fontSize: 40,
+                    
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),

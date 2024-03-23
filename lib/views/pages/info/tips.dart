@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class TipsPage extends StatefulWidget {
@@ -15,24 +16,26 @@ class _TipsPageState extends State<TipsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppBar(
         title: Text("Organizer Tips"),
       ),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(
-            8,
-            (index) => _buildTipCard(
-              title: "Tip ${index + 1}",
-              description: _getTipDescription(index),
-              likes: likesCount[index],
-              dislikes: dislikesCount[index],
-              isLiked: likedStatus[index],
-              isDisliked: dislikedStatus[index],
-              onLike: () => _handleLike(index),
-              onDislike: () => _handleDislike(index),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+              8,
+              (index) => _buildTipCard(
+                title: "Tip ${index + 1}",
+                description: _getTipDescription(index),
+                likes: likesCount[index],
+                dislikes: dislikesCount[index],
+                isLiked: likedStatus[index],
+                isDisliked: dislikedStatus[index],
+                onLike: () => _handleLike(index),
+                onDislike: () => _handleDislike(index),
+              ),
             ),
           ),
         ),
@@ -76,13 +79,17 @@ class _TipsPageState extends State<TipsPage> {
     required VoidCallback onLike,
     required VoidCallback onDislike,
   }) {
-
-    return Card(
-      elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+    return Container(
+        decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.02),
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+          width: 0.5,
+        ),
       ),
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+      padding: EdgeInsets.all(8.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -131,11 +138,10 @@ class _TipsPageState extends State<TipsPage> {
     );
   }
 
-  
   void _handleAction(VoidCallback actionCallback) {
-      setState(() {
-        actionCallback();
-      });
+    setState(() {
+      actionCallback();
+    });
   }
 
   void _handleLike(int index) {
@@ -179,5 +185,4 @@ class _TipsPageState extends State<TipsPage> {
       });
     }
   }
-
 }

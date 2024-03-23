@@ -12,14 +12,14 @@ class CustomBottomAppBar extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 5, left: 10, right: 10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-          width: 1,
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+          width: 0.5,
         ),
         borderRadius: BorderRadius.circular(30),
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
-            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
+            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
+            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.75),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -28,7 +28,7 @@ class CustomBottomAppBar extends StatelessWidget {
       child: BottomAppBar(
         
         shape: CircularNotchedRectangle(),
-        height: 50,
+        height: 60,
         padding: EdgeInsets.zero,
         color: Colors.transparent,
         elevation: 0,
@@ -87,7 +87,7 @@ class CustomBottomAppBarItem extends StatelessWidget {
           color: isSelected
               ? Theme.of(context).colorScheme.primary
               : Colors.transparent,
-          width: 2,
+          width: 1,
         ),
       ),
       child: InkWell(
@@ -107,7 +107,7 @@ class CustomBottomAppBarItem extends StatelessWidget {
               children: [
                 Icon(
                   iconData,
-                  size: 25,
+                  size: 32,
                   color:
                       isSelected ? Theme.of(context).colorScheme.primary : null,
                 ),

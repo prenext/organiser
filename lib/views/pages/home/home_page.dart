@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
-      appBar:_currentIndex == 0 ? CustomAppBar(): null,
+      appBar:_currentIndex == 0 ? MainAppBar(): null,
       extendBody: true,
       body: _screens[_currentIndex],
       drawer: CustomDrawer(),

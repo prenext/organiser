@@ -1,3 +1,4 @@
+import 'package:Organiser/views/widgets/common/tabs_appbar.dart';
 import 'package:flutter/material.dart';
 
 class Socials extends StatefulWidget {
@@ -13,29 +14,17 @@ class _SocialsState extends State<Socials> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 0,
-          bottom: TabBar(
-            labelColor: Theme.of(context).colorScheme.primary,
-            indicatorColor: Theme.of(context).colorScheme.primary,
-            unselectedLabelColor: Theme.of(context).hintColor,
-            tabs: [
-              Tab(
-                text: 'Groups',
-                // icon: Icon(
-                //   Icons.people,
-                //   size: 15,
-                // ),
-              ),
-              Tab(
-                text: 'Communities',
-                // icon: Icon(
-                //   Icons.group,
-                //   size: 15,
-                // ),
-              ),
-            ],
-          ),
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: TabsAppBar(
+          tabs: [
+            Tab(
+              text: 'Groups',
+            ),
+            Tab(
+              text: 'Communities',
+            ),
+          ],
         ),
         body: TabBarView(
           children: [
@@ -51,34 +40,30 @@ class _SocialsState extends State<Socials> {
 class Screen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: 20, // Replace with your actual list length
-          itemBuilder: (context, index) {
-            return ChatListItem(
-              groupName: 'Group $index',
-              iconLabels: ['Events', 'Tasks', 'Goals', 'Schedules'],
-              iconNumbers: [3, 5, 7, 2], // Replace with your actual numbers
-            );
-          }),
-    );
+    return ListView.builder(
+        itemCount: 20, // Replace with your actual list length
+        itemBuilder: (context, index) {
+          return ChatListItem(
+            groupName: 'Group $index',
+            iconLabels: ['Events', 'Tasks', 'Goals', 'Schedules'],
+            iconNumbers: [3, 5, 7, 2], // Replace with your actual numbers
+          );
+        });
   }
 }
 
 class Screen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: 15, // Replace with your actual list length
-        itemBuilder: (context, index) {
-          return CommunityListItem(
-            communityName: 'Community $index',
-            eventsCount: 8, // Replace with your actual numbers
-            followersCount: 120, // Replace with your actual numbers
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: 15, // Replace with your actual list length
+      itemBuilder: (context, index) {
+        return CommunityListItem(
+          communityName: 'Community $index',
+          eventsCount: 8, // Replace with your actual numbers
+          followersCount: 120, // Replace with your actual numbers
+        );
+      },
     );
   }
 }

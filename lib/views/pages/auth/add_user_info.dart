@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:Organiser/controllers/file_controller.dart';
 import 'package:Organiser/models/user.dart';
-import 'package:Organiser/views/pages/home/home_page.dart';
 import 'package:Organiser/views/pages/landing_page.dart';
 import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/common/auth/auth_buttons.dart';

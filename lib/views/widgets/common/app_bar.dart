@@ -6,15 +6,15 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
+  State<MainAppBar> createState() => _MainAppBarState();
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _MainAppBarState extends State<MainAppBar> {
   late Timer _timer;
 
   late DateFormat _timeFormat;
@@ -48,13 +48,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
     final formattedTime = _timeFormat.format(currentTime);
 
     // Determine greeting based on current time
+    // ignore: unused_local_variable
     String greeting;
     if (currentTime.hour < 12) {
-      greeting = 'Good morning';
+      greeting = 'Morning';
     } else if (currentTime.hour < 18) {
-      greeting = 'Good afternoon';
+      greeting = 'Afternoon';
     } else {
-      greeting = 'Good evening';
+      greeting = 'Evening';
     }
 
     return AppBar(
@@ -68,17 +69,23 @@ class _CustomAppBarState extends State<CustomAppBar> {
           height: 0.3,
         ),
       ),
-      centerTitle: true,
-      leadingWidth: 150,
-      title: Column(
+      // centerTitle: true,
+      // leadingWidth: 150,
+      title: Row(
         children: [
-          Text(//date today,
-              DateFormat('EEEE, d MMMM yyyy').format(currentTime),
+          Text(
+              //date today,
+              DateFormat('E, d MMM').format(currentTime),
               style: TextStyle(
-                  fontSize: 12.0, color: Theme.of(context).colorScheme.primary)),
+                  fontSize: 16.0,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w400)),
+          Text("  "),
           Text(formattedTime,
               style: TextStyle(
-                  fontSize: 14.0, color: Theme.of(context).colorScheme.primary)),
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary)),
         ],
       ),
       leading: GestureDetector(
@@ -92,26 +99,25 @@ class _CustomAppBarState extends State<CustomAppBar> {
           children: [
             IconButton(
                 padding: EdgeInsets.all(0),
-                iconSize: 15.0,
+                iconSize: 35.0,
                 onPressed: () => {
                       //open drawer
                       Scaffold.of(context).openDrawer()
                     },
-                icon: Icon(Icons.arrow_forward_ios, size: 15.0)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('$greeting,', style: TextStyle(fontSize: 10.0)),
-                Text(
-                  '${user != null ? user.fname : "Guest"}',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
+                icon: Icon(Icons.menu)),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text('$greeting,', style: TextStyle(fontSize: 13.0)),
+            //     Text(
+            //       '${user != null ? user.fname : "Guest"}',
+            //       style: TextStyle(
+            //         color: Colors.grey,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -145,7 +151,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
               ),
             ),
             child: CircleAvatar(
-              radius: 11.0,
+              backgroundColor: Colors.transparent,
+              radius: 15.0,
               backgroundImage: user != null && user.profilePhotoUrl != null
                   ? NetworkImage(user.profilePhotoUrl ?? '')
                   : null,
@@ -157,6 +164,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         ),
         // PopupMenuButton to switch between time formats
         PopupMenuButton<String>(
+          iconSize: 35,
           onSelected: (value) {
             setState(() {
               _timeFormat = DateFormat(value);
@@ -206,7 +214,7 @@ class NotificationBadgeIconButton extends StatelessWidget {
     return IconButton(
       icon: Stack(
         children: [
-          Icon(icon),
+          Icon(icon, size: 30),
           if (badgeCount > 0) // Show badge only if badgeCount is greater than 0
             Positioned(
               right: 0,

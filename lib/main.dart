@@ -20,6 +20,7 @@ void main() async {
   FirebaseFirestore.instance.settings = Settings(
     persistenceEnabled: true,
   );
+  
 
   runApp(
     MultiProvider(

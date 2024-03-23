@@ -1,6 +1,7 @@
+import 'package:Organiser/views/widgets/common/tabs_appbar.dart';
 import 'package:flutter/material.dart';
 
-class Food extends StatefulWidget {
+class Food extends StatefulWidget  {
   const Food({Key? key}) : super(key: key);
 
   @override
@@ -13,18 +14,15 @@ class _FoodState extends State<Food> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Food'),
-          bottom: TabBar(
-            labelColor: Theme.of(context).colorScheme.primary,
-            indicatorColor: Theme.of(context).colorScheme.primary,
-            unselectedLabelColor: Theme.of(context).hintColor,
-            tabs: [
-              Tab(text: 'Meals'),
-              Tab(text: 'Marketplace'),
-            ],
-          ),
-        ),
+        backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
+        appBar: TabsAppBar(tabs: [
+          Tab(child: Text("meals"),),
+          Tab(
+            child: Text("market Place"),
+          )
+
+        ]),
         body: TabBarView(
           children: [
             _buildMealsPage(),
@@ -37,24 +35,26 @@ class _FoodState extends State<Food> {
 
   Widget _buildMealsPage() {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Card(
-            child: ListTile(
-              title: Text('Meal 1'),
-              subtitle: Text('Description for Meal 1'),
-              // Customize the card as needed for your meal representation
+      child: SafeArea(
+        child: Column(
+          children: [
+            Card(
+              child: ListTile(
+                title: Text('Meal 1'),
+                subtitle: Text('Description for Meal 1'),
+                // Customize the card as needed for your meal representation
+              ),
             ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Meal 2'),
-              subtitle: Text('Description for Meal 2'),
-              // Customize the card as needed for your meal representation
+            Card(
+              child: ListTile(
+                title: Text('Meal 2'),
+                subtitle: Text('Description for Meal 2'),
+                // Customize the card as needed for your meal representation
+              ),
             ),
-          ),
-          // Add more cards for other meals
-        ],
+            // Add more cards for other meals
+          ],
+        ),
       ),
     );
   }
