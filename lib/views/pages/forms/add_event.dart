@@ -15,10 +15,6 @@ import 'package:Organiser/views/widgets/styled/input_adder/ticket.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/optionsAppBar.dart';
 
 class CreateEventPage extends StatefulWidget {
-  final EventModel eventModel;
-
-  CreateEventPage(this.eventModel);
-
   @override
   _CreateEventPageState createState() => _CreateEventPageState();
 }
@@ -92,7 +88,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     costPerTicketController: _ticketCostController,
                   ),
                   SizedBox(height: 16.0),
-                  TimezoneAdder(timezoneConroller: _timezoneConroller,)
+                  TimezoneAdder(
+                    timezoneConroller: _timezoneConroller,
+                  )
                 ],
               ),
             ),
@@ -115,23 +113,20 @@ class _CreateEventPageState extends State<CreateEventPage> {
 
   void createEvent() {
     Event newEvent = Event(
-      title: _titleController.text,
-      priority: _priorityController.text,
-      notes: _notesController.text,
-      category: _cartegoryController.text,
-      tags: _tagsController,
-      photoURL: _photoUrlController,
-      dateAndTime: [_dateAndTimeController],
-      isRepeating: _isRepetingController,
-      repetition: [_repetitionController],
-      location: [_locationController],
-      ticketCost: _ticketCostController.text as double,
-      numberOfTickets: _ticketsController.text as int,
-      timezone: _timezoneConroller.text
-    );
+        title: _titleController.text,
+        priority: _priorityController.text,
+        notes: _notesController.text,
+        category: _cartegoryController.text,
+        tags: _tagsController,
+        photoURL: _photoUrlController,
+        dateAndTime: [_dateAndTimeController],
+        isRepeating: _isRepetingController,
+        repetition: [_repetitionController],
+        location: [_locationController],
+        ticketCost: _ticketCostController.text as double,
+        numberOfTickets: _ticketsController.text as int,
+        timezone: _timezoneConroller.text);
     Navigator.pop(context);
-    print(" Clicked a function");
-    widget.eventModel.addEvent(newEvent);
   }
 
   void createDraft() {

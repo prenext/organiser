@@ -9,13 +9,13 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 5, left: 10, right: 10),
+      margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
-          width: 0.5,
-        ),
-        borderRadius: BorderRadius.circular(30),
+        // border: Border.all(
+        //   // color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+        //   width: 0.5,
+        // ),
+        borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
           colors: [
             Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
@@ -26,14 +26,13 @@ class CustomBottomAppBar extends StatelessWidget {
         ),
       ),
       child: BottomAppBar(
-        
         shape: CircularNotchedRectangle(),
         height: 60,
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
         color: Colors.transparent,
         elevation: 0,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomBottomAppBarItem(
               iconData: Icons.dashboard_outlined,
@@ -87,7 +86,7 @@ class CustomBottomAppBarItem extends StatelessWidget {
           color: isSelected
               ? Theme.of(context).colorScheme.primary
               : Colors.transparent,
-          width: 1,
+          width: 2,
         ),
       ),
       child: InkWell(
@@ -99,7 +98,7 @@ class CustomBottomAppBarItem extends StatelessWidget {
               ? Theme.of(context).scaffoldBackgroundColor
               : Colors.transparent,
           elevation: 0,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(50),
           child: Padding(
             padding: EdgeInsets.all(3), // Adjust padding as needed
             child: Column(

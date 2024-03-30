@@ -3,7 +3,6 @@ import 'package:Organiser/views/pages/auth/account.dart';
 import 'package:Organiser/views/pages/info/about.dart';
 import 'package:Organiser/views/pages/info/tips.dart';
 import 'package:Organiser/views/pages/settings/settings.dart';
-import 'package:Organiser/views/pages/theme/color.dart';
 import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/dialogs/logout.dart';
 import 'package:Organiser/views/widgets/dialogs/rate_app.dart';
@@ -148,19 +147,19 @@ class CustomDrawer extends StatelessWidget {
                             ));
                       },
                       context: context),
-                  _buildListTileWithDecoration(
-                      title: 'Theme Color',
-                      icon: Icons.color_lens_outlined,
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ThemeSelectionScreen(
-                                onColorSelected: (Color) {},
-                              ),
-                            ));
-                      },
-                      context: context),
+                  // _buildListTileWithDecoration(
+                  //     title: 'Theme Color',
+                  //     icon: Icons.color_lens_outlined,
+                  //     onTap: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //             builder: (context) => ThemeSelectionScreen(
+                  //               onColorSelected: (Color) {},
+                  //             ),
+                  //           ));
+                  //     },
+                  //     context: context),
                   _buildListTileWithDecoration(
                       title: Provider.of<ThemeProvider>(context).themeData ==
                               lightMode
@@ -224,7 +223,7 @@ class CustomDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '© 2023 Alidante',
+                    '© 2024 Alidantech co',
                     style: TextStyle(
                       fontSize: 14.0,
                       color: Theme.of(context).hintColor,

@@ -1,6 +1,7 @@
 import 'package:Organiser/config/themes/light.dart';
 import 'package:Organiser/controllers/common/event_controller.dart';
 import 'package:Organiser/views/pages/forms/add_event.dart';
+import 'package:Organiser/views/pages/forms/add_task.dart';
 import 'package:Organiser/views/services/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,11 @@ class _CustomFABState extends State<CustomFAB>
           children: [
             if (isMenuOpen)
               buildMenuItem(Icons.check_circle, () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CreateTaskPage()),
+                );
                 setState(() {
                   isMenuOpen = !isMenuOpen;
                 });
@@ -54,12 +60,9 @@ class _CustomFABState extends State<CustomFAB>
               }, themeProvider),
             if (isMenuOpen)
               buildMenuItem(Icons.event, () {
-                EventModel eventModel =
-                    new EventModel(); // Initialize your EventModel instance
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => CreateEventPage(eventModel)),
+                  MaterialPageRoute(builder: (context) => CreateEventPage()),
                 );
 
                 setState(() {
@@ -127,19 +130,16 @@ class _CustomFABState extends State<CustomFAB>
               width: 0.6)),
       child: FloatingActionButton(
         backgroundColor: themeProvider.themeData == lightMode
-            ? Theme.of(context).secondaryHeaderColor.withOpacity(0.8)
-            : Theme.of(context).secondaryHeaderColor.withOpacity(0.9)
-             ,
-        elevation: 0.0,
+            ? Theme.of(context).primaryColor.withOpacity(0.8)
+            : Theme.of(context).primaryColor.withOpacity(0.5),
+        elevation: 4.0,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         // mini: true,
         onPressed: onPressed,
         child: Icon(
           icon,
-          color: themeProvider.themeData == lightMode
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).primaryColor,
+          color: Colors.white,
           size: 35.0,
         ),
       ),

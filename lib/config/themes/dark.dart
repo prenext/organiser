@@ -1,19 +1,20 @@
+import 'package:Organiser/config/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData darkMode = ThemeData(
-  primaryColor: Colors.green,
+  primaryColor: AppColors.primaryDark,
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
-    background: Colors.black,
-    primary: Colors.green.shade500,
-    secondary: Colors.green.shade800,
+    background: AppColors.backgroundDark,
+    primary: AppColors.primaryDark500,
+    secondary: AppColors.primaryDark800,
   ),
-  scaffoldBackgroundColor: Colors.grey.shade900,
-  cardTheme: CardTheme(color: Colors.black12),
-  shadowColor: Colors.black,
-  drawerTheme: DrawerThemeData(backgroundColor: Colors.black87),
+  scaffoldBackgroundColor: AppColors.scaffoldBackgroundDark,
+  cardTheme: CardTheme(color: AppColors.cardDark),
+  shadowColor: AppColors.shadowDark,
+  drawerTheme: DrawerThemeData(backgroundColor: AppColors.drawerBackgroundDark),
   dialogTheme: DialogTheme(
-    backgroundColor: Colors.grey.shade500.withOpacity(0.9),
+    backgroundColor: AppColors.dialogBackgroundDark.withOpacity(0.9),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
   ),
 );
