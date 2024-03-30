@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:Organiser/controllers/user_controller.dart';
-import 'package:Organiser/models/user.dart';
+import 'package:Organiser/models/user_model.dart';
 
 class UserProvider with ChangeNotifier {
   final UserController _userController = UserController();

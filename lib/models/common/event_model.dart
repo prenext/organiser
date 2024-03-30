@@ -1,8 +1,8 @@
-import 'package:Organiser/models/common/meal.dart';
+import 'package:Organiser/models/enums/event_enums.dart';
 import 'package:flutter/material.dart';
 
 class Event {
-  String id = "";
+  String id;
   String priority;
   String title;
   String notes;
@@ -18,6 +18,7 @@ class Event {
   String timezone;
 
   Event({
+    required this.id,
     required this.title,
     required this.notes,
     required this.priority,
@@ -30,12 +31,12 @@ class Event {
     required this.location,
     required this.ticketCost,
     required this.numberOfTickets,
-     required this.timezone,
+    required this.timezone,
   });
 
-  // Factory constructor to create an Event instance from a Firebase snapshot
   factory Event.fromMap(Map<String, dynamic> data, String documentId) {
     return Event(
+      id: documentId,
       title: data['title'],
       priority: data['priority'],
       notes: data['description'],
@@ -47,11 +48,11 @@ class Event {
       repetition: List<Map<RepeatFrequency, List>>.from(data['repetition']),
       location: List<Map<String, String>>.from(data['location']),
       ticketCost: data['ticketCost'],
-      numberOfTickets: data['numberOfTickets'], timezone: data['timezone'],
+      numberOfTickets: data['numberOfTickets'],
+      timezone: data['timezone'],
     );
   }
 
-  // Method to convert Event instance to a map for Firebase
   Map<String, dynamic> toMap() {
     return {
       'title': title,
@@ -70,12 +71,3 @@ class Event {
     };
   }
 }
-
-// ignore: unused_element
-TimeOfDay _convertMapToTimeOfDay(Map<String, dynamic> timeMap) {
-  // Assuming 'hour' and 'minute' are the keys in your Firestore data
-  int hour = timeMap['hour'];
-  int minute = timeMap['minute'];
-  return TimeOfDay(hour: hour, minute: minute);
-}
-

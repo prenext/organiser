@@ -1,4 +1,4 @@
-import 'package:Organiser/models/user.dart';
+import 'package:Organiser/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

@@ -1,4 +1,4 @@
-import 'package:Organiser/models/user.dart';
+import 'package:Organiser/models/user_model.dart';
 import 'package:Organiser/views/services/user_provider.dart';
 import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:Organiser/views/widgets/styled/account_page/user_actions.dart';

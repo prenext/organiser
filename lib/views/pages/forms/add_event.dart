@@ -1,9 +1,8 @@
-import 'package:Organiser/models/common/event.dart';
-import 'package:Organiser/models/common/meal.dart';
+import 'package:Organiser/models/common/event_model.dart';
+import 'package:Organiser/models/enums/event_enums.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/repeat.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/timezone.dart';
 import 'package:flutter/material.dart';
-import 'package:Organiser/controllers/common/event_controller.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/title.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/note.dart';
 import 'package:Organiser/views/widgets/styled/input_adder/cartegory.dart';
@@ -20,7 +19,6 @@ class CreateEventPage extends StatefulWidget {
 }
 
 class _CreateEventPageState extends State<CreateEventPage> {
-  //create a the required controllers for event model
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _priorityController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
@@ -125,7 +123,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
         location: [_locationController],
         ticketCost: _ticketCostController.text as double,
         numberOfTickets: _ticketsController.text as int,
-        timezone: _timezoneConroller.text);
+        timezone: _timezoneConroller.text, id: '');
     Navigator.pop(context);
   }
 

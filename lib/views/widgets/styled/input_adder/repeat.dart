@@ -1,4 +1,4 @@
-import 'package:Organiser/models/common/meal.dart';
+import 'package:Organiser/models/enums/event_enums.dart';
 import 'package:flutter/material.dart';
 
 
