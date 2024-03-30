@@ -20,7 +20,7 @@ class UserProvider with ChangeNotifier {
   Future<void> createUser(UserModel user) async {
     await _userController.createUser(user);
     _user = user;
-    _userStreamController.add(_user); // Emit user data update
+    _userStreamController.add(_user);
     notifyListeners();
   }
 
@@ -28,25 +28,24 @@ class UserProvider with ChangeNotifier {
   Future<void> getUser({required String userId}) async {
     final user = await _userController.getUser(userId);
     _user = user;
-    _userStreamController.add(_user); // Emit user data update
+    _userStreamController.add(_user);
     notifyListeners();
   }
 
   Future<void> updateUser(String userId, Map<String, dynamic> updates) async {
     await _userController.updateUser(userId, updates);
     _user = await _userController.getUser(userId);
-    _userStreamController.add(_user); // Emit user data update
+    _userStreamController.add(_user); 
     notifyListeners();
   }
 
   Future<void> deleteUser(String userId) async {
     await _userController.deleteUser(userId);
     _user = null;
-    _userStreamController.add(_user); // Emit user data update
+    _userStreamController.add(_user);
     notifyListeners();
   }
 
-  // Dispose the stream controller when no longer needed
   @override
   void dispose() {
     _userStreamController.close();

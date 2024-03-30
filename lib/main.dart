@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import 'views/services/user_provider.dart';
 
 void main() async {
@@ -20,7 +19,6 @@ void main() async {
   FirebaseFirestore.instance.settings = Settings(
     persistenceEnabled: true,
   );
-  
 
   runApp(
     MultiProvider(
@@ -62,7 +60,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
       statusBarBrightness: themeProvider.themeData.brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
-          systemStatusBarContrastEnforced: false,
+      systemStatusBarContrastEnforced: false,
     ));
     return MaterialApp(
       theme: themeProvider.themeData,

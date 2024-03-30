@@ -1,7 +1,7 @@
 import 'package:Organiser/models/common/meal.dart';
 import 'package:flutter/material.dart';
 
-class Event with ChangeNotifier {
+class Event {
   String id = "";
   String priority;
   String title;
