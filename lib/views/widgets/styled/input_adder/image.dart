@@ -1,5 +1,5 @@
 import 'package:Organiser/views/widgets/input/buttons.dart';
-import 'package:Organiser/views/widgets/input/description.dart';
+import 'package:Organiser/views/widgets/input/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class ImageAdder extends StatelessWidget {
@@ -7,24 +7,12 @@ class ImageAdder extends StatelessWidget {
 
   ImageAdder({required this.imageUrlController});
 
-  // Future<void> _pickImage() async {
-  //   XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     setState(() {
-  //       imageUrlController = image as PickedFile?;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StyledButtons.primaryElevatedButton(
       onPressed: () {
         Navigator.push(
-            context,
-            DialogRoute(
-                context: context,
-                builder: (context) => DescriptionEditorPage()));
+            context, MaterialPageRoute(builder: (context) => FilePickerPage()));
       },
       text: 'Image',
       icon: Icons.edit_document,

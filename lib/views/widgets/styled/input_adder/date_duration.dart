@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class DateAndTimeAdder extends StatefulWidget {
-  final Map<DateTime, TimeOfDay> dateAndTimeController;
+  final List<Map<DateTime, Map<TimeOfDay, TimeOfDay>>> dateAndTimeController;
   DateTime? dateController;
   DateTime? endDateController;
   TimeOfDay? startTimeController;
@@ -17,9 +17,8 @@ class DateAndTimeAdder extends StatefulWidget {
   _DateAndTimeAdder createState() => _DateAndTimeAdder();
 }
 
-class _DateAndTimeAdder extends State<DateAndTimeAdder>{
-
-   Widget build(BuildContext context) {
+class _DateAndTimeAdder extends State<DateAndTimeAdder> {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         DateAdder(
@@ -27,7 +26,9 @@ class _DateAndTimeAdder extends State<DateAndTimeAdder>{
           endDateController: widget.endDateController,
           isMultiDayController: widget.isMultiDay,
         ),
-        SizedBox(height: 16.0,),
+        SizedBox(
+          height: 16.0,
+        ),
         TimeAdder(
           isMultiDay: widget.isMultiDay,
           isDuration: true,
@@ -38,5 +39,4 @@ class _DateAndTimeAdder extends State<DateAndTimeAdder>{
       ],
     );
   }
-
 }

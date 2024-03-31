@@ -45,6 +45,8 @@ dependencies:
   dartz: ^0.10.1
   firebase_storage: ^11.6.9
   fl_chart: ^0.66.2
+  file_picker: ^8.0.0+1
+  video_player: ^2.8.3
   # syncfusion_flutter_calendar: ^24.1.47
 
 dev_dependencies:

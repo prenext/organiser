@@ -1,5 +1,5 @@
 import 'package:Organiser/firebase_options.dart';
-import 'package:Organiser/views/pages/splash.dart';
+import 'package:Organiser/views/pages/splash.dart'; 
 import 'package:Organiser/views/services/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';

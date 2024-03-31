@@ -25,7 +25,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
   final TextEditingController _cartegoryController = TextEditingController();
   final List<String> _tagsController = [];
   final String _photoUrlController = '';
-  final Map<DateTime, TimeOfDay> _dateAndTimeController = {};
+  final List<Map<DateTime, Map<TimeOfDay, TimeOfDay>>> _dateAndTimeController =
+      [];
   final bool _isRepetingController = true;
   final Map<RepeatFrequency, List> _repetitionController = {};
   final Map<String, String> _locationController = {};
@@ -50,22 +51,25 @@ class _CreateEventPageState extends State<CreateEventPage> {
                       titleController: _titleController,
                       priorityController: _priorityController),
                   SizedBox(height: 16.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      NotesAdder(
-                        notesController: _notesController,
-                      ),
-                      CartegoryAdder(
-                        cartegoryController: _cartegoryController,
-                      ),
-                      TagsAdder(
-                        selectedTags: _tagsController,
-                      ),
-                      ImageAdder(
-                        imageUrlController: _photoUrlController,
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Wrap(
+                      spacing: 8.0,
+                      children: [
+                        NotesAdder(
+                          notesController: _notesController,
+                        ),
+                        CartegoryAdder(
+                          cartegoryController: _cartegoryController,
+                        ),
+                        TagsAdder(
+                          selectedTags: _tagsController,
+                        ),
+                        ImageAdder(
+                          imageUrlController: _photoUrlController,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 16.0),
                   DateAndTimeAdder(
@@ -85,7 +89,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     ticketsController: _ticketsController,
                     costPerTicketController: _ticketCostController,
                   ),
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 16.0
+                  ),
                   TimezoneAdder(
                     timezoneConroller: _timezoneConroller,
                   )
@@ -110,6 +115,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
   }
 
   void createEvent() {
+    // ignore: unused_local_variable
     Event newEvent = Event(
         title: _titleController.text,
         priority: _priorityController.text,
@@ -117,13 +123,14 @@ class _CreateEventPageState extends State<CreateEventPage> {
         category: _cartegoryController.text,
         tags: _tagsController,
         photoURL: _photoUrlController,
-        dateAndTime: [_dateAndTimeController],
+        dateAndTime: _dateAndTimeController,
         isRepeating: _isRepetingController,
         repetition: [_repetitionController],
         location: [_locationController],
         ticketCost: _ticketCostController.text as double,
         numberOfTickets: _ticketsController.text as int,
-        timezone: _timezoneConroller.text, id: '');
+        timezone: _timezoneConroller.text,
+        id: '');
     Navigator.pop(context);
   }
 

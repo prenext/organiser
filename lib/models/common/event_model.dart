@@ -9,7 +9,7 @@ class Event {
   String category;
   List<String> tags;
   String photoURL;
-  List<Map<DateTime, TimeOfDay>> dateAndTime;
+  List<Map<DateTime, Map<TimeOfDay, TimeOfDay>>> dateAndTime;
   bool isRepeating;
   List<Map<RepeatFrequency, List>> repetition;
   List<Map<String, String>> location;
@@ -43,7 +43,19 @@ class Event {
       category: data['category'],
       tags: List<String>.from(data['tags']),
       photoURL: data['photoURL'],
-      dateAndTime: List<Map<DateTime, TimeOfDay>>.from(data['dateAndTime']),
+      dateAndTime: (data['dateAndTime'] as List<dynamic>).map((entry) {
+        return (entry as Map<String, dynamic>).map((key, value) {
+          return MapEntry(
+            DateTime.parse(key),
+            (value as Map<String, dynamic>).map((startTimeKey, startTimeValue) {
+              return MapEntry(
+                TimeOfDay.fromDateTime(DateTime.parse(startTimeKey)),
+                TimeOfDay.fromDateTime(DateTime.parse(startTimeValue)),
+              );
+            }),
+          );
+        });
+      }).toList(),
       isRepeating: data['isRepeating'],
       repetition: List<Map<RepeatFrequency, List>>.from(data['repetition']),
       location: List<Map<String, String>>.from(data['location']),
@@ -61,7 +73,19 @@ class Event {
       'category': category,
       'tags': tags,
       'photoURL': photoURL,
-      'dateAndTime': dateAndTime,
+      'dateAndTime': dateAndTime.map((entry) {
+        return entry.map((key, value) {
+          return MapEntry(
+            key.toIso8601String(),
+            value.map((startTimeKey, startTimeValue) {
+              return MapEntry(
+                startTimeKey,
+                startTimeValue,
+              );
+            }),
+          );
+        });
+      }).toList(),
       'isRepeating': isRepeating,
       'repetition': repetition,
       'location': location,

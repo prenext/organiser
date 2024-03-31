@@ -1,5 +1,4 @@
 import 'package:Organiser/config/themes/light.dart';
-import 'package:Organiser/controllers/common/event_controller.dart';
 import 'package:Organiser/views/pages/forms/add_event.dart';
 import 'package:Organiser/views/pages/forms/add_task.dart';
 import 'package:Organiser/views/services/theme_provider.dart';
