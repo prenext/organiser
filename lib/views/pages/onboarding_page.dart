@@ -152,14 +152,14 @@ class AuthPageDecoration extends StatelessWidget {
         Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/bg_decorate.webp',
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage(
+          //       'assets/images/bg_decorate.webp',
+          //     ),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
         ),
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),

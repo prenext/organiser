@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
       ),
-       floatingActionButton: CustomFAB(),
+      floatingActionButton: CustomFAB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }

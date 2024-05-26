@@ -1,4 +1,4 @@
-import 'package:Organiser/views/widgets/common/tabs_appbar.dart';
+import 'package:Organiser/views/widgets/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 // import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -13,38 +13,24 @@ class _SchedulesState extends State<Schedules>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: TabsAppBar(
-          tabs: [
-            Tab(text: 'Schedules'),
-            Tab(
-              text: 'Events',
-            ),
-          ],
-        ),
-        body: TabBarView(
-          children: [
-            _buildSchedulesView(),
-            _buildEventsView(),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: CustomAppBar(
+        leadingWidth: 0,
+        leading: Text(""),
+        centerTitle: false,
+        title: Text("Calendar"),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+        ],
       ),
+      body: _buildSchedulesView(),
     );
   }
 
   Widget _buildSchedulesView() {
     return Center(
       child: Text('Schedules  View'),
-    );
-  }
-
-  Widget _buildEventsView() {
-    // You can customize this view for displaying events
-    return Center(
-      child: Text('Events View'),
     );
   }
 }

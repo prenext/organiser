@@ -1,5 +1,5 @@
-import 'package:Organiser/config/themes/light.dart';
-import 'package:Organiser/views/pages/auth/account.dart';
+import 'dart:ui';
+
 import 'package:Organiser/views/pages/info/about.dart';
 import 'package:Organiser/views/pages/info/tips.dart';
 import 'package:Organiser/views/pages/settings/settings.dart';
@@ -8,7 +8,6 @@ import 'package:Organiser/views/widgets/dialogs/logout.dart';
 import 'package:Organiser/views/widgets/dialogs/rate_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Organiser/views/services/theme_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();
@@ -43,95 +42,94 @@ class CustomDrawer extends StatelessWidget {
           Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
       clipBehavior: Clip.hardEdge,
       shape: Border.all(
-          width: 0.5, color: Theme.of(context).primaryColor.withOpacity(0.5)),
+          width: 0.5, color: Theme.of(context).primaryColor.withOpacity(0.2)),
       child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            GestureDetector(
-              onTap: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AccountPage()))
-              },
-              child: Consumer<UserProvider>(
-                builder: (context, userProvider, _) {
-                  final user = userProvider.user;
-                  return SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1.0, // Adjust the width as needed
-                                    ),
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    maxRadius: 10.0,
-                                    backgroundImage: user != null &&
-                                            user.profilePhotoUrl != null
-                                        ? NetworkImage(
-                                            user.profilePhotoUrl ?? '')
-                                        : null,
-                                    child: user != null &&
-                                            user.profilePhotoUrl == null
-                                        ? Icon(Icons.person)
-                                        : null,
+            Consumer<UserProvider>(
+              builder: (context, userProvider, _) {
+                final user = userProvider.user;
+                return Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    // image: DecorationImage(
+                    //   image: NetworkImage('https://source.unsplash.com/random'),
+                    //   fit: BoxFit.cover,
+                    // ),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  child: Container(
+                    color: Theme.of(context)
+                        .scaffoldBackgroundColor
+                        .withOpacity(0.5),
+                    child: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.primary,
+                                  width: 1.0, // Adjust the width as needed
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                maxRadius: 10.0,
+                                backgroundImage: user != null &&
+                                        user.profilePhotoUrl != null
+                                    ? NetworkImage(user.profilePhotoUrl ?? '')
+                                    : null,
+                                child: user != null &&
+                                        user.profilePhotoUrl == null
+                                    ? Icon(Icons.person)
+                                    : null,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Display the user's name
+                                Text(
+                                  user != null ? user.username : 'Guest',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Display the user's name
-                                    Text(
-                                      user != null ? user.username : 'Guest',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    // Optionally, display additional user information like email
-                                    Text(
-                                      user != null ? user.email : '',
-                                      style: TextStyle(
-                                        fontSize: 13.0,
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  user != null ? user.email : '',
+                                  style: TextStyle(
+                                    fontSize: 13.0,
+                                    color: Theme.of(context).hintColor,
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-            Divider(
-              height: 1,
-              color: Theme.of(context).hintColor.withOpacity(0.2),
-            ),
+            // Divider(
+            //   height: 1,
+            //   color: Theme.of(context).hintColor.withOpacity(0.2),
+            // ),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
@@ -147,31 +145,17 @@ class CustomDrawer extends StatelessWidget {
                             ));
                       },
                       context: context),
-                  // _buildListTileWithDecoration(
-                  //     title: 'Theme Color',
-                  //     icon: Icons.color_lens_outlined,
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) => ThemeSelectionScreen(
-                  //               onColorSelected: (Color) {},
-                  //             ),
-                  //           ));
-                  //     },
-                  //     context: context),
                   _buildListTileWithDecoration(
-                      title: Provider.of<ThemeProvider>(context).themeData ==
-                              lightMode
-                          ? 'Light Mode'
-                          : 'Dark Mode',
-                      icon: Provider.of<ThemeProvider>(context).themeData ==
-                              lightMode
-                          ? Icons.sunny
-                          : Icons.dark_mode,
+                      title: 'Theme',
+                      icon: Icons.color_lens_outlined,
                       onTap: () {
-                        Provider.of<ThemeProvider>(context, listen: false)
-                            .toggleTheme(context);
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => ThemeSelectionScreen(
+                        //         onColorSelected: (Color) {},
+                        //       ),
+                        //     ));
                       },
                       context: context),
                   _buildListTileWithDecoration(
@@ -223,7 +207,7 @@ class CustomDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '© 2024 Alidantech co',
+                    '© ${DateTime.now().year} Alidantech co',
                     style: TextStyle(
                       fontSize: 14.0,
                       color: Theme.of(context).hintColor,

@@ -1,4 +1,4 @@
-import 'package:Organiser/models/user.dart';
+import 'package:Organiser/models/user_model.dart';
 import 'package:Organiser/views/pages/auth/add_user_info.dart';
 import 'package:Organiser/views/pages/splash.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          PageDecoration(),
+          // PageDecoration(),
           StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {

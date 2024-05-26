@@ -1,7 +1,7 @@
 import 'package:Organiser/views/widgets/common/tabs_appbar.dart';
 import 'package:flutter/material.dart';
 
-class Food extends StatefulWidget  {
+class Food extends StatefulWidget {
   const Food({Key? key}) : super(key: key);
 
   @override
@@ -16,65 +16,37 @@ class _FoodState extends State<Food> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
-        appBar: TabsAppBar(tabs: [
-          Tab(child: Text("meals"),),
+        appBar: TabsAppBar(title: "Food", actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
+        ], tabs: [
           Tab(
-            child: Text("market Place"),
+            child: Text("Meals"),
+          ),
+          Tab(
+            child: Text("Market Place"),
           )
-
         ]),
         body: TabBarView(
           children: [
-            _buildMealsPage(),
-            _buildMarketplacePage(),
+            _buildMealsView(),
+            _buildMarketView(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildMealsPage() {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          children: [
-            Card(
-              child: ListTile(
-                title: Text('Meal 1'),
-                subtitle: Text('Description for Meal 1'),
-                // Customize the card as needed for your meal representation
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: Text('Meal 2'),
-                subtitle: Text('Description for Meal 2'),
-                // Customize the card as needed for your meal representation
-              ),
-            ),
-            // Add more cards for other meals
-          ],
-        ),
-      ),
+  Widget _buildMealsView() {
+    return Center(
+      child: Text('Meals  View'),
     );
   }
 
-  Widget _buildMarketplacePage() {
-    List<String> restaurants = [
-      'Restaurant A',
-      'Restaurant B',
-      'Restaurant C',
-      // Add more restaurants as needed
-    ];
-
-    return ListView.builder(
-      itemCount: restaurants.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(restaurants[index]),
-          // Customize the ListTile as needed for your restaurant representation
-        );
-      },
+  Widget _buildMarketView() {
+    // You can customize this view for displaying events
+    return Center(
+      child: Text('Market View'),
     );
   }
 }

@@ -9,17 +9,25 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
+      constraints: BoxConstraints(maxWidth: 600),
+      margin: EdgeInsets.only(bottom: 0, left: 0, right: 0),
       decoration: BoxDecoration(
         // border: Border.all(
         //   // color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
         //   width: 0.5,
         // ),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+          width: 0.05,
+        ),
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
-            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.75),
+            Theme.of(context).scaffoldBackgroundColor,
+            Theme.of(context).scaffoldBackgroundColor,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -28,7 +36,7 @@ class CustomBottomAppBar extends StatelessWidget {
       child: BottomAppBar(
         shape: CircularNotchedRectangle(),
         height: 60,
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         color: Colors.transparent,
         elevation: 0,
         child: Row(
@@ -106,7 +114,7 @@ class CustomBottomAppBarItem extends StatelessWidget {
               children: [
                 Icon(
                   iconData,
-                  size: 32,
+                  size: 27,
                   color:
                       isSelected ? Theme.of(context).colorScheme.primary : null,
                 ),
