@@ -1,11 +1,11 @@
 import 'package:Organiser/models/common/goal_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class GoalsController {
+class GoalController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String _parentCollection;
 
-  GoalsController(this._parentCollection);
+  GoalController(this._parentCollection);
 
   Future<void> addGoal(String documentId, Goal goal) async {
     try {

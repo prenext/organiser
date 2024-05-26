@@ -1,5 +1,7 @@
+import 'package:Organiser/config/themes/light.dart';
 import 'package:Organiser/views/pages/auth/account.dart';
 import 'package:Organiser/views/pages/messages/messages.dart';
+import 'package:Organiser/views/services/theme_provider.dart';
 import 'package:Organiser/views/services/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,12 +82,12 @@ class _MainAppBarState extends State<MainAppBar> {
                   fontSize: 16.0,
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w400)),
-          Text("  "),
-          Text(formattedTime,
-              style: TextStyle(
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary)),
+          // Text("  "),
+          // Text(formattedTime,
+          //     style: TextStyle(
+          //         fontSize: 17.0,
+          //         fontWeight: FontWeight.bold,
+          //         color: Theme.of(context).colorScheme.primary)),
         ],
       ),
       leading: GestureDetector(
@@ -99,29 +101,31 @@ class _MainAppBarState extends State<MainAppBar> {
           children: [
             IconButton(
                 padding: EdgeInsets.all(0),
-                iconSize: 35.0,
+                iconSize: 30.0,
                 onPressed: () => {
                       //open drawer
                       Scaffold.of(context).openDrawer()
                     },
                 icon: Icon(Icons.menu)),
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text('$greeting,', style: TextStyle(fontSize: 13.0)),
-            //     Text(
-            //       '${user != null ? user.fname : "Guest"}',
-            //       style: TextStyle(
-            //         color: Colors.grey,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),
       actions: [
+        // toggle theme button
+        IconButton(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+          ),
+          icon: Icon(Provider.of<ThemeProvider>(context).themeData == lightMode
+              ? Icons.dark_mode
+              : Icons.light_mode),
+          onPressed: () {
+            // Toggle theme
+            Provider.of<ThemeProvider>(context, listen: false)
+                .toggleTheme(context);
+          },
+        ),
+
         NotificationBadgeIconButton(
           icon: Icons.notifications_outlined,
           badgeCount: 5, // Set the badge count here
@@ -132,7 +136,6 @@ class _MainAppBarState extends State<MainAppBar> {
             );
           },
         ),
-
         GestureDetector(
           onTap: () {
             Navigator.push(
@@ -141,7 +144,7 @@ class _MainAppBarState extends State<MainAppBar> {
             );
           },
           child: Container(
-            margin: EdgeInsets.all(0),
+            margin: EdgeInsets.only(right: 10.0),
             padding: EdgeInsets.all(0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -161,37 +164,6 @@ class _MainAppBarState extends State<MainAppBar> {
                   : null,
             ),
           ),
-        ),
-        // PopupMenuButton to switch between time formats
-        PopupMenuButton<String>(
-          iconSize: 35,
-          onSelected: (value) {
-            setState(() {
-              _timeFormat = DateFormat(value);
-            });
-          },
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              value: 'HH:mm:ss',
-              child: Row(
-                children: [
-                  Icon(Icons.access_time),
-                  SizedBox(width: 8),
-                  Text('24 Hours'),
-                ],
-              ),
-            ),
-            PopupMenuItem(
-              value: 'h:mm:ss a',
-              child: Row(
-                children: [
-                  Icon(Icons.lock_clock),
-                  SizedBox(width: 8),
-                  Text('AM/PM'),
-                ],
-              ),
-            ),
-          ],
         ),
       ],
     );

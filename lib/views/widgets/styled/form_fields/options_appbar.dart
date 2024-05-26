@@ -33,7 +33,7 @@ class OptionsAppBar extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 40.0, vertical: 15),
+                      horizontal: 40.0, vertical: 5),
                   child: Text(
                     this.cancelTitle,
                     style: TextStyle(fontSize: 18),
@@ -50,7 +50,7 @@ class OptionsAppBar extends StatelessWidget {
             },
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 5),
               child: Text(
                 this.AcceptTitle,
                 style: TextStyle(fontSize: 18),

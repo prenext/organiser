@@ -1,5 +1,5 @@
 import 'package:Organiser/firebase_options.dart';
-import 'package:Organiser/views/pages/splash.dart'; 
+import 'package:Organiser/views/pages/splash.dart';
 import 'package:Organiser/views/services/theme_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'views/services/user_provider.dart';
-
+    
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -49,10 +49,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
           themeProvider.themeData.brightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-      systemNavigationBarColor:
-          themeProvider.themeData.brightness == Brightness.dark
-              ? Colors.black
-              : Colors.white,
+      systemNavigationBarColor: themeProvider.themeData.scaffoldBackgroundColor,
       statusBarIconBrightness:
           themeProvider.themeData.brightness == Brightness.dark
               ? Brightness.light
@@ -61,6 +58,7 @@ class _OrganiserAppState extends State<OrganiserApp> {
           ? Brightness.light
           : Brightness.dark,
       systemStatusBarContrastEnforced: false,
+      systemNavigationBarDividerColor: themeProvider.themeData.scaffoldBackgroundColor,
     ));
     return MaterialApp(
       theme: themeProvider.themeData,

@@ -1,4 +1,4 @@
-import 'package:Organiser/models/enums/time_enums.dart';
+import 'package:Organiser/models/classes/repeat_interval.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Schedule {
@@ -9,7 +9,7 @@ class Schedule {
   DateTime? customDate;
   Duration duration;
   bool repeat;
-  RepeatType repeatType;
+  RepeatInterval repeatType;
   int priority;
   String category;
 
@@ -35,8 +35,7 @@ class Schedule {
       customDate: (data['customDate'] as Timestamp?)?.toDate(),
       duration: Duration(minutes: data['duration']),
       repeat: data['repeat'],
-      repeatType: RepeatType.values.firstWhere(
-          (e) => e.toString().split('.').last == data['repeatType']),
+      repeatType: data['repeatType'],
       priority: data['priority'],
       category: data['category'],
     );

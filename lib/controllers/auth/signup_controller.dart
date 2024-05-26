@@ -7,6 +7,7 @@ class SignUpController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
+  
   Future<Either<String, User?>> signUp(
       BuildContext context, String email, String password) async {
     try {

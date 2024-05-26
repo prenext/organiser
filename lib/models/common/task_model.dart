@@ -1,49 +1,67 @@
-import 'package:Organiser/models/enums/time_enums.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:Organiser/models/classes/do_day.dart';
+import 'package:Organiser/models/classes/do_time.dart';
+import 'package:Organiser/models/classes/repeat_interval.dart';
+import 'package:Organiser/models/classes/repeat_type.dart';
+import 'package:Organiser/models/common/media_model.dart';
+import 'package:Organiser/models/enums/task_enums.dart';
 
 class Task {
   String id;
   String title;
+  String hashtags;
   String description;
-  Map<String, bool> subtasks;
-  DateTime doDay;
+  DoDay doDay;
   DoTime doTime;
-  int priority;
-  String category;
+  TaskPriority priority;
   bool repeat;
-  RepeatInterval repeatInterval;
-  int repeatCount;
+  RepeatInterval? repeatInterval;
+  RepeatType? repeatType;
+  List<MediaType>? attachments;
+  Map<String, TaskStatus>? subtasks;
 
   Task({
     required this.id,
     required this.title,
     required this.description,
-    required this.subtasks,
     required this.doDay,
     required this.doTime,
     required this.priority,
-    required this.category,
+    required this.hashtags,
     required this.repeat,
     required this.repeatInterval,
-    required this.repeatCount,
+    required this.repeatType,
+    this.attachments,
+    this.subtasks,
   });
 
   // Factory constructor to create a Task instance from a Firebase snapshot
   factory Task.fromMap(Map<String, dynamic> data, String documentId) {
     return Task(
       id: documentId,
-      title: data['title'],
-      description: data['description'],
-      subtasks: Map<String, bool>.from(data['subtasks']),
-      doDay: (data['doDay'] as Timestamp).toDate(),
-      doTime: DoTime.values
-          .firstWhere((e) => e.toString().split('.').last == data['doTime']),
-      priority: data['priority'] ?? 0,
-      category: data['category'] ?? '',
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      subtasks: (data['subtasks'] != null)
+          ? Map<String, TaskStatus>.from(data['subtasks'])
+          : null,
+      doDay: DoDay(tangibleValue: data['doDay']),
+      doTime: DoTime(tangibleValue: data['doTime']),
+      priority: (data['priority'] != null)
+          ? TaskPriority.values[data['priority']]
+          : TaskPriority.low,
+      hashtags: data['hashtags'] ?? '',
       repeat: data['repeat'] ?? false,
-      repeatInterval: RepeatInterval.values.firstWhere(
-          (e) => e.toString().split('.').last == data['repeatInterval']),
-      repeatCount: data['repeatCount'] ?? 0,
+      repeatInterval: RepeatInterval(
+        type: data['repeatInterval']['type'],
+        every: data['repeatInterval']['every'],
+      ),
+      repeatType: RepeatType(
+        type: data['repeatType']['type'],
+        value: data['repeatType']['value'],
+      ),
+      attachments: (data['attachments'] != null)
+          ? List<MediaType>.from(
+              data['attachments'].map((item) => MediaType.fromJson(item)))
+          : null,
     );
   }
 
@@ -53,13 +71,14 @@ class Task {
       'title': title,
       'description': description,
       'subtasks': subtasks,
-      'doDay': doDay,
-      'doTime': doTime.toString().split('.').last,
-      'priority': priority,
-      'category': category,
+      'doDay': doDay.tangibleValue,
+      'doTime': doTime.tangibleValue,
+      'priority': priority.index,
+      'hashtags': hashtags,
       'repeat': repeat,
-      'repeatInterval': repeatInterval.toString().split('.').last,
-      'repeatCount': repeatCount,
+      'repeatInterval': repeatInterval?.toMap(),
+      'repeatType': repeatType?.toMap(),
+      'attachments': attachments?.map((media) => media.toJson()).toList(),
     };
   }
 }

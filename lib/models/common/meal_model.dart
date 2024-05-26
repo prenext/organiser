@@ -1,5 +1,5 @@
+import 'package:Organiser/models/classes/repeat_interval.dart';
 import 'package:Organiser/models/enums/meal_enums.dart';
-import 'package:Organiser/models/enums/time_enums.dart';
 
 class Meal {
   String id;
@@ -10,7 +10,7 @@ class Meal {
   MealType type;
   List<String> contents;
   bool repeat;
-  RepeatFrequency repeatFrequency;
+  RepeatInterval repeatFrequency;
   double cost;
 
   Meal({
@@ -37,8 +37,7 @@ class Meal {
           .firstWhere((e) => e.toString().split('.').last == data['type']),
       contents: List<String>.from(data['contents']),
       repeat: data['repeat'],
-      repeatFrequency: RepeatFrequency.values.firstWhere(
-          (e) => e.toString().split('.').last == data['repeatFrequency']),
+      repeatFrequency:  data['repeatFrequency'],
       cost: data['cost'].toDouble(),
     );
   }

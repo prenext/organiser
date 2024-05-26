@@ -3,15 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TaskController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  String _parentCollection;
+  final String parentCollection;
+  final String ownerId;
 
-  TaskController(this._parentCollection);
+  TaskController(this.parentCollection, this.ownerId);
 
-  Future<void> addTask(String documentId, Task task) async {
+  Future<void> addTask(Task task) async {
     try {
       await _firestore
-          .collection(_parentCollection)
-          .doc(documentId)
+          .collection(parentCollection)
+          .doc(ownerId)
           .collection('tasks')
           .add(task.toMap());
     } catch (e) {
@@ -20,25 +21,25 @@ class TaskController {
     }
   }
 
-  Future<void> updateTask(String documentId, Task task) async {
+  Future<void> updateTask(Task task) async {
     try {
       await _firestore
-          .collection(_parentCollection)
-          .doc(documentId)
+          .collection(parentCollection)
+          .doc(ownerId)
           .collection('tasks')
           .doc(task.id)
           .set(task.toMap());
     } catch (e) {
       print('Error updating task: $e');
-      rethrow; 
+      rethrow;
     }
   }
 
-  Future<void> deleteTask(String documentId, String taskId) async {
+  Future<void> deleteTask(String taskId) async {
     try {
       await _firestore
-          .collection(_parentCollection)
-          .doc(documentId)
+          .collection(parentCollection)
+          .doc(ownerId)
           .collection('tasks')
           .doc(taskId)
           .delete();
@@ -48,10 +49,10 @@ class TaskController {
     }
   }
 
-  Stream<List<Task>> getAllTasks(String documentId) {
+  Stream<List<Task>> getAllTasks() {
     return _firestore
-        .collection(_parentCollection)
-        .doc(documentId)
+        .collection(parentCollection)
+        .doc(ownerId)
         .collection('tasks')
         .snapshots()
         .map((snapshot) => snapshot.docs
@@ -59,11 +60,11 @@ class TaskController {
             .toList());
   }
 
-  Future<Task?> getTaskById(String documentId, String taskId) async {
+  Future<Task?> getTaskById(String taskId) async {
     try {
       var docSnapshot = await _firestore
-          .collection(_parentCollection)
-          .doc(documentId)
+          .collection(parentCollection)
+          .doc(ownerId)
           .collection('tasks')
           .doc(taskId)
           .get();

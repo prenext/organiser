@@ -1,11 +1,11 @@
 import 'package:Organiser/models/common/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class EventsController {
+class EventController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String _parentCollection;
 
-  EventsController(this._parentCollection);
+  EventController(this._parentCollection);
 
   Future<void> addEvent(String documentId, Event event) async {
     try {

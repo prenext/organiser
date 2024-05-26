@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          PageDecoration(),
+          // PageDecoration(),
           StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {

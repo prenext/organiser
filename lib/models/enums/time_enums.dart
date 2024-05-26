@@ -1,29 +1,18 @@
-enum RepeatInterval {
-  daily,
-  weekly,
-  monthly,
-  yearly,
-}
 
-enum DoTime {
-  morning,
-  afternoon,
-  evening,
-  custom,
-}
+enum RepeatIntervalEnum { daily, weekly, monthly, yearly }
 
+enum RepeatTypeEnum { repeatUntil, repeatCount, infinite }
 
-enum RepeatFrequency {
-  daily,
-  weekly,
-  monthly,
-}
+enum DoTimeEnum { morning, afternoon, evening, night, custom, none, midnight, noon }
 
+enum DoDayEnum { today, tomorrow, weekDay, custom, none }
 
-enum RepeatType {
-  daily,
-  weekly,
-  monthly,
-  yearly,
-  custom,
+enum DayOfWeek {
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday
 }
