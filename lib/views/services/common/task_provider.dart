@@ -1,13 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:Organiser/controllers/common/task_controller.dart';
 import 'package:Organiser/models/common/task_model.dart';
-import 'package:Organiser/views/widgets/common/snack_bar.dart';
 
 class TaskProvider with ChangeNotifier {
   final TaskController _taskController;
-  final StreamController<List<Task>> _taskStreamController =
-      StreamController<List<Task>>.broadcast();
   List<Task> _tasks = [];
   bool _isLoading = false;
   String? _error;
@@ -15,7 +11,6 @@ class TaskProvider with ChangeNotifier {
   TaskProvider(this._taskController);
 
   List<Task> get tasks => _tasks;
-  Stream<List<Task>> get taskStream => _taskStreamController.stream;
   bool get isLoading => _isLoading;
   String? get error => _error;
 
@@ -26,7 +21,6 @@ class TaskProvider with ChangeNotifier {
 
       await _taskController.addTask(task);
       _tasks.add(task);
-      _taskStreamController.add(_tasks);
 
       _showSuccessSnackbar(context, 'Task created successfully.');
     } catch (e) {
@@ -43,11 +37,10 @@ class TaskProvider with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      final tasks = await _taskController.getAllTasks();
-      _tasks = tasks as List<Task>;
-      _taskStreamController.add(_tasks);
+      _tasks = await _taskController.getAllTasks();
+      _showSuccessSnackbar(context, 'Tasks fetched successfully.');
     } catch (e) {
-      _error = 'Failed to fetch tasks: $e';
+      _error = 'Failed to get tasks: $e';
       _showErrorSnackbar(context, _error!);
     } finally {
       _isLoading = false;
@@ -63,7 +56,6 @@ class TaskProvider with ChangeNotifier {
       await _taskController.updateTask(task);
       _tasks.removeWhere((element) => element.id == task.id);
       _tasks.add(task);
-      _taskStreamController.add(_tasks);
 
       _showSuccessSnackbar(context, 'Task updated successfully.');
     } catch (e) {
@@ -82,7 +74,6 @@ class TaskProvider with ChangeNotifier {
 
       await _taskController.deleteTask(taskId);
       _tasks.removeWhere((element) => element.id == taskId);
-      _taskStreamController.add(_tasks);
 
       _showSuccessSnackbar(context, 'Task deleted successfully.');
     } catch (e) {
@@ -95,16 +86,15 @@ class TaskProvider with ChangeNotifier {
   }
 
   void _showSuccessSnackbar(BuildContext context, String message) {
-    CustomSnackbar.show(context, 'success', message);
+    // Implement success message logic here if needed
   }
 
   void _showErrorSnackbar(BuildContext context, String errorMessage) {
-    CustomSnackbar.show(context, 'error', errorMessage);
+    // Implement error message logic here if needed
   }
 
   @override
   void dispose() {
-    _taskStreamController.close();
     super.dispose();
   }
 

@@ -49,15 +49,21 @@ class TaskController {
     }
   }
 
-  Stream<List<Task>> getAllTasks() {
-    return _firestore
-        .collection(parentCollection)
-        .doc(ownerId)
-        .collection('tasks')
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Task.fromMap(doc.data(), doc.id))
-            .toList());
+  Future<List<Task>> getAllTasks() async {
+    try {
+      var querySnapshot = await _firestore
+          .collection(parentCollection)
+          .doc(ownerId)
+          .collection('tasks')
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => Task.fromMap(doc.data(), doc.id))
+          .toList();
+    } catch (e) {
+      print('Error fetching tasks: $e');
+      rethrow;
+    }
   }
 
   Future<Task?> getTaskById(String taskId) async {

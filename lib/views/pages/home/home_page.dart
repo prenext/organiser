@@ -28,21 +28,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLargeScreen = MediaQuery.of(context).size.width >= 900;
+
     return Scaffold(
-      backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
-      appBar:_currentIndex == 0 ? MainAppBar(): null,
+      appBar: _currentIndex == 0 ? MainAppBar() : null,
       extendBody: true,
       body: _screens[_currentIndex],
-      drawer: CustomDrawer(),
-      bottomNavigationBar: CustomBottomAppBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+      drawer: isLargeScreen ? CustomDrawer() : null,
+      endDrawer: isLargeScreen ? null : CustomDrawer(),
+      bottomNavigationBar: isLargeScreen
+          ? null
+          : CustomBottomAppBar(
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
       floatingActionButton: CustomFAB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );

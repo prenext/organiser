@@ -50,13 +50,9 @@ class Task {
           : TaskPriority.low,
       hashtags: data['hashtags'] ?? '',
       repeat: data['repeat'] ?? false,
-      repeatInterval: RepeatInterval(
-        type: data['repeatInterval']['type'],
-        every: data['repeatInterval']['every'],
-      ),
-      repeatType: RepeatType(
-        type: data['repeatType']['type'],
-        value: data['repeatType']['value'],
+      repeatInterval: RepeatInterval.fromMap(data['repeatInterval']),
+      repeatType: RepeatType.fromMap(
+        data['repeatType'] ?? {'type': 'infinite', 'value': null},
       ),
       attachments: (data['attachments'] != null)
           ? List<MediaType>.from(

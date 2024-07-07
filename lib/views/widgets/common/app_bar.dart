@@ -47,7 +47,7 @@ class _MainAppBarState extends State<MainAppBar> {
     final currentTime = DateTime.now();
 
     // Format the time based on the selected time format
-    final formattedTime = _timeFormat.format(currentTime);
+    _timeFormat.format(currentTime);
 
     // Determine greeting based on current time
     // ignore: unused_local_variable
@@ -94,27 +94,33 @@ class _MainAppBarState extends State<MainAppBar> {
         onTap: () {
           Scaffold.of(context).openDrawer();
         },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            IconButton(
-                padding: EdgeInsets.all(0),
-                iconSize: 30.0,
-                onPressed: () => {
-                      //open drawer
-                      Scaffold.of(context).openDrawer()
-                    },
-                icon: Icon(Icons.menu)),
-          ],
+        child: Container(
+          margin: EdgeInsets.only(left: 16.0),
+          padding: EdgeInsets.all(0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+              width: 0.5,
+            ),
+          ),
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 15.0,
+            backgroundImage: user != null && user.profilePhotoUrl != null
+                ? NetworkImage(user.profilePhotoUrl ?? '')
+                : null,
+            child: user != null && user.profilePhotoUrl == null
+                ? Icon(Icons.person)
+                : null,
+          ),
         ),
       ),
       actions: [
         // toggle theme button
         IconButton(
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+            padding: WidgetStateProperty.all(EdgeInsets.all(0)),
           ),
           icon: Icon(Provider.of<ThemeProvider>(context).themeData == lightMode
               ? Icons.dark_mode
@@ -135,35 +141,6 @@ class _MainAppBarState extends State<MainAppBar> {
               MaterialPageRoute(builder: (context) => NotificationScreen()),
             );
           },
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AccountPage()),
-            );
-          },
-          child: Container(
-            margin: EdgeInsets.only(right: 10.0),
-            padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 1.0,
-              ),
-            ),
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: 15.0,
-              backgroundImage: user != null && user.profilePhotoUrl != null
-                  ? NetworkImage(user.profilePhotoUrl ?? '')
-                  : null,
-              child: user != null && user.profilePhotoUrl == null
-                  ? Icon(Icons.person)
-                  : null,
-            ),
-          ),
         ),
       ],
     );

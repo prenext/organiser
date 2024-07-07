@@ -1,3 +1,4 @@
+import 'package:Organiser/views/pages/screens/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:Organiser/views/widgets/common/tabs_appbar.dart';
 
@@ -46,7 +47,7 @@ class _TasksState extends State<Tasks> {
 
   Widget _buildTasksView() {
     return Center(
-      child: Text('Tasks  View'),
+      child: TaskScreen(),
     );
   }
 

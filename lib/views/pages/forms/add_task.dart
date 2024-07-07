@@ -1,3 +1,4 @@
+import 'package:Organiser/views/pages/screens/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Organiser/models/enums/task_enums.dart';
@@ -226,10 +227,23 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       subtasks: _subtasks,
     );
 
+    // SHOW SNACKBAR
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Creating task...'),
+      ),
+    );
+
     // Create the task using TaskProvider
     await taskProvider.createTask(task, context);
 
     // Navigate back or perform further actions
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TaskDetailsScreen(task: task),
+      ),
+    );
   }
 
   void createDraft() {

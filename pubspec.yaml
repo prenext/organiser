@@ -33,18 +33,18 @@ dependencies:
   table_calendar: ^3.0.9
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
-  firebase_core: ^2.24.2
+  firebase_core: ^3.1.1
   image_picker: ^1.0.5
   provider: ^6.1.1
   shared_preferences: ^2.2.2
-  firebase_auth: ^4.15.3
-  cloud_firestore: ^4.13.6
+  firebase_auth: ^5.1.1
+  cloud_firestore: ^5.0.2
   url_launcher: ^6.2.2
-  email_validator: ^2.1.17
+  email_validator: ^3.0.0
   smooth_page_indicator: ^1.1.0
   dartz: ^0.10.1
-  firebase_storage: ^11.6.9
-  fl_chart: ^0.66.2
+  firebase_storage: ^12.1.0
+  fl_chart: ^0.68.0
   file_picker: ^8.0.0+1
   video_player: ^2.8.3
   # syncfusion_flutter_calendar: ^24.1.47

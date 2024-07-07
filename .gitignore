@@ -1,13 +1,5 @@
-#platform code
-windows
 # Firebase configuration
-lib/firebase_options.dart
-# android
-ios
-web
-linux
 Miscellaneous
-macos
 .vscode
 # Miscellaneous
 *.class
